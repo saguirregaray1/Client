@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.UI.EnterpriseController">
+   <children>
+      <TabPane layoutY="57.0" prefHeight="414.0" prefWidth="704.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Empresas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="682.0">
+                     <children>
+                        <TextField fx:id="nameEnterprise" layoutX="474.0" layoutY="14.0" prefHeight="26.0" prefWidth="201.0" promptText="Inserte nombre empresa" />
+                        <Button layoutX="512.0" layoutY="336.0" mnemonicParsing="false" onAction="#showEnterprises" prefHeight="26.0" prefWidth="123.0" text="Ver empresas" />
+                        <Button layoutX="510.0" layoutY="146.0" mnemonicParsing="false" onAction="#addEnterprise" prefHeight="26.0" prefWidth="129.0" text="Crear empresa" />
+                        <TableView fx:id="EnterprisesTable" layoutX="18.0" layoutY="14.0" prefHeight="350.0" prefWidth="418.0">
+                          <columns>
+                            <TableColumn fx:id="nameColumn" prefWidth="97.5999755859375" text="Nombre" />
+                            <TableColumn fx:id="emailColumn" prefWidth="199.20001220703125" text="Email" />
+                              <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="121.60003662109375" text="Contraseña" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="emailEnterprise" layoutX="473.0" layoutY="56.0" prefHeight="26.0" prefWidth="202.0" promptText="Inserte email" />
+                        <PasswordField fx:id="passwordEnterprise" layoutX="473.0" layoutY="98.0" prefHeight="26.0" prefWidth="202.0" promptText="Inserte contraseña" />
+                        <Button layoutX="510.0" layoutY="234.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Modificar empresa" />
+                        <Button layoutX="510.0" layoutY="193.0" mnemonicParsing="false" onAction="#deleteEnterprse" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Region layoutX="-5.0" layoutY="-1.0" prefHeight="58.0" prefWidth="710.0" style="-fx-background-color: red;" />
+      <Label layoutX="16.0" prefHeight="58.0" prefWidth="688.0" text="Bienvenido" textFill="#1acf1d">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </children>
+</AnchorPane>
