@@ -1,6 +1,7 @@
 package com.example.clientTIC.UI;
 
 
+import com.example.clientTIC.Spring.AppService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.clientTIC.Spring.ApplicationContextProvider.getApplicationContext;
+
 public class EnterpriseController implements Initializable {
 
     @FXML
@@ -23,56 +26,68 @@ public class EnterpriseController implements Initializable {
     private TextField emailEnterprise;
 
     @FXML
+    private TextField nroCuenta;
+
+    @FXML
     private TextField passwordEnterprise;
 
     @FXML
-    private TableView<Enterprise> EnterprisesTable;
+    private TextField nameOfCompanyToDelete;
+
 
     @FXML
-    private TableColumn<Enterprise,String> nameColumn;
+    private TableView<Company> EnterprisesTable;
 
     @FXML
-    private TableColumn<Enterprise,String> emailColumn;
+    private TableColumn<Company,String> nameColumn;
 
     @FXML
-    private TableColumn<Enterprise, PasswordField> passwordColumn;
+    private TableColumn<Company,String> emailColumn;
+
+    @FXML
+    private TableColumn<Company,Long> idColumn;
+
+    @FXML
+    private TableColumn<Company,Long> nroCuentaColumn;
+
+    @FXML
+    private TableColumn<Company, String> passwordColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-        //add your data to the table here.
-        //EnterprisesTable.setItems(enterpriseModels);
+        idColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("company_id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("name"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("mail"));
+        nroCuentaColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("nroCuenta"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("password"));
     }
 
-    final ObservableList<Enterprise> enterpriseModels = FXCollections.observableArrayList(
-            new Enterprise("Pepsi","pepsico@gmail.com", "Chepchieng"),
-            new Enterprise("Arcor","arcor@gmail.com", "Tooeeedd")
-            );
     @FXML
     protected void addEnterprise(){
 
         String name = nameEnterprise.getText();
         String email = emailEnterprise.getText();
+        String nroAccount = nroCuenta.getText();
         String password = passwordEnterprise.getText();
 
-        if(name.equals(null)|| email.equals(null)||password.equals(null) || name.equals("")|| email.equals("")||password.equals("")){
+        AppService appService=getApplicationContext().getBean(AppService.class);
+        appService.addNewCompany(name,email,nroAccount,password);
 
-        }else{
-            enterpriseModels.add(new Enterprise(name,email,password));
-            EnterprisesTable.setItems(enterpriseModels);
-        }
+
     }
 
     @FXML
     protected void showEnterprises(){
-        EnterprisesTable.setItems(enterpriseModels);
+        AppService appService=getApplicationContext().getBean(AppService.class);
+        ObservableList<Company> list= appService.getListOfCompanies();
+        EnterprisesTable.setItems(list);
     }
 
     @FXML
-    protected void deleteEnterprse(){
-        //
+    protected void deleteEnterprse() {
+        String companyName=nameOfCompanyToDelete.getText();
+        AppService appService=getApplicationContext().getBean(AppService.class);
+        appService.deleteCompanies(companyName);
     }
 
 

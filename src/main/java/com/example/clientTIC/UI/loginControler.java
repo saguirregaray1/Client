@@ -1,5 +1,14 @@
 package com.example.clientTIC.UI;
 
+import com.example.clientTIC.Spring.AppService;
+import com.example.clientTIC.Spring.ApplicationContextProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import io.vertx.core.json.Json;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,22 +38,31 @@ public class loginControler {
 
 
     @FXML
-    void AdminButtonClick(ActionEvent event) throws IOException {
+    void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        appService.addNewAdmin("a","b");
 
-        String username = emailTextField.getText();
+        String mail = emailTextField.getText();
         String password = passwordTextField.getText();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
-        Parent root = loader.load();
+        HttpResponse<JsonNode> apiResponse=appService.login(mail,password);
 
-        AdminController adminController = loader.getController();
-        adminController.displayName(username);
+        if (apiResponse.getStatus()==400){ //?
+            throw new IllegalStateException("usuario o contraseña incorrecta");
+            }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
+            Parent root = loader.load();
+
+            AdminController adminController = loader.getController();
+            adminController.displayName(mail);
 
 
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene= new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene= new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            }
     }
 
     @FXML
