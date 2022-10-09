@@ -1,4 +1,4 @@
-package com.example.clientTIC.UI;
+package com.example.clientTIC.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

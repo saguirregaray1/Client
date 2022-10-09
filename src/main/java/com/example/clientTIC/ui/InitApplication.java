@@ -1,6 +1,4 @@
-package com.example.clientTIC.UI;
-import com.example.clientTIC.Spring.AppService;
-import com.example.clientTIC.Spring.ApplicationContextProvider;
+package com.example.clientTIC.ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

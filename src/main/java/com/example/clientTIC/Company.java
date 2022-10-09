@@ -1,18 +1,18 @@
-package com.example.clientTIC.UI;
+package com.example.clientTIC;
 
 public class Company {
 
     private Long id;
     private String nombre;
-    private String mail;
+    private String email;
 
     private Long nroCuenta;
     private String password;
 
-    public Company(Long id, String nombre, String mail, Long nroCuenta, String password) {
+    public Company(Long id, String nombre, String email, Long nroCuenta, String password) {
         this.id = id;
         this.nombre = nombre;
-        this.mail = mail;
+        this.email = email;
         this.nroCuenta = nroCuenta;
         this.password = password;
     }
@@ -35,12 +35,12 @@ public class Company {
         this.nombre = nombre;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String mail) {
+        this.email = mail;
     }
 
     public Long getNroCuenta() {

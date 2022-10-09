@@ -1,12 +1,11 @@
-package com.example.clientTIC.UI;
+package com.example.clientTIC.ui;
 
 
-import com.example.clientTIC.Spring.AppService;
-import javafx.collections.FXCollections;
+import com.example.clientTIC.Company;
+import com.example.clientTIC.spring.AppService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -15,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.example.clientTIC.Spring.ApplicationContextProvider.getApplicationContext;
+import static com.example.clientTIC.spring.ApplicationContextProvider.getApplicationContext;
 
 public class EnterpriseController implements Initializable {
 
@@ -55,9 +54,9 @@ public class EnterpriseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("company_id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("name"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("mail"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("nombre"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("email"));
         nroCuentaColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("nroCuenta"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("password"));
     }

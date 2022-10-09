@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.UI.AdminController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.AdminController">
    <children>
       <Button layoutX="89.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="Ver usuarios" textAlignment="CENTER" />
       <Button layoutX="90.0" layoutY="70.0" mnemonicParsing="false" onAction="#openEntrView" prefHeight="26.0" prefWidth="170.0" text="Ver empresas" />

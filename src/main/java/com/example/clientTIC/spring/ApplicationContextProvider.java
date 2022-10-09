@@ -1,4 +1,4 @@
-package com.example.clientTIC.Spring;
+package com.example.clientTIC.spring;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

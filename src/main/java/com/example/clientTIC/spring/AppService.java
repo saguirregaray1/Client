@@ -1,11 +1,8 @@
-package com.example.clientTIC.Spring;
+package com.example.clientTIC.spring;
 
 
-import com.example.clientTIC.UI.Company;
-import com.fasterxml.jackson.core.JsonParseException;
+import com.example.clientTIC.Company;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mashape.unirest.http.HttpResponse;
@@ -14,13 +11,13 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
-@org.springframework.stereotype.Service
+@Service
 public class AppService {
 
     public void getListOfClubs() {
@@ -82,7 +79,7 @@ public class AppService {
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode club = mapper.createObjectNode();
             club.put("nombre", name);
-            club.put("mail", email);
+            club.put("email", email);
             club.put("nroCuenta", nroAccount);
             club.put("password", password);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
@@ -102,7 +99,7 @@ public class AppService {
         try {
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode admin = mapper.createObjectNode();
-            admin.put("mail", email);
+            admin.put("email", email);
             admin.put("password", password);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(admin);
         } catch (Exception ignored) {
@@ -165,14 +162,14 @@ public class AppService {
         }
     }
 
-    public HttpResponse<JsonNode> login(String mail, String password) throws UnirestException {
+    public HttpResponse<JsonNode> login(String email, String password) throws UnirestException {
         String json = "";
         HttpResponse<JsonNode> apiResponse=null;
 
         try {
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode user = mapper.createObjectNode();
-            user.put("mail", mail);
+            user.put("email", email);
             user.put("password", password);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
         } catch (Exception ignored) {
