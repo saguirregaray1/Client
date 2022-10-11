@@ -9,4 +9,7 @@ public enum AppUserRole {
     AppUserRole() {
 
     }
+
+    public static class Activities {
+    }
 }
