@@ -6,7 +6,4 @@ public enum AppUserRole {
     EMPLOYEE,
     ADMIN;
 
-    AppUserRole() {
-
-    }
 }

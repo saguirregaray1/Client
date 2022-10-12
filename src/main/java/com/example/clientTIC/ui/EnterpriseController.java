@@ -1,7 +1,7 @@
 package com.example.clientTIC.ui;
 
 
-import com.example.clientTIC.Company;
+import com.example.clientTIC.models.Company;
 import com.example.clientTIC.spring.AppService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -65,12 +65,9 @@ public class EnterpriseController implements Initializable {
     protected void addEnterprise(){
 
         String name = nameEnterprise.getText();
-        String email = emailEnterprise.getText();
         String nroAccount = nroCuenta.getText();
-        String password = passwordEnterprise.getText();
-
         AppService appService=getApplicationContext().getBean(AppService.class);
-        appService.addNewCompany(name,email,nroAccount,password);
+        appService.addNewCompany(name,nroAccount);
 
 
     }
