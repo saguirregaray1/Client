@@ -6,13 +6,9 @@ public enum AppUserRole {
     EMPLOYEE,
     ADMIN;
 
-<<<<<<< HEAD
-=======
     AppUserRole() {
 
     }
-
     public static class Activities {
     }
->>>>>>> 63a7042d58ba5ef4b1c482a2609ed83f6740fa28
 }

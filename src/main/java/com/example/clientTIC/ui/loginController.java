@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginControler {
+public class loginController {
 
     @FXML
     public AnchorPane Pane_base;

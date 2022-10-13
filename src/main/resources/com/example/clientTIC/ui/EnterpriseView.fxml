@@ -59,7 +59,7 @@
                         <TextField fx:id="emailEnterprise" layoutX="590.0" layoutY="54.0" prefHeight="26.0" prefWidth="151.0" promptText="Inserte email" />
                         <PasswordField fx:id="passwordEnterprise" layoutX="598.0" layoutY="139.0" prefHeight="26.0" prefWidth="141.0" promptText="Inserte contraseña" />
                         <Button layoutX="596.0" layoutY="255.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Modificar empresa" />
-                        <Button layoutX="597.0" layoutY="345.0" mnemonicParsing="false" onAction="#deleteEnterprse" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
+                        <Button layoutX="597.0" layoutY="345.0" mnemonicParsing="false" onAction="#deleteEnterprise" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
                         <TextField fx:id="nroCuenta" layoutX="589.0" layoutY="96.0" prefHeight="26.0" prefWidth="149.0" promptText="Inserte numero de cuenta" />
                         <TextField fx:id="nameOfCompanyToDelete" layoutX="597.0" layoutY="302.0" prefHeight="26.0" prefWidth="152.0" promptText="Inserte nombre empresa" />
                         <Button layoutX="599.0" layoutY="391.0" mnemonicParsing="false" onAction="#showEnterprises" prefHeight="26.0" prefWidth="123.0" text="Ver empresas" />

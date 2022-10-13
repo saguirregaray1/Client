@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,9 +41,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            ObjectNode club = mapper.createObjectNode();
-            club.put("nombre", nombre);
-            club.put("dir", dir);
+            Club club = new Club(nombre,dir,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
         } catch (Exception ignored) {
         }
@@ -81,9 +80,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            ObjectNode club = mapper.createObjectNode();
-            club.put("nombre", name);
-            club.put("nroCuenta", nroAccount);
+            Club club = new Club(name,nroAccount,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
         } catch (Exception ignored) {
         }
@@ -155,14 +152,11 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public void addNewEmployee(String cedula, Long companyId, String saldo) {
+    public void addNewEmployee(Long cedula, Long companyId, Long saldo) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            ObjectNode employee = mapper.createObjectNode();
-            employee.put("companyId",companyId);
-            employee.put("cedula", cedula);
-            employee.put("saldo", saldo);
+            Employee employee=new Employee(companyId,cedula,saldo,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
         } catch (Exception ignored) {
         }

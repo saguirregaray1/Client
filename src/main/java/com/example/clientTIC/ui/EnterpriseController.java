@@ -40,6 +40,7 @@ public class EnterpriseController implements Initializable {
     @FXML
     private TableColumn<Company,String> nameColumn;
 
+    //borrar
     @FXML
     private TableColumn<Company,String> emailColumn;
 
@@ -49,6 +50,7 @@ public class EnterpriseController implements Initializable {
     @FXML
     private TableColumn<Company,Long> nroCuentaColumn;
 
+    //borrar
     @FXML
     private TableColumn<Company, String> passwordColumn;
 
@@ -56,9 +58,8 @@ public class EnterpriseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("nombre"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("email"));
         nroCuentaColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("nroCuenta"));
-        passwordColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("password"));
+        // agregar companyEmployees
     }
 
     @FXML
@@ -80,7 +81,7 @@ public class EnterpriseController implements Initializable {
     }
 
     @FXML
-    protected void deleteEnterprse() {
+    protected void deleteEnterprise() {
         String companyName=nameOfCompanyToDelete.getText();
         AppService appService=getApplicationContext().getBean(AppService.class);
         appService.deleteCompanies(companyName);
