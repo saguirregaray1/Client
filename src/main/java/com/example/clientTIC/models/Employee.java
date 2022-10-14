@@ -12,20 +12,28 @@ public class Employee {
 
     private Long saldo;
 
+    private String email;
+
+    private String password;
+
     private List<Activity> favs;
 
-    public Employee(Long id, Long companyId, Long cedula, Long saldo, List<Activity> favs) {
+    public Employee(Long id, Long companyId, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
         this.id = id;
         this.companyId = companyId;
         this.cedula = cedula;
         this.saldo = saldo;
+        this.email = email;
+        this.password = password;
         this.favs = favs;
     }
 
-    public Employee(Long companyId, Long cedula, Long saldo, List<Activity> favs) {
+    public Employee(Long companyId, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
         this.companyId = companyId;
         this.cedula = cedula;
         this.saldo = saldo;
+        this.email = email;
+        this.password = password;
         this.favs = favs;
     }
 
@@ -71,6 +79,22 @@ public class Employee {
         this.favs = favs;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -78,6 +102,8 @@ public class Employee {
                 ", companyId=" + companyId +
                 ", cedula=" + cedula +
                 ", saldo=" + saldo +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", favs=" + favs +
                 '}';
     }

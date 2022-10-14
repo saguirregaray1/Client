@@ -35,7 +35,7 @@ public class AdminController {
     @FXML
     void openEntrView(ActionEvent event2) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EnterpriseView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CompanyView.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node)event2.getSource()).getScene().getWindow();
         Scene scene= new Scene(root);

@@ -1,8 +1,6 @@
 package com.example.clientTIC.ui;
 
 import com.example.clientTIC.Activity;
-import com.example.clientTIC.AppUserRole;
-import com.example.clientTIC.spring.AppService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,8 +20,6 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static com.example.clientTIC.spring.ApplicationContextProvider.getApplicationContext;
 
 public class UserViewController extends ListView<Activity> implements Initializable {
 

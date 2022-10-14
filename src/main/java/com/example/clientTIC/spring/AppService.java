@@ -56,7 +56,7 @@ public class AppService {
 
     public void deleteClubs(String clubName) {
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/company/" + clubName).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/club/" + clubName).asJson();
         } catch (UnirestException ex) {
             throw new RuntimeException(ex);
         }
@@ -133,7 +133,7 @@ public class AppService {
 
     public void deleteAdmin(String email) {
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/employee/" + email).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/admin/" + email).asJson();
         } catch (UnirestException ex) {
             throw new RuntimeException(ex);
         }
@@ -143,7 +143,7 @@ public class AppService {
         ObjectMapper mapper = new ObjectMapper();
         List<Employee> list = null;
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/admin").asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee").asJson();
             list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Employee>>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -152,11 +152,11 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public void addNewEmployee(Long cedula, Long companyId, Long saldo) {
+    public void addNewEmployee(Long cedula, Long companyId, Long saldo, String email, String password) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Employee employee=new Employee(companyId,cedula,saldo,new ArrayList<Activity>());
+            Employee employee=new Employee(companyId,cedula,saldo,email,password,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
         } catch (Exception ignored) {
         }

@@ -16,17 +16,19 @@ import java.util.ResourceBundle;
 
 import static com.example.clientTIC.spring.ApplicationContextProvider.getApplicationContext;
 
-public class EnterpriseController implements Initializable {
+public class CompanyController implements Initializable {
 
     @FXML
-    private TextField nameEnterprise;
+    private TextField companyName;
 
+    // borrar
     @FXML
     private TextField emailEnterprise;
 
     @FXML
     private TextField nroCuenta;
 
+    // borrar
     @FXML
     private TextField passwordEnterprise;
 
@@ -35,7 +37,7 @@ public class EnterpriseController implements Initializable {
 
 
     @FXML
-    private TableView<Company> EnterprisesTable;
+    private TableView<Company> companyTable;
 
     @FXML
     private TableColumn<Company,String> nameColumn;
@@ -65,7 +67,7 @@ public class EnterpriseController implements Initializable {
     @FXML
     protected void addEnterprise(){
 
-        String name = nameEnterprise.getText();
+        String name = companyName.getText();
         String nroAccount = nroCuenta.getText();
         AppService appService=getApplicationContext().getBean(AppService.class);
         appService.addNewCompany(name,nroAccount);
@@ -77,7 +79,7 @@ public class EnterpriseController implements Initializable {
     protected void showEnterprises(){
         AppService appService=getApplicationContext().getBean(AppService.class);
         ObservableList<Company> list= appService.getListOfCompanies();
-        EnterprisesTable.setItems(list);
+        companyTable.setItems(list);
     }
 
     @FXML
