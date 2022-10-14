@@ -190,6 +190,19 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
+    public ObservableList<List> getListOfActivitiesByCategory(ActivityCategories category){
+        ObjectMapper mapper = new ObjectMapper();
+        List<List> list = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity/" + category).asJson();
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return FXCollections.observableList(list);
+    }
+
     public void addNewActivity(Long clubId, String nombre, Long precio, int cupos, ActivityCategories activityCategories){
         String json = "";
         try {
@@ -228,4 +241,31 @@ public class AppService {
         }
         return apiResponse;
     }
+
+    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, com.example.clientTIC.Activity activity) {
+        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)){
+            String json = "";
+            HttpResponse<JsonNode> apiResponse=null;
+
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                ObjectNode user = mapper.createObjectNode();
+                user.put("employeeId", appUser.getId());
+                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+            } catch (Exception ignored) {
+            }
+            try {
+                apiResponse = Unirest.post("http://localhost:8080/club/activity/"+activity.getId())
+                        .header("Content-Type", "application/json")
+                        .body(json).asJson();
+            } catch (UnirestException e) {
+                throw new RuntimeException(e);
+            }
+            return apiResponse;
+        }
+        throw new IllegalStateException("usuario no es empleado");
+    }
+
+
 }
+

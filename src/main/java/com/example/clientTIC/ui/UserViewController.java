@@ -1,6 +1,10 @@
 package com.example.clientTIC.ui;
 
 import com.example.clientTIC.Activity;
+import com.example.clientTIC.AppUser;
+import com.example.clientTIC.models.ActivityCategories;
+import com.example.clientTIC.spring.AppService;
+import com.example.clientTIC.spring.ApplicationContextProvider;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -45,12 +49,18 @@ public class UserViewController extends ListView<Activity> implements Initializa
 
     @FXML
     protected void setFilter(){
-        filter.getText();
+        String category=filter.getText();  //tiene que ser un listado
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        appService.getListOfActivitiesByCategory(ActivityCategories.valueOf(category));
     }
 
     @FXML
-    protected void registerToActivity(){
-        //registrarse a actividad
+    protected void registerToActivity(AppUser appUser, Activity activity){
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        if (appService.registerToActivity(appUser,activity).getStatus()!=200){
+            throw new IllegalStateException("no se registró");
+        }
+        //registrado
     }
 
 
