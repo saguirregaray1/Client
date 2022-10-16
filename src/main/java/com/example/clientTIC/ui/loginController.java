@@ -57,6 +57,7 @@ public class loginController {
 
             AdminController adminController = loader.getController();
             adminController.displayName(appUser.getEmail());
+
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene= new Scene(root);
             stage.setScene(scene);
