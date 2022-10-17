@@ -177,9 +177,9 @@ public class AppService {
         }
     }
 
-    public ObservableList<List> getListOfActivities(){
+    public List<Activity> getListOfActivities(){
         ObjectMapper mapper = new ObjectMapper();
-        List<List> list = null;
+        List<Activity> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity").asJson();
             list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
@@ -187,20 +187,33 @@ public class AppService {
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
         }
-        return FXCollections.observableList(list);
+        return list;
     }
 
-    public ObservableList<List> getListOfActivitiesByCategory(String category){
+    public List<Activity> getListOfActivitiesByCategory(String category){
         ObjectMapper mapper = new ObjectMapper();
-        List<List> list = null;
+        List<Activity> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity/" + category).asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
         }
-        return FXCollections.observableList(list);
+        return list;
+    }
+
+    public List<Activity> getListOfFavs(AppUser appUser){
+        ObjectMapper mapper = new ObjectMapper();
+        List<Activity> list = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/" + appUser.getId()).asJson();
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
     }
 
     public void addNewActivity(Long clubId, String nombre, Long precio, int cupos, ActivityCategories activityCategories){

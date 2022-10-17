@@ -59,8 +59,6 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        ObservableList<List> activityList= appService.getListOfActivitiesByCategory(category);
-        setListOfActivities(activityList);
         }
 
     @FXML
@@ -68,8 +66,6 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //obtener favoritos
-        ObservableList<List> activityList = appService.getListOfActivitiesByCategory(filter.getValue());
-        setListOfActivities(activityList);
         }
 
     @FXML
