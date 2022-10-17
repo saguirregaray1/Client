@@ -1,6 +1,7 @@
 package com.example.clientTIC.ui;
 
 import com.example.clientTIC.AppUser;
+import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -52,16 +53,26 @@ public class loginController {
         else {
             ObjectMapper mapper = new ObjectMapper();
             AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>(){});
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
-            Parent root = loader.load();
+            if(appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
+                Parent root = loader.load();
 
-            AdminController adminController = loader.getController();
-            adminController.displayName(appUser.getEmail());
+                AdminController adminController = loader.getController();
+                adminController.displayName(appUser.getEmail());
 
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene= new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            }
             }
     }
 
