@@ -76,12 +76,12 @@ public class AppService {
 
     }
 
-    public void addNewCompany(String name, String nroAccount) {
+    public void addNewCompany(String name, Long nroAccount) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Club club = new Club(name,nroAccount,new ArrayList<Activity>());
-            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
+            Company company = new Company(name,nroAccount,new ArrayList<Employee>());
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
         } catch (Exception ignored) {
         }
         try {
@@ -182,7 +182,7 @@ public class AppService {
         List<Activity> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity").asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);

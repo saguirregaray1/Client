@@ -85,9 +85,10 @@ public class UserViewController extends ListView<Activity> implements Initializa
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         filter.getItems().addAll(categorias);
         filter.setOnAction(this::setFilter);
+        setListOfActivities(appService.getListOfActivities());
     }
 
-    private void setListOfActivities(ObservableList<List> activityList){
+    private void setListOfActivities(List<Activity> activityList){
         for(int i = 0; i<activityList.size();i++){
             HBox hBox = new HBox(40);
             Button button = new Button("Registrarse");
@@ -101,7 +102,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
             //ImageView imageView = new ImageView(image);
             //imageView.setFitHeight(100);
             //imageView.setFitWidth(150);
-            Label label = new Label("Titulo o descripcion de la actividad");
+            Label label = new Label(activityList.get(i).getNombre());
             label.setMaxWidth(300);
             label.setMaxHeight(100);
             label.setWrapText(true);

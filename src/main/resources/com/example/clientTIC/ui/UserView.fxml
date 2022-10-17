@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="699.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.UserViewController">
+<AnchorPane prefHeight="699.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.UserViewController">
    <children>
       <Region layoutX="-4.0" layoutY="-1.0" prefHeight="59.0" prefWidth="932.0" style="-fx-background-color: #263f73;" />
       <Label layoutX="293.0" layoutY="9.0" prefHeight="40.0" prefWidth="440.0" text="Lista de actividades" textFill="#f4f4f4">
@@ -17,7 +17,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="604.0" layoutY="627.0" mnemonicParsing="false" onAction="#showFavorites" prefHeight="44.0" prefWidth="258.0" style="-fx-background-color: #263f73;" text="Mostrar favoritos" textFill="#efefef">
+      <Button layoutX="604.0" layoutY="627.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="258.0" style="-fx-background-color: #263f73;" text="Mostrar favoritos" textFill="#efefef">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

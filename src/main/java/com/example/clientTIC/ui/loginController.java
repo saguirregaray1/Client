@@ -2,6 +2,7 @@ package com.example.clientTIC.ui;
 
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
+import com.example.clientTIC.models.ActivityCategories;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -40,7 +41,10 @@ public class loginController {
     @FXML
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        appService.addNewAdmin("a","b");
+        appService.addNewCompany("coca", 123L);
+        appService.addNewEmployee(123L,1L,1000L,"abc","bb");
+        appService.addNewClub("um","18");
+        appService.addNewActivity(1L,"futbol",1000L,100, ActivityCategories.CATEGORY_1);
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
@@ -64,10 +68,10 @@ public class loginController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            }else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
+            }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
+                FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 Parent root = loader.load();
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();

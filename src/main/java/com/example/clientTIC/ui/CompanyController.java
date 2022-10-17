@@ -68,7 +68,7 @@ public class CompanyController implements Initializable {
     protected void addEnterprise(){
 
         String name = companyName.getText();
-        String nroAccount = nroCuenta.getText();
+        Long nroAccount = Long.valueOf(nroCuenta.getText());
         AppService appService=getApplicationContext().getBean(AppService.class);
         appService.addNewCompany(name,nroAccount);
 
