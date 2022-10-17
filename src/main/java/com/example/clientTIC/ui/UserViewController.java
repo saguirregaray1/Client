@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -100,7 +101,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
 
     private void setListOfActivities(List<Activity> activityList){
         for(int i = 0; i<activityList.size();i++){
-            HBox hBox = new HBox(40);
+            HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
             Activity activity = activityList.get(i);
             button.setOnAction(new EventHandler<ActionEvent>() {
@@ -113,16 +114,31 @@ public class UserViewController extends ListView<Activity> implements Initializa
             //ImageView imageView = new ImageView(image);
             //imageView.setFitHeight(100);
             //imageView.setFitWidth(150);
-            Label label = new Label(activity.getNombre());
-            label.setMaxWidth(300);
-            label.setMaxHeight(100);
-            label.setWrapText(true);
+            Label labelName = new Label(activity.getNombre());
+            labelName.setMaxWidth(250);
+            labelName.setMaxHeight(100);
+            labelName.setWrapText(true);
+            labelName.setStyle("-fx-font-weight: bold");
+            labelName.setFont(new Font("Arial",20));
+            Label labelPrice = new Label(" Precio: "+ activity.getPrecio());
+            labelPrice.setMaxWidth(250);
+            labelPrice.setMaxHeight(100);
+            labelPrice.setWrapText(true);
+            labelPrice.setFont(new Font("Arial",20));
+            Label labelCupos = new Label(" Cupos disponibles: "+ activity.getCupos());
+            labelCupos.setMaxWidth(250);
+            labelCupos.setMaxHeight(100);
+            labelCupos.setWrapText(true);
+            labelCupos.setFont(new Font("Arial",20));
             hBox.setAlignment(Pos.CENTER);
             hBox.setPadding(new Insets(5,5,5,5));
             Separator separator1 = new Separator(Orientation.VERTICAL);
             Separator separator2 = new Separator(Orientation.VERTICAL);
+            Separator separator3 = new Separator(Orientation.VERTICAL);
+            Separator separator4 = new Separator(Orientation.VERTICAL);
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
-            hBox.getChildren().addAll(separator1,label,separator2,button);
+            hBox.getChildren().addAll(separator1,labelName,separator2,labelPrice,
+                    separator3,labelCupos,separator4,button);
             activityBox.getChildren().add(hBox);
         }
     }
