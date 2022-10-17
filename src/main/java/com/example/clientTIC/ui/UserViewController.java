@@ -87,12 +87,8 @@ public class UserViewController extends ListView<Activity> implements Initializa
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        ObservableList<List> activityList = appService.getListOfActivities();
         filter.getItems().addAll(categorias);
         filter.setOnAction(this::setFilter);
-        setListOfActivities(activityList);
-
-
     }
 
     private void setListOfActivities(ObservableList<List> activityList){
