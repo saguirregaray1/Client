@@ -1,7 +1,7 @@
 package com.example.clientTIC.ui;
 
-import com.example.clientTIC.Activity;
 import com.example.clientTIC.AppUser;
+import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -60,17 +60,12 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        ObservableList<List> activityList= appService.getListOfActivitiesByCategory(ActivityCategories.CATEGORY_1);
-        setListOfActivities(activityList);
         }
 
     @FXML
     protected void showFavorites(AppUser appUser, Activity activity){
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        //obtener favoritos
-        ObservableList<List> activityList = appService.getListOfActivitiesByCategory(ActivityCategories.CATEGORY_1);
-        setListOfActivities(activityList);
         }
 
     @FXML
@@ -88,12 +83,8 @@ public class UserViewController extends ListView<Activity> implements Initializa
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        ObservableList<List> activityList = appService.getListOfActivities();
         filter.getItems().addAll(categorias);
         filter.setOnAction(this::setFilter);
-        setListOfActivities(activityList);
-
-
     }
 
     private void setListOfActivities(ObservableList<List> activityList){

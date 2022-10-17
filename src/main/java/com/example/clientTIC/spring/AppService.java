@@ -177,30 +177,43 @@ public class AppService {
         }
     }
 
-    public ObservableList<List> getListOfActivities(){
+    public List<Activity> getListOfActivities(){
         ObjectMapper mapper = new ObjectMapper();
-        List<List> list = null;
+        List<Activity> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity").asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
         }
-        return FXCollections.observableList(list);
+        return list;
     }
 
-    public ObservableList<List> getListOfActivitiesByCategory(ActivityCategories category){
+    public List<Activity> getListOfActivitiesByCategory(ActivityCategories category){
         ObjectMapper mapper = new ObjectMapper();
-        List<List> list = null;
+        List<Activity> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity/" + category).asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
         }
-        return FXCollections.observableList(list);
+        return list;
+    }
+
+    public List<Activity> getListOfFavs(AppUser appUser){
+        ObjectMapper mapper = new ObjectMapper();
+        List<Activity> list;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/"+ appUser.getId()).asJson();
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
     }
 
     public void addNewActivity(Long clubId, String nombre, Long precio, int cupos, ActivityCategories activityCategories){
@@ -242,7 +255,7 @@ public class AppService {
         return apiResponse;
     }
 
-    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, com.example.clientTIC.Activity activity) {
+    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, Activity activity) {
         if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)){
             String json = "";
             HttpResponse<JsonNode> apiResponse=null;
