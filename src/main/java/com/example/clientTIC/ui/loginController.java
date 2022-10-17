@@ -71,6 +71,8 @@ public class loginController {
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 Parent root = loader.load();
+                UserViewController userViewController = loader.getController();
+                userViewController.setAppUser(appUser);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

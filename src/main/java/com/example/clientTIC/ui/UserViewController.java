@@ -5,6 +5,8 @@ import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,6 +33,14 @@ import java.util.ResourceBundle;
 public class UserViewController extends ListView<Activity> implements Initializable {
 
     public AppUser appUser;
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     //ejemplo de categorias para el filtrado
     ObservableList<String> categorias = FXCollections.observableArrayList(ActivityCategories.CATEGORY_1.toString(),
@@ -71,10 +81,10 @@ public class UserViewController extends ListView<Activity> implements Initializa
     @FXML
     protected void registerToActivity(AppUser appUser, com.example.clientTIC.models.Activity activity){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        if (appService.registerToActivity(appUser,activity).getStatus()!=200){
+        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activity);
+        if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
-        appService.registerToActivity(appUser,activity);
     }
 
 
@@ -92,17 +102,18 @@ public class UserViewController extends ListView<Activity> implements Initializa
         for(int i = 0; i<activityList.size();i++){
             HBox hBox = new HBox(40);
             Button button = new Button("Registrarse");
+            Activity activity = activityList.get(i);
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //registerToActivity(appUser,activityList.get(i));
+                    registerToActivity(appUser,activity);
                 }
             });
             //Image image = new Image("images.jpg");
             //ImageView imageView = new ImageView(image);
             //imageView.setFitHeight(100);
             //imageView.setFitWidth(150);
-            Label label = new Label(activityList.get(i).getNombre());
+            Label label = new Label(activity.getNombre());
             label.setMaxWidth(300);
             label.setMaxHeight(100);
             label.setWrapText(true);
