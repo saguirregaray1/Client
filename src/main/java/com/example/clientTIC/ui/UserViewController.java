@@ -1,7 +1,7 @@
 package com.example.clientTIC.ui;
 
-import com.example.clientTIC.Activity;
 import com.example.clientTIC.AppUser;
+import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -33,11 +33,10 @@ public class UserViewController extends ListView<Activity> implements Initializa
     public AppUser appUser;
 
     //ejemplo de categorias para el filtrado
-    ObservableList<String> categorias = FXCollections.observableArrayList(
-            "Categoria 1",
-            "Categoria 2",
-            "Categoria 3",
-            "Categoria 4");
+    ObservableList<String> categorias = FXCollections.observableArrayList(ActivityCategories.CATEGORY_1.toString(),
+            ActivityCategories.CATEGORY_2.toString(),
+            ActivityCategories.CATEGORY_3.toString(),
+            ActivityCategories.CATEGORY_4.toString());
 
     @FXML
     private VBox activityBox;
@@ -60,21 +59,21 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        ObservableList<List> activityList= appService.getListOfActivitiesByCategory(ActivityCategories.CATEGORY_1);
+        ObservableList<List> activityList= appService.getListOfActivitiesByCategory(category);
         setListOfActivities(activityList);
         }
 
     @FXML
-    protected void showFavorites(AppUser appUser, Activity activity){
+    protected void showFavorites(AppUser appUser, com.example.clientTIC.models.Activity activity){
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //obtener favoritos
-        ObservableList<List> activityList = appService.getListOfActivitiesByCategory(ActivityCategories.CATEGORY_1);
+        ObservableList<List> activityList = appService.getListOfActivitiesByCategory(filter.getValue());
         setListOfActivities(activityList);
         }
 
     @FXML
-    protected void registerToActivity(AppUser appUser, Activity activity){
+    protected void registerToActivity(AppUser appUser, com.example.clientTIC.models.Activity activity){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         if (appService.registerToActivity(appUser,activity).getStatus()!=200){
             throw new IllegalStateException("no se registró");

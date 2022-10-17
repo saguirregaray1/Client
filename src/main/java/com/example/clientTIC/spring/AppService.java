@@ -190,7 +190,7 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public ObservableList<List> getListOfActivitiesByCategory(ActivityCategories category){
+    public ObservableList<List> getListOfActivitiesByCategory(String category){
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
         try {
@@ -242,7 +242,7 @@ public class AppService {
         return apiResponse;
     }
 
-    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, com.example.clientTIC.Activity activity) {
+    public HttpResponse<JsonNode> registerToActivity(AppUser appUser,Activity activity) {
         if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)){
             String json = "";
             HttpResponse<JsonNode> apiResponse=null;

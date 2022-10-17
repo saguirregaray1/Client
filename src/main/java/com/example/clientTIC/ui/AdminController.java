@@ -32,6 +32,7 @@ public class AdminController {
     }
 
 
+
     @FXML
     void openEntrView(ActionEvent event2) throws IOException {
 
