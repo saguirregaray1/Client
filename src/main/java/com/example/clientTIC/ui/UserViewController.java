@@ -70,22 +70,25 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        setListOfActivities(appService.getListOfActivitiesByCategory(category));
         }
 
     @FXML
     protected void showFavorites(AppUser appUser, com.example.clientTIC.models.Activity activity){
+       //boton
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        //obtener favoritos
+        setListOfActivities(appService.getListOfFavs(appUser));
         }
 
     @FXML
-    protected void registerToActivity(AppUser appUser, com.example.clientTIC.models.Activity activity){
+    protected void registerToActivity(AppUser appUser, Activity activity){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activity);
         if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
+        //update atributos
     }
 
 
@@ -96,6 +99,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         filter.getItems().addAll(categorias);
         filter.setOnAction(this::setFilter);
+
         setListOfActivities(appService.getListOfActivities());
     }
 

@@ -10,15 +10,24 @@ public class AppUser {
 
     private AppUserRole appUserRole;
 
-    public AppUser(Long id, String email, String password, AppUserRole appUserRole) {
+    private Long associatedId;
+
+    public AppUser(Long id, String email, String password, AppUserRole appUserRole, Long associatedId) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
+        this.associatedId = associatedId;
     }
 
     public AppUser(){}
 
+    public AppUser(String email, String password, AppUserRole appUserRole, Long associatedId) {
+        this.email = email;
+        this.password = password;
+        this.appUserRole = appUserRole;
+        this.associatedId = associatedId;
+    }
     public AppUser(String email, String password, AppUserRole appUserRole) {
         this.email = email;
         this.password = password;
@@ -55,5 +64,13 @@ public class AppUser {
 
     public void setAppUserRole(AppUserRole appUserRole) {
         this.appUserRole = appUserRole;
+    }
+
+    public Long getAssociatedId() {
+        return associatedId;
+    }
+
+    public void setAssociatedId(Long associatedId) {
+        this.associatedId = associatedId;
     }
 }

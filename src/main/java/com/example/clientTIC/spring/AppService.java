@@ -4,6 +4,7 @@ package com.example.clientTIC.spring;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.models.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -43,13 +44,10 @@ public class AppService {
             ObjectMapper mapper = new ObjectMapper();
             Club club = new Club(nombre,dir,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
-        } catch (Exception ignored) {
-        }
-        try {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
-        } catch (UnirestException ex) {
+        } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -82,13 +80,10 @@ public class AppService {
             ObjectMapper mapper = new ObjectMapper();
             Company company = new Company(name,nroAccount,new ArrayList<Employee>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
-        } catch (Exception ignored) {
-        }
-        try {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
-        } catch (UnirestException ex) {
+        } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -118,15 +113,12 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            AppUser admin = new AppUser(email,password, AppUserRole.ADMIN);
+            Admin admin = new Admin(email,password);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(admin);
-        } catch (Exception ignored) {
-        }
-        try {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/admin")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
-        } catch (UnirestException ex) {
+        } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -158,13 +150,10 @@ public class AppService {
             ObjectMapper mapper = new ObjectMapper();
             Employee employee=new Employee(companyId,cedula,saldo,email,password,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
-        } catch (Exception ignored) {
-        }
-        try {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/employee")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
-        } catch (UnirestException ex) {
+        } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -207,7 +196,7 @@ public class AppService {
         ObjectMapper mapper = new ObjectMapper();
         List<Activity> list = null;
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/" + appUser.getId()).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + appUser.getAssociatedId()).asJson();
             list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -222,13 +211,10 @@ public class AppService {
             ObjectMapper mapper = new ObjectMapper();
             Activity activity = new Activity(clubId,nombre,precio,cupos,activityCategories);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(activity);
-        } catch (Exception ignored) {
-        }
-        try {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/activity")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
-        } catch (UnirestException ex) {
+        } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -262,16 +248,11 @@ public class AppService {
 
             try {
                 ObjectMapper mapper = new ObjectMapper();
-                ObjectNode user = mapper.createObjectNode();
-                user.put("employeeId", appUser.getId());
-                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
-            } catch (Exception ignored) {
-            }
-            try {
+                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
                 apiResponse = Unirest.post("http://localhost:8080/club/activity/"+activity.getId())
                         .header("Content-Type", "application/json")
                         .body(json).asJson();
-            } catch (UnirestException e) {
+            } catch (UnirestException | JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
             return apiResponse;
@@ -279,6 +260,23 @@ public class AppService {
         throw new IllegalStateException("usuario no es empleado");
     }
 
+    public void addFavourite(AppUser appUser, Activity activity){
+        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)){
+            String json = "";
+            HttpResponse<JsonNode> apiResponse=null;
+
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
+                apiResponse = Unirest.post("http://localhost:8080/employee/"+ activity.getId())
+                        .header("Content-Type", "application/json")
+                        .body(json).asJson();
+            } catch (UnirestException | JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
 }
+
 
