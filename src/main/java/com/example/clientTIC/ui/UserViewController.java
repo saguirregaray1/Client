@@ -74,11 +74,11 @@ public class UserViewController extends ListView<Activity> implements Initializa
         }
 
     @FXML
-    protected void showFavorites(AppUser appUser, com.example.clientTIC.models.Activity activity){
+    protected void mostrarFavoritos(ActionEvent event){
        //boton
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        setListOfActivities(appService.getListOfFavs(appUser));
+        setListOfActivities(appService.getListOfFavs(this.appUser));
         }
 
     @FXML
@@ -88,7 +88,8 @@ public class UserViewController extends ListView<Activity> implements Initializa
         if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
-        //update atributos
+       activityBox.getChildren().clear();
+        setListOfActivities(appService.getListOfActivities());
     }
 
 
@@ -100,10 +101,12 @@ public class UserViewController extends ListView<Activity> implements Initializa
         filter.getItems().addAll(categorias);
         filter.setOnAction(this::setFilter);
 
+
         setListOfActivities(appService.getListOfActivities());
     }
 
     private void setListOfActivities(List<Activity> activityList){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         for(int i = 0; i<activityList.size();i++){
             HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
@@ -112,6 +115,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
                 @Override
                 public void handle(ActionEvent event) {
                     registerToActivity(appUser,activity);
+                    setListOfActivities(appService.getListOfActivities());
                 }
             });
             //Image image = new Image("images.jpg");
@@ -146,5 +150,6 @@ public class UserViewController extends ListView<Activity> implements Initializa
             activityBox.getChildren().add(hBox);
         }
     }
+
 
 }
