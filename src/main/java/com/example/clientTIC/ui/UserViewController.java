@@ -74,20 +74,22 @@ public class UserViewController extends ListView<Activity> implements Initializa
         }
 
     @FXML
-    protected void showFavorites(AppUser appUser, com.example.clientTIC.models.Activity activity){
+    protected void mostrarFavoritos(ActionEvent event){
        //boton
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        setListOfActivities(appService.getListOfFavs(appUser));
+        setListOfActivities(appService.getListOfFavs(this.appUser));
         }
 
     @FXML
-    protected void registerToActivity(AppUser appUser, Activity activity){
+    protected void registerToActivity(AppUser appUser, Long activityId){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activity);
+        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activityId);
         if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
+        activityBox.getChildren().clear();
+        setListOfActivities(appService.getListOfActivities());
         //update atributos
     }
 
@@ -110,7 +112,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    registerToActivity(appUser, activity);
+                    registerToActivity(appUser, Long.valueOf(value.get(7).toString()));
                 }
             });
             //Image image = new Image("images.jpg");
@@ -123,12 +125,12 @@ public class UserViewController extends ListView<Activity> implements Initializa
             labelName.setWrapText(true);
             labelName.setStyle("-fx-font-weight: bold");
             labelName.setFont(new Font("Arial", 20));
-            Label labelPrice = new Label(" Precio: " + activity.getPrecio());
+            Label labelPrice = new Label(" Cupos disponibles: " + activity.getPrecio());
             labelPrice.setMaxWidth(250);
             labelPrice.setMaxHeight(100);
             labelPrice.setWrapText(true);
             labelPrice.setFont(new Font("Arial", 20));
-            Label labelCupos = new Label(" Cupos disponibles: " + activity.getCupos());
+            Label labelCupos = new Label(" Precio: " + activity.getCupos());
             labelCupos.setMaxWidth(250);
             labelCupos.setMaxHeight(100);
             labelCupos.setWrapText(true);

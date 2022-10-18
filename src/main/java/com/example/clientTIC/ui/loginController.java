@@ -41,12 +41,12 @@ public class loginController {
     @FXML
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        appService.addNewAdmin("aa","bb");
+       /* appService.addNewAdmin("aa","bb");
         appService.addNewCompany("coca", 123L);
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
         appService.addNewClub("um","18");
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,100, ActivityCategories.CATEGORY_1);
-        appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2);
+        appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2); */
 
 
         String email = emailTextField.getText();
