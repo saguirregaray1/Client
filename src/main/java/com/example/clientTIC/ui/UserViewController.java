@@ -70,7 +70,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-      //  setListOfActivities(appService.getListOfActivitiesByCategory(category));
+        setListOfActivities(appService.getListOfActivitiesByCategory(category));
         }
 
     @FXML
@@ -78,7 +78,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
        //boton
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-      //  setListOfActivities(appService.getListOfFavs(appUser));
+        setListOfActivities(appService.getListOfFavs(appUser));
         }
 
     @FXML
@@ -99,7 +99,6 @@ public class UserViewController extends ListView<Activity> implements Initializa
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         filter.getItems().addAll(categorias);
         filter.setOnAction(this::setFilter);
-
         setListOfActivities(appService.getListOfActivities());
     }
 

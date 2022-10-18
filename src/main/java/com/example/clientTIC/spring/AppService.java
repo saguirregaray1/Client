@@ -179,12 +179,12 @@ public class AppService {
         return list;
     }
 
-    public List<Activity> getListOfActivitiesByCategory(String category){
+    public List<List> getListOfActivitiesByCategory(String category){
         ObjectMapper mapper = new ObjectMapper();
-        List<Activity> list = null;
+        List<List> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity/" + category).asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
@@ -192,12 +192,12 @@ public class AppService {
         return list;
     }
 
-    public List<Activity> getListOfFavs(AppUser appUser){
+    public List<List> getListOfFavs(AppUser appUser){
         ObjectMapper mapper = new ObjectMapper();
-        List<Activity> list = null;
+        List<List> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + appUser.getAssociatedId()).asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
