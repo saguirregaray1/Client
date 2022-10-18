@@ -103,15 +103,14 @@ public class UserViewController extends ListView<Activity> implements Initializa
     }
 
     private void setListOfActivities(List<List> activityList){
-        for(int i = 0; i<activityList.size();i++){
+        for (List value : activityList) {
             HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
-            List list= activityList.get(i);
-            Activity activity = new Activity((String) list.get(1), Long.valueOf(list.get(2).toString()), (Integer) list.get(3),ActivityCategories.valueOf((String) list.get(4)));
+            Activity activity = new Activity((String) value.get(1), Long.valueOf(value.get(2).toString()), (Integer) value.get(3), ActivityCategories.valueOf((String) value.get(4)));
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    registerToActivity(appUser,activity);
+                    registerToActivity(appUser, activity);
                 }
             });
             //Image image = new Image("images.jpg");
@@ -123,26 +122,26 @@ public class UserViewController extends ListView<Activity> implements Initializa
             labelName.setMaxHeight(100);
             labelName.setWrapText(true);
             labelName.setStyle("-fx-font-weight: bold");
-            labelName.setFont(new Font("Arial",20));
-            Label labelPrice = new Label(" Precio: "+ activity.getPrecio());
+            labelName.setFont(new Font("Arial", 20));
+            Label labelPrice = new Label(" Precio: " + activity.getPrecio());
             labelPrice.setMaxWidth(250);
             labelPrice.setMaxHeight(100);
             labelPrice.setWrapText(true);
-            labelPrice.setFont(new Font("Arial",20));
-            Label labelCupos = new Label(" Cupos disponibles: "+ activity.getCupos());
+            labelPrice.setFont(new Font("Arial", 20));
+            Label labelCupos = new Label(" Cupos disponibles: " + activity.getCupos());
             labelCupos.setMaxWidth(250);
             labelCupos.setMaxHeight(100);
             labelCupos.setWrapText(true);
-            labelCupos.setFont(new Font("Arial",20));
+            labelCupos.setFont(new Font("Arial", 20));
             hBox.setAlignment(Pos.CENTER);
-            hBox.setPadding(new Insets(5,5,5,5));
+            hBox.setPadding(new Insets(5, 5, 5, 5));
             Separator separator1 = new Separator(Orientation.VERTICAL);
             Separator separator2 = new Separator(Orientation.VERTICAL);
             Separator separator3 = new Separator(Orientation.VERTICAL);
             Separator separator4 = new Separator(Orientation.VERTICAL);
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
-            hBox.getChildren().addAll(separator1,labelName,separator2,labelPrice,
-                    separator3,labelCupos,separator4,button);
+            hBox.getChildren().addAll(separator1, labelName, separator2, labelPrice,
+                    separator3, labelCupos, separator4, button);
             activityBox.getChildren().add(hBox);
         }
     }
