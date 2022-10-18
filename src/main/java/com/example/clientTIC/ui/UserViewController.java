@@ -70,7 +70,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        setListOfActivities(appService.getListOfActivitiesByCategory(category));
+      //  setListOfActivities(appService.getListOfActivitiesByCategory(category));
         }
 
     @FXML
@@ -78,7 +78,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
        //boton
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        setListOfActivities(appService.getListOfFavs(appUser));
+      //  setListOfActivities(appService.getListOfFavs(appUser));
         }
 
     @FXML
@@ -103,11 +103,12 @@ public class UserViewController extends ListView<Activity> implements Initializa
         setListOfActivities(appService.getListOfActivities());
     }
 
-    private void setListOfActivities(List<Activity> activityList){
+    private void setListOfActivities(List<List> activityList){
         for(int i = 0; i<activityList.size();i++){
             HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
-            Activity activity = activityList.get(i);
+            List list= activityList.get(i);
+            Activity activity = new Activity((String) list.get(1), Long.valueOf(list.get(2).toString()), (Integer) list.get(3),ActivityCategories.valueOf((String) list.get(4)));
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {

@@ -4,7 +4,7 @@ public class Activity {
 
     private Long id;
 
-    private Long clubId;
+    private Club club;
 
     private String nombre;
 
@@ -14,16 +14,23 @@ public class Activity {
 
     private ActivityCategories activityCategories;
 
-    public Activity(Long id, Long clubId, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
+    public Activity(Long id, Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
         this.id = id;
-        this.clubId = clubId;
+        this.club = club;
         this.nombre = nombre;
         this.precio = precio;
         this.cupos = cupos;
         this.activityCategories = activityCategories;
     }
-    public Activity(Long clubId, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
-        this.clubId = clubId;
+    public Activity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
+        this.club = club;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cupos = cupos;
+        this.activityCategories = activityCategories;
+    }
+
+    public Activity(String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
         this.nombre = nombre;
         this.precio = precio;
         this.cupos = cupos;
@@ -40,12 +47,12 @@ public class Activity {
         this.id = id;
     }
 
-    public Long getClubId() {
-        return clubId;
+    public Club getClub() {
+        return club;
     }
 
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public String getNombre() {

@@ -6,7 +6,7 @@ public class Employee {
 
     private Long id;
 
-    private Long companyId;
+    private Company company;
 
     private Long cedula;
 
@@ -18,9 +18,9 @@ public class Employee {
 
     private List<Activity> favs;
 
-    public Employee(Long id, Long companyId, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
+    public Employee(Long id, Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
         this.id = id;
-        this.companyId = companyId;
+        this.company = company;
         this.cedula = cedula;
         this.saldo = saldo;
         this.email = email;
@@ -28,8 +28,8 @@ public class Employee {
         this.favs = favs;
     }
 
-    public Employee(Long companyId, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
-        this.companyId = companyId;
+    public Employee(Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
+        this.company = company;
         this.cedula = cedula;
         this.saldo = saldo;
         this.email = email;
@@ -47,12 +47,12 @@ public class Employee {
         this.id = id;
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Long getCedula() {
@@ -99,7 +99,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", companyId=" + companyId +
+                ", companyId=" + company +
                 ", cedula=" + cedula +
                 ", saldo=" + saldo +
                 ", email='" + email + '\'' +

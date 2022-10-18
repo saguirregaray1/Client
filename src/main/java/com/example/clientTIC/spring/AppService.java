@@ -144,11 +144,11 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public void addNewEmployee(Long cedula, Long companyId, Long saldo, String email, String password) {
+    public void addNewEmployee(Long cedula, Company company, Long saldo, String email, String password) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Employee employee=new Employee(companyId,cedula,saldo,email,password,new ArrayList<Activity>());
+            Employee employee=new Employee(company,cedula,saldo,email,password,new ArrayList<Activity>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/employee")
                     .header("Content-Type", "application/json")
@@ -166,12 +166,12 @@ public class AppService {
         }
     }
 
-    public List<Activity> getListOfActivities(){
+    public List<List> getListOfActivities(){
         ObjectMapper mapper = new ObjectMapper();
-        List<Activity> list = null;
+        List<List> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/activity").asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Activity>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
@@ -205,11 +205,12 @@ public class AppService {
         return list;
     }
 
-    public void addNewActivity(Long clubId, String nombre, Long precio, int cupos, ActivityCategories activityCategories){
+    public void addNewActivity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories){
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Activity activity = new Activity(clubId,nombre,precio,cupos,activityCategories);
+
+            Activity activity = new Activity(club,nombre,precio,cupos,activityCategories);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(activity);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/activity")
                     .header("Content-Type", "application/json")
