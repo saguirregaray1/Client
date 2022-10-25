@@ -46,11 +46,11 @@ public class AppService {
 
     }
 
-    public void addNewClub(String nombre,String dir) {
+    public void addNewClub(String nombre, String dir) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Club club = new Club(nombre,dir,new ArrayList<Activity>(), new ArrayList<AppUser>());
+            Club club = new Club(nombre, dir, new ArrayList<Activity>(), new ArrayList<AppUser>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club")
                     .header("Content-Type", "application/json")
@@ -86,7 +86,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Company company = new Company(name,nroAccount,new ArrayList<Employee>(),new ArrayList<AppUser>());
+            Company company = new Company(name, nroAccount, new ArrayList<Employee>(), new ArrayList<AppUser>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company")
                     .header("Content-Type", "application/json")
@@ -117,11 +117,12 @@ public class AppService {
         }
         return FXCollections.observableList(list);
     }
+
     public void addNewAdmin(String email, String password) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Admin admin = new Admin(email,password);
+            Admin admin = new Admin(email, password);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(admin);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/admin")
                     .header("Content-Type", "application/json")
@@ -156,7 +157,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Employee employee=new Employee(company,cedula,saldo,email,password,new ArrayList<Activity>(),new AppUser(email,password,AppUserRole.EMPLOYEE));
+            Employee employee = new Employee(company, cedula, saldo, email, password, new ArrayList<Activity>(), new AppUser(email, password, AppUserRole.EMPLOYEE));
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/employee")
                     .header("Content-Type", "application/json")
@@ -174,7 +175,7 @@ public class AppService {
         }
     }
 
-    public List<List> getListOfActivities(){
+    public List<List> getListOfActivities() {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
         try {
@@ -187,7 +188,7 @@ public class AppService {
         return list;
     }
 
-    public List<List> getListOfActivitiesByCategory(String category){
+    public List<List> getListOfActivitiesByCategory(String category) {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
         try {
@@ -200,7 +201,7 @@ public class AppService {
         return list;
     }
 
-    public List<List> getListOfFavs(AppUser appUser){
+    public List<List> getListOfFavs(AppUser appUser) {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
         try {
@@ -213,12 +214,12 @@ public class AppService {
         return list;
     }
 
-    public void addNewActivity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories){
+    public void addNewActivity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            Activity activity = new Activity(club,nombre,precio,cupos,activityCategories);
+            Activity activity = new Activity(club, nombre, precio, cupos, activityCategories);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(activity);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/activity")
                     .header("Content-Type", "application/json")
@@ -230,7 +231,7 @@ public class AppService {
 
     public HttpResponse<JsonNode> login(String email, String password) throws UnirestException {
         String json = "";
-        HttpResponse<JsonNode> apiResponse=null;
+        HttpResponse<JsonNode> apiResponse = null;
 
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -250,15 +251,15 @@ public class AppService {
         return apiResponse;
     }
 
-    public HttpResponse<JsonNode> registerToActivity(AppUser appUser,Long activityId) {
-        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)){
+    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, Long activityId) {
+        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
             String json = "";
-            HttpResponse<JsonNode> apiResponse=null;
+            HttpResponse<JsonNode> apiResponse = null;
 
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
-                apiResponse = Unirest.post("http://localhost:8080/club/activity/"+activityId)
+                apiResponse = Unirest.post("http://localhost:8080/club/activity/" + activityId)
                         .header("Content-Type", "application/json")
                         .body(json).asJson();
             } catch (UnirestException | JsonProcessingException e) {
@@ -269,15 +270,15 @@ public class AppService {
         throw new IllegalStateException("usuario no es empleado");
     }
 
-    public void addFavourite(AppUser appUser, Activity activity){
-        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)){
+    public void addFavourite(AppUser appUser, Activity activity) {
+        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
             String json = "";
-            HttpResponse<JsonNode> apiResponse=null;
+            HttpResponse<JsonNode> apiResponse = null;
 
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
-                apiResponse = Unirest.post("http://localhost:8080/employee/"+ activity.getId())
+                apiResponse = Unirest.post("http://localhost:8080/employee/" + activity.getId())
                         .header("Content-Type", "application/json")
                         .body(json).asJson();
             } catch (UnirestException | JsonProcessingException e) {
@@ -286,25 +287,24 @@ public class AppService {
         }
     }
 
-   /* public void subirImagen(){
+    public void subirImagen() {
         File file = new File("src/main/resources/python.png");
         FileInputStream input = null;
-        MultipartFile multipartFile=null;
+        MultipartFile multipartFile = null;
 
         ObjectMapper mapper = new ObjectMapper();
-        Imagen modeloFile=null;
+        Imagen modeloFile = null;
         String json = "";
-        try{
+        try {
             input = new FileInputStream(file);
-            multipartFile = new MockMultipartFile("file",file.getName(),"image/png", IOUtils.toByteArray(input));
+            multipartFile = new MockMultipartFile("file", file.getName(), "image/png", IOUtils.toByteArray(input));
             modeloFile = new Imagen(multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getBytes());
             json = mapper.writeValueAsString(modeloFile);
-            System.out.println(json);
             HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/image")
                     .header("Content-Type", "application/json;charset=utf-8")
                     .body(json)
                     .asJson();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -316,8 +316,6 @@ public class AppService {
         Image imagenverdadera = new Image(bytearray);
         return imagenverdadera;
     }
-*/
-
 }
 
 

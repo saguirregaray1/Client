@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -47,7 +48,8 @@ public class loginController {
         appService.addNewClub("um","18");
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,100, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2);
-
+        appService.subirImagen();
+        Image imagen=appService.obtenerImagen();
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
