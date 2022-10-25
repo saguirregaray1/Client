@@ -285,7 +285,7 @@ public class AppService {
         }
     }
 
-    public void subirImagen() {
+    public void uploadImage() {
         File file = new File("src/main/resources/descarga.jpg");
         FileInputStream input = null;
         MultipartFile multipartFile = null;
@@ -307,13 +307,40 @@ public class AppService {
         }
     }
 
-    public Image obtenerImagen() throws UnirestException, IOException {
+    public List<Image> getActivityImages(Long activityId) throws UnirestException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        HttpResponse<InputStream> a = Unirest.get("http://localhost:8080/image/1").asBinary();
-        byte[] imagen = ResponseUtils.getBytes(a.getBody());
-        ByteArrayInputStream bytearray = new ByteArrayInputStream(imagen);
-        Image imagenverdadera = new Image(bytearray);
-        return imagenverdadera;
+        HttpResponse<InputStream> a = Unirest.get("http://localhost:8080/image/"+activityId).asBinary();
+
+        List<byte[]> images = mapper.readValue(a.getBody().toString(), new TypeReference<>() {});
+        List<Image> pictures = new ArrayList<>();
+
+        for (byte[] i:images){
+            ByteArrayInputStream bytearray = new ByteArrayInputStream(i);
+            Image imagenverdadera = new Image(bytearray);
+            pictures.add(imagenverdadera);
+        }
+        return pictures;
+        }
+
+    public void uploadActivityPicture(File file, Long activityId) {
+        FileInputStream input = null;
+        MultipartFile multipartFile = null;
+
+        ObjectMapper mapper = new ObjectMapper();
+        Imagen modeloFile = null;
+        String json = "";
+        try {
+            input = new FileInputStream(file);
+            multipartFile = new MockMultipartFile("file", file.getName(), "image/jpg", IOUtils.toByteArray(input));
+            modeloFile = new Imagen(multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getBytes());
+            json = mapper.writeValueAsString(modeloFile);
+            HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/image/"+ activityId)
+                    .header("Content-Type", "application/json;charset=utf-8")
+                    .body(json)
+                    .asJson();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -21,7 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 public class loginController {
@@ -49,8 +52,8 @@ public class loginController {
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,100, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
-        appService.subirImagen();
-        Image imagen=appService.obtenerImagen();
+        appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
+        List<Image> imagenes=appService.getActivityImages(1L);
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
