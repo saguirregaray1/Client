@@ -1,5 +1,7 @@
 package com.example.clientTIC.models;
 
+import com.example.clientTIC.AppUser;
+
 import java.util.List;
 
 public class Club {
@@ -12,17 +14,21 @@ public class Club {
 
     private List<Activity> clubActivities;
 
-    public Club(Long id,String nombre, String dir, List<Activity> clubActivities) {
+    private List<AppUser> clubUsers;
+
+    public Club(Long id,String nombre, String dir, List<Activity> clubActivities, List<AppUser> clubUsers) {
         this.id = id;
         this.nombre = nombre;
         this.dir = dir;
         this.clubActivities = clubActivities;
+        this.clubUsers = clubUsers;
     }
 
-    public Club(String nombre, String dir, List<Activity> clubActivities) {
+    public Club(String nombre, String dir, List<Activity> clubActivities, List<AppUser> clubUsers) {
         this.nombre = nombre;
         this.dir = dir;
         this.clubActivities = clubActivities;
+        this.clubUsers = clubUsers;
     }
 
     public Club(){}
@@ -57,5 +63,24 @@ public class Club {
 
     public void setClubActivities(List<Activity> clubActivities) {
         this.clubActivities = clubActivities;
+    }
+
+    public List<AppUser> getClubUsers() {
+        return clubUsers;
+    }
+
+    public void setClubUsers(List<AppUser> clubUsers) {
+        this.clubUsers = clubUsers;
+    }
+
+    @Override
+    public String toString() {
+        return "Club{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", dir='" + dir + '\'' +
+                ", clubActivities=" + clubActivities +
+                ", clubUsers=" + clubUsers +
+                '}';
     }
 }

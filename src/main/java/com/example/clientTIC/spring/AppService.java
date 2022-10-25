@@ -12,10 +12,18 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.http.utils.ResponseUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import org.apache.commons.io.IOUtils;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +50,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Club club = new Club(nombre,dir,new ArrayList<Activity>());
+            Club club = new Club(nombre,dir,new ArrayList<Activity>(), new ArrayList<AppUser>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club")
                     .header("Content-Type", "application/json")
@@ -78,7 +86,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Company company = new Company(name,nroAccount,new ArrayList<Employee>());
+            Company company = new Company(name,nroAccount,new ArrayList<Employee>(),new ArrayList<AppUser>());
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company")
                     .header("Content-Type", "application/json")
@@ -148,7 +156,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Employee employee=new Employee(company,cedula,saldo,email,password,new ArrayList<Activity>());
+            Employee employee=new Employee(company,cedula,saldo,email,password,new ArrayList<Activity>(),new AppUser(email,password,AppUserRole.EMPLOYEE));
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/employee")
                     .header("Content-Type", "application/json")
@@ -196,7 +204,7 @@ public class AppService {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + appUser.getAssociatedId()).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + appUser.getEmployee().getId()).asJson();
             list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -277,6 +285,38 @@ public class AppService {
             }
         }
     }
+
+   /* public void subirImagen(){
+        File file = new File("src/main/resources/python.png");
+        FileInputStream input = null;
+        MultipartFile multipartFile=null;
+
+        ObjectMapper mapper = new ObjectMapper();
+        Imagen modeloFile=null;
+        String json = "";
+        try{
+            input = new FileInputStream(file);
+            multipartFile = new MockMultipartFile("file",file.getName(),"image/png", IOUtils.toByteArray(input));
+            modeloFile = new Imagen(multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getBytes());
+            json = mapper.writeValueAsString(modeloFile);
+            System.out.println(json);
+            HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/image")
+                    .header("Content-Type", "application/json;charset=utf-8")
+                    .body(json)
+                    .asJson();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public Image obtenerImagen() throws UnirestException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        byte[] imagen = ResponseUtils.getBytes(Unirest.get("http://localhost:8080/image/1").asBinary().getBody());
+        ByteArrayInputStream bytearray = new ByteArrayInputStream(imagen);
+        Image imagenverdadera = new Image(bytearray);
+        return imagenverdadera;
+    }
+*/
 
 }
 

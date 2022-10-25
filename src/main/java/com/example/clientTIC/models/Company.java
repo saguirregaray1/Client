@@ -1,6 +1,8 @@
 package com.example.clientTIC.models;
 
 
+import com.example.clientTIC.AppUser;
+
 import java.util.List;
 
 public class Company {
@@ -11,16 +13,20 @@ public class Company {
 
     private List<Employee> companyEmployees;
 
-    public Company(Long id, String nombre,Long nroCuenta, List<Employee> companyEmployees) {
+    private List<AppUser> companyUsers;
+
+    public Company(Long id, String nombre,Long nroCuenta, List<Employee> companyEmployees, List<AppUser> companyUsers) {
         this.id = id;
         this.nombre = nombre;
         this.nroCuenta = nroCuenta;
         this.companyEmployees = companyEmployees;
+        this.companyUsers = companyUsers;
     }
-    public Company(String nombre,Long nroCuenta, List<Employee> companyEmployees) {
+    public Company(String nombre,Long nroCuenta, List<Employee> companyEmployees, List<AppUser> companyUsers) {
         this.nombre = nombre;
         this.nroCuenta = nroCuenta;
         this.companyEmployees = companyEmployees;
+        this.companyUsers = companyUsers;
     }
 
     public Company(){}
@@ -57,6 +63,14 @@ public class Company {
         this.companyEmployees = companyEmployees;
     }
 
+    public List<AppUser> getCompanyUsers() {
+        return companyUsers;
+    }
+
+    public void setCompanyUsers(List<AppUser> companyUsers) {
+        this.companyUsers = companyUsers;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
@@ -64,6 +78,7 @@ public class Company {
                 ", nombre='" + nombre + '\'' +
                 ", nroCuenta=" + nroCuenta +
                 ", companyEmployees=" + companyEmployees +
+                ", companyUsers=" + companyUsers +
                 '}';
     }
 }

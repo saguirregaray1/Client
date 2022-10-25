@@ -1,5 +1,7 @@
 package com.example.clientTIC.models;
 
+import com.example.clientTIC.AppUser;
+
 public class Admin {
 
     private Long id;
@@ -8,20 +10,27 @@ public class Admin {
 
     private String password;
 
+    private AppUser appUser;
 
-    public Admin(Long id, String email, String password) {
+
+    public Admin(Long id, String email, String password, AppUser appUser) {
         this.id = id;
         this.email = email;
         this.password = password;
-
+        this.appUser = appUser;
     }
 
     public Admin(){}
 
+    public Admin(String email, String password,AppUser appUser) {
+        this.email = email;
+        this.password = password;
+        this.appUser = appUser;
+    }
     public Admin(String email, String password) {
         this.email = email;
         this.password = password;
-
+        this.appUser = new AppUser();
     }
 
     public Long getId() {

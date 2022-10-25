@@ -1,5 +1,7 @@
 package com.example.clientTIC.models;
 
+import com.example.clientTIC.AppUser;
+
 import java.util.List;
 
 public class Employee {
@@ -18,7 +20,9 @@ public class Employee {
 
     private List<Activity> favs;
 
-    public Employee(Long id, Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
+    private AppUser appUser;
+
+    public Employee(Long id, Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs,AppUser appUser) {
         this.id = id;
         this.company = company;
         this.cedula = cedula;
@@ -26,14 +30,16 @@ public class Employee {
         this.email = email;
         this.password = password;
         this.favs = favs;
+        this.appUser = appUser;
     }
 
-    public Employee(Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs) {
+    public Employee(Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs, AppUser appUser) {
         this.company = company;
         this.cedula = cedula;
         this.saldo = saldo;
         this.email = email;
         this.password = password;
+        this.appUser = appUser;
         this.favs = favs;
     }
 
@@ -95,16 +101,25 @@ public class Employee {
         this.password = password;
     }
 
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", companyId=" + company +
+                ", company=" + company +
                 ", cedula=" + cedula +
                 ", saldo=" + saldo +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", favs=" + favs +
+                ", appUser=" + appUser +
                 '}';
     }
 }
