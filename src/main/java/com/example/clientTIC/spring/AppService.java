@@ -204,8 +204,9 @@ public class AppService {
     public List<List> getListOfFavs(AppUser appUser) {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
+        Long userId= appUser.getId();
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + appUser.getEmployee().getId()).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + userId ).asJson();
             list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -270,7 +271,7 @@ public class AppService {
         throw new IllegalStateException("usuario no es empleado");
     }
 
-    public void addFavourite(AppUser appUser, Activity activity) {
+    public void addFavourite(AppUser appUser, Long activityId) {
         if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
             String json = "";
             HttpResponse<JsonNode> apiResponse = null;
@@ -278,7 +279,7 @@ public class AppService {
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
-                apiResponse = Unirest.post("http://localhost:8080/employee/" + activity.getId())
+                apiResponse = Unirest.post("http://localhost:8080/employee/" + activityId)
                         .header("Content-Type", "application/json")
                         .body(json).asJson();
             } catch (UnirestException | JsonProcessingException e) {

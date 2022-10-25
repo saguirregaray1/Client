@@ -48,6 +48,7 @@ public class loginController {
         appService.addNewClub("um","18");
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,100, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2);
+        appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
         appService.subirImagen();
         Image imagen=appService.obtenerImagen();
 
