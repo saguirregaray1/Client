@@ -21,10 +21,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -289,7 +286,7 @@ public class AppService {
     }
 
     public void subirImagen() {
-        File file = new File("src/main/resources/python.png");
+        File file = new File("src/main/resources/descarga.jpg");
         FileInputStream input = null;
         MultipartFile multipartFile = null;
 
@@ -298,7 +295,7 @@ public class AppService {
         String json = "";
         try {
             input = new FileInputStream(file);
-            multipartFile = new MockMultipartFile("file", file.getName(), "image/png", IOUtils.toByteArray(input));
+            multipartFile = new MockMultipartFile("file", file.getName(), "image/jpg", IOUtils.toByteArray(input));
             modeloFile = new Imagen(multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getBytes());
             json = mapper.writeValueAsString(modeloFile);
             HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/image")
@@ -312,7 +309,8 @@ public class AppService {
 
     public Image obtenerImagen() throws UnirestException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        byte[] imagen = ResponseUtils.getBytes(Unirest.get("http://localhost:8080/image/1").asBinary().getBody());
+        HttpResponse<InputStream> a = Unirest.get("http://localhost:8080/image/1").asBinary();
+        byte[] imagen = ResponseUtils.getBytes(a.getBody());
         ByteArrayInputStream bytearray = new ByteArrayInputStream(imagen);
         Image imagenverdadera = new Image(bytearray);
         return imagenverdadera;
