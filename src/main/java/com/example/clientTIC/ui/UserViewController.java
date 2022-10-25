@@ -21,7 +21,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -115,35 +118,52 @@ public class UserViewController extends ListView<Activity> implements Initializa
                     registerToActivity(appUser, Long.valueOf(value.get(7).toString()));
                 }
             });
-            //Image image = new Image("images.jpg");
-            //ImageView imageView = new ImageView(image);
-            //imageView.setFitHeight(100);
-            //imageView.setFitWidth(150);
+            Image image = new Image("images.jpg");
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(150);
+            Button activityButton= new Button();
+            activityButton.setGraphic(imageView);
+            activityButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ActivityView.fxml"));
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    Scene scene= new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            });
             Label labelName = new Label(activity.getNombre());
             labelName.setMaxWidth(250);
             labelName.setMaxHeight(100);
             labelName.setWrapText(true);
             labelName.setStyle("-fx-font-weight: bold");
             labelName.setFont(new Font("Arial", 20));
-            Label labelPrice = new Label(" Cupos disponibles: " + activity.getPrecio());
+            Label labelPrice = new Label(" Precio: " + activity.getPrecio());
             labelPrice.setMaxWidth(250);
             labelPrice.setMaxHeight(100);
             labelPrice.setWrapText(true);
             labelPrice.setFont(new Font("Arial", 20));
-            Label labelCupos = new Label(" Precio: " + activity.getCupos());
+            Label labelCupos = new Label(" Cupos disponibles: " + activity.getCupos());
             labelCupos.setMaxWidth(250);
             labelCupos.setMaxHeight(100);
             labelCupos.setWrapText(true);
             labelCupos.setFont(new Font("Arial", 20));
             hBox.setAlignment(Pos.CENTER);
             hBox.setPadding(new Insets(5, 5, 5, 5));
-            Separator separator1 = new Separator(Orientation.VERTICAL);
-            Separator separator2 = new Separator(Orientation.VERTICAL);
-            Separator separator3 = new Separator(Orientation.VERTICAL);
-            Separator separator4 = new Separator(Orientation.VERTICAL);
+            HBox.setHgrow(activityButton, Priority.ALWAYS);
+            HBox.setHgrow(activityButton, Priority.ALWAYS);
+            HBox.setHgrow(activityButton, Priority.ALWAYS);
+            HBox.setHgrow(activityButton, Priority.ALWAYS);
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
-            hBox.getChildren().addAll(separator1, labelName, separator2, labelPrice,
-                    separator3, labelCupos, separator4, button);
+            hBox.getChildren().addAll(activityButton, labelName,labelPrice,labelCupos,button);
             activityBox.getChildren().add(hBox);
         }
     }
