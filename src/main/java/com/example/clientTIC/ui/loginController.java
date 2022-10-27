@@ -53,7 +53,7 @@ public class loginController {
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
-        List<Image> imagenes=appService.getActivityImages(1L);
+        appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L);
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();

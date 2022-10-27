@@ -40,7 +40,6 @@ public class AppService {
             throw new RuntimeException(ex);
         }
         return FXCollections.observableList(list);
-
     }
 
     public void addNewClub(String nombre, String dir) {
@@ -307,11 +306,21 @@ public class AppService {
         }
     }
 
-    public List<Image> getActivityImages(Long activityId) throws UnirestException, IOException {
+    public List<Image> getActivityImages(Long activityId){
         ObjectMapper mapper = new ObjectMapper();
-        HttpResponse<InputStream> a = Unirest.get("http://localhost:8080/image/"+activityId).asBinary();
+        HttpResponse<InputStream> a = null;
+        try {
+            a = Unirest.get("http://localhost:8080/image/"+activityId).asBinary();
+        } catch (UnirestException e) {
+            throw new RuntimeException(e);
+        }
 
-        List<byte[]> images = mapper.readValue(a.getBody().toString(), new TypeReference<>() {});
+        List<byte[]> images = null;
+        try {
+            images = mapper.readValue(a.getBody(), new TypeReference<>() {});
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         List<Image> pictures = new ArrayList<>();
 
         for (byte[] i:images){

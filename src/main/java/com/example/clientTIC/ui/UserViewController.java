@@ -7,6 +7,7 @@ import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,7 +75,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         setListOfActivities(appService.getListOfActivitiesByCategory(category));
-        }
+    }
 
     @FXML
     protected void mostrarFavoritos(ActionEvent event){
@@ -82,7 +83,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         setListOfActivities(appService.getListOfFavs(this.appUser));
-        }
+    }
 
     @FXML
     protected void registerToActivity(AppUser appUser, Long activityId){
@@ -93,7 +94,6 @@ public class UserViewController extends ListView<Activity> implements Initializa
         }
         activityBox.getChildren().clear();
         setListOfActivities(appService.getListOfActivities());
-        //update atributos
     }
 
 
@@ -103,23 +103,25 @@ public class UserViewController extends ListView<Activity> implements Initializa
     public void initialize(URL location, ResourceBundle resources) {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         filter.getItems().addAll(categorias);
+
         filter.setOnAction(this::setFilter);
         setListOfActivities(appService.getListOfActivities());
     }
 
     private void setListOfActivities(List<List> activityList){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         for (List value : activityList) {
             HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
-            Activity activity = new Activity((String) value.get(1), Long.valueOf(value.get(2).toString()), (Integer) value.get(3), ActivityCategories.valueOf((String) value.get(4)));
+            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()), (Integer) value.get(2), ActivityCategories.valueOf((String) value.get(3)));
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    registerToActivity(appUser, Long.valueOf(value.get(7).toString()));
+                    registerToActivity(appUser, Long.valueOf(value.get(6).toString()));
                 }
             });
-            Image image = new Image("images.jpg");
-            ImageView imageView = new ImageView(image);
+            List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(6).toString()));
+            ImageView imageView = new ImageView(pictures.get(0));
             imageView.setFitHeight(100);
             imageView.setFitWidth(150);
             Button activityButton= new Button();
