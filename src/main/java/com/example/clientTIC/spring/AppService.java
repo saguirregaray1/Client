@@ -64,6 +64,22 @@ public class AppService {
         }
     }
 
+    public HttpResponse<JsonNode> cameToActivity(Long cedula, Long activityId) {
+        String json = "";
+        HttpResponse<JsonNode> apiResponse = null;
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(cedula);
+            apiResponse = Unirest.post("http://localhost:8080/club/activity/" + activityId)
+                    .header("Content-Type", "application/json")
+                    .body(json).asJson();
+        } catch (UnirestException | JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return apiResponse;
+    }
+
     public ObservableList<Company> getListOfCompanies() {
         ObjectMapper mapper = new ObjectMapper();
         List<Company> list = null;
@@ -200,9 +216,9 @@ public class AppService {
     public List<List> getListOfFavs(AppUser appUser) {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list = null;
-        Long userId= appUser.getId();
+        Long userId = appUser.getId();
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + userId ).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/favourite/" + userId).asJson();
             list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<List>>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -306,30 +322,31 @@ public class AppService {
         }
     }
 
-    public List<Image> getActivityImages(Long activityId){
+    public List<Image> getActivityImages(Long activityId) {
         ObjectMapper mapper = new ObjectMapper();
         HttpResponse<InputStream> a = null;
         try {
-            a = Unirest.get("http://localhost:8080/image/"+activityId).asBinary();
+            a = Unirest.get("http://localhost:8080/image/" + activityId).asBinary();
         } catch (UnirestException e) {
             throw new RuntimeException(e);
         }
 
         List<byte[]> images = null;
         try {
-            images = mapper.readValue(a.getBody(), new TypeReference<>() {});
+            images = mapper.readValue(a.getBody(), new TypeReference<>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         List<Image> pictures = new ArrayList<>();
 
-        for (byte[] i:images){
+        for (byte[] i : images) {
             ByteArrayInputStream bytearray = new ByteArrayInputStream(i);
             Image imagenverdadera = new Image(bytearray);
             pictures.add(imagenverdadera);
         }
         return pictures;
-        }
+    }
 
     public void uploadActivityPicture(File file, Long activityId) {
         FileInputStream input = null;
@@ -343,7 +360,7 @@ public class AppService {
             multipartFile = new MockMultipartFile("file", file.getName(), "image/jpg", IOUtils.toByteArray(input));
             modeloFile = new Imagen(multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getBytes());
             json = mapper.writeValueAsString(modeloFile);
-            HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/image/"+ activityId)
+            HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/image/" + activityId)
                     .header("Content-Type", "application/json;charset=utf-8")
                     .body(json)
                     .asJson();
