@@ -136,6 +136,11 @@ public class UserViewController extends ListView<Activity> implements Initializa
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                    ActivityViewController activityViewController = loader.getController();
+                    activityViewController.setCurrentActivity(activity);
+                    activityViewController.setCurrentAppUser(appUser);
+                    activityViewController.setInfo(activity.getNombre(),/*activity.getClub().getNombre(),*/
+                            String.valueOf(activity.getPrecio()),appService.getActivityImages(activity.getId()));
                     Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     Scene scene= new Scene(root);
                     stage.setScene(scene);

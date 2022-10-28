@@ -32,45 +32,43 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.CompanyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.CompanyController">
    <children>
-      <TabPane layoutY="57.0" prefHeight="479.0" prefWidth="778.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Empresas">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="692.0">
-                     <children>
-                        <TextField fx:id="companyName" layoutX="590.0" layoutY="14.0" prefHeight="26.0" prefWidth="146.0" promptText="Inserte nombre empresa" />
-                        <Button layoutX="596.0" layoutY="213.0" mnemonicParsing="false" onAction="#addEnterprise" prefHeight="26.0" prefWidth="129.0" text="Crear empresa" />
-                        <TableView fx:id="companyTable" layoutX="18.0" layoutY="14.0" prefHeight="414.0" prefWidth="535.0">
-                          <columns>
-                              <TableColumn fx:id="idColumn" prefWidth="62.39999580383301" text="Id" />
-                            <TableColumn fx:id="nameColumn" prefWidth="131.99999237060547" text="Nombre" />
-                            <TableColumn fx:id="emailColumn" prefWidth="136.60003662109375" text="Email" />
-                              <TableColumn fx:id="nroCuentaColumn" prefWidth="104.199951171875" text="Nro Cuenta" />
-                              <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="99.60000610351562" text="Contraseña" />
-                          </columns>
-                        </TableView>
-                        <TextField fx:id="emailEnterprise" layoutX="590.0" layoutY="54.0" prefHeight="26.0" prefWidth="151.0" promptText="Inserte email" />
-                        <PasswordField fx:id="passwordEnterprise" layoutX="598.0" layoutY="139.0" prefHeight="26.0" prefWidth="141.0" promptText="Inserte contraseña" />
-                        <Button layoutX="596.0" layoutY="255.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Modificar empresa" />
-                        <Button layoutX="597.0" layoutY="345.0" mnemonicParsing="false" onAction="#deleteEnterprise" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
-                        <TextField fx:id="nroCuenta" layoutX="589.0" layoutY="96.0" prefHeight="26.0" prefWidth="149.0" promptText="Inserte numero de cuenta" />
-                        <TextField fx:id="nameOfCompanyToDelete" layoutX="597.0" layoutY="302.0" prefHeight="26.0" prefWidth="152.0" promptText="Inserte nombre empresa" />
-                        <Button layoutX="599.0" layoutY="391.0" mnemonicParsing="false" onAction="#showEnterprises" prefHeight="26.0" prefWidth="123.0" text="Ver empresas" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-      <Region layoutX="1.0" layoutY="-1.0" prefHeight="58.0" prefWidth="778.0" style="-fx-background-color: red;" />
-      <Label layoutX="16.0" prefHeight="58.0" prefWidth="762.0" text="Bienvenido" textFill="#1acf1d">
+  <AnchorPane layoutX="1.0" layoutY="58.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="778.0">
+         <children>
+            <TextField fx:id="companyName" layoutX="590.0" layoutY="14.0" prefHeight="26.0" prefWidth="146.0" promptText="Inserte nombre empresa" />
+            <Button layoutX="596.0" layoutY="213.0" mnemonicParsing="false" onAction="#addEnterprise" prefHeight="26.0" prefWidth="129.0" text="Crear empresa" />
+            <TextField fx:id="emailEnterprise" layoutX="590.0" layoutY="54.0" prefHeight="26.0" prefWidth="151.0" promptText="Inserte email" />
+            <PasswordField fx:id="passwordEnterprise" layoutX="590.0" layoutY="140.0" prefHeight="26.0" prefWidth="141.0" promptText="Inserte contraseña" />
+            <Button layoutX="596.0" layoutY="255.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Modificar empresa" />
+            <Button layoutX="597.0" layoutY="345.0" mnemonicParsing="false" onAction="#deleteEnterprise" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
+            <TextField fx:id="nroCuenta" layoutX="589.0" layoutY="96.0" prefHeight="26.0" prefWidth="149.0" promptText="Inserte numero de cuenta" />
+            <TextField fx:id="nameOfCompanyToDelete" layoutX="597.0" layoutY="302.0" prefHeight="26.0" prefWidth="152.0" promptText="Inserte nombre empresa" />
+            <Button layoutX="599.0" layoutY="391.0" mnemonicParsing="false" onAction="#showEnterprises" prefHeight="26.0" prefWidth="123.0" text="Ver empresas" />
+            <TableView fx:id="companyTable" layoutX="20.0" layoutY="19.0" prefHeight="414.0" prefWidth="535.0">
+              <columns>
+                  <TableColumn fx:id="idColumn" prefWidth="62.39999580383301" text="Id" />
+                <TableColumn fx:id="nameColumn" prefWidth="131.99999237060547" text="Nombre" />
+                <TableColumn fx:id="emailColumn" prefWidth="136.60003662109375" text="Email" />
+                  <TableColumn fx:id="nroCuentaColumn" prefWidth="104.199951171875" text="Nro Cuenta" />
+                  <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="99.60000610351562" text="Contraseña" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Region layoutX="-6.0" layoutY="-1.0" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: red;" />
+      <Label layoutX="16.0" prefHeight="58.0" prefWidth="762.0" text="Bienvenido, aqui tiene la lista de empresas" textFill="#1acf1d">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
