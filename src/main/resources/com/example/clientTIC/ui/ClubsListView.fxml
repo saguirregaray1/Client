@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="462.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.ClubListViewController">
    <children>
@@ -30,6 +29,7 @@
                </font>
             </Label>
             <Line endX="100.0" layoutX="130.0" layoutY="231.0" startX="-100.0" />
+            <Button fx:id="returnButton" layoutX="78.0" layoutY="400.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: transparent;" />
          </children>
       </AnchorPane>
       <TabPane layoutX="255.0" prefHeight="462.0" prefWidth="623.0" tabClosingPolicy="UNAVAILABLE">
@@ -38,32 +38,54 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="62.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="242.3671875" />
                         <Label layoutX="62.0" layoutY="70.0" prefHeight="114.0" prefWidth="152.0" text="Introduzca la cedula para la verificacion:" wrapText="true">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="237.0" layoutY="147.0" />
+                        <TextField fx:id="userCheckIn" layoutX="237.0" layoutY="147.0" />
+                        <Label fx:id="checkInResult" layoutX="153.0" layoutY="248.0" prefHeight="98.0" prefWidth="220.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="429.0" layoutY="147.0" mnemonicParsing="false" onAction="#verifyButton" prefHeight="26.0" prefWidth="79.0" text="Verificar" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="User management">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="43.0" layoutY="24.0" prefHeight="31.0" prefWidth="167.0" text="Registrar usuario:">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="43.0" layoutY="74.0" promptText="Introduzca cedula" />
+                        <TextField layoutX="43.0" layoutY="115.0" prefHeight="26.0" prefWidth="220.0" promptText="Introduzca email" />
+                        <Button layoutX="43.0" layoutY="172.0" mnemonicParsing="false" onAction="#registerUserButton" prefHeight="26.0" prefWidth="114.0" text="Registrar" />
+                        <Label layoutX="49.0" layoutY="256.0" prefHeight="31.0" prefWidth="167.0" text="Borrar usuario:">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="48.0" layoutY="306.0" promptText="Introduzca cedula" />
+                        <Button layoutX="49.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteUserButton" prefHeight="26.0" prefWidth="114.0" text="Borrar" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Crear actividades">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <CheckBox contentDisplay="RIGHT" layoutX="146.0" layoutY="78.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="hastimeActivity" contentDisplay="RIGHT" layoutX="146.0" layoutY="78.0" mnemonicParsing="false" />
                         <Label layoutX="42.0" layoutY="78.0" text="Tiene horarios?" />
-                        <TextField layoutX="38.0" layoutY="32.0" promptText="Nombre actividad" />
-                        <Button layoutX="186.0" layoutY="114.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
+                        <TextField fx:id="createActivityName" layoutX="38.0" layoutY="32.0" promptText="Nombre actividad" />
+                        <Button layoutX="186.0" layoutY="114.0" mnemonicParsing="false" onAction="#chargeImagesButton" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
                         <Label layoutX="40.0" layoutY="118.0" text="Quiere cargar imagenes?" />
-                        <AnchorPane layoutX="186.0" layoutY="71.0" prefHeight="31.0" prefWidth="104.0" />
+                        <AnchorPane fx:id="timeButtonAnchorpane" layoutX="186.0" layoutY="71.0" prefHeight="31.0" prefWidth="104.0" />
                         <Label layoutX="370.0" layoutY="58.0" prefHeight="18.0" prefWidth="188.0" text="Imagenes cargadas" underline="true">
                            <font>
                               <Font size="14.0" />
@@ -73,18 +95,18 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="221.0">
                                  <children>
-                                    <VBox prefHeight="295.0" prefWidth="220.0" />
+                                    <VBox fx:id="imagesActivity" prefHeight="295.0" prefWidth="220.0" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <Button layoutX="40.0" layoutY="374.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
+                        <Button layoutX="40.0" layoutY="374.0" mnemonicParsing="false" onAction="#createActivityButton" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
                         <Label layoutX="38.0" layoutY="164.0" prefHeight="18.0" prefWidth="201.0" />
-                        <VBox layoutX="42.0" layoutY="202.0" prefHeight="150.0" prefWidth="208.0" />
+                        <VBox fx:id="horariosActivity" layoutX="42.0" layoutY="202.0" prefHeight="150.0" prefWidth="208.0" />
                      </children>
                   </AnchorPane>
               </content>
