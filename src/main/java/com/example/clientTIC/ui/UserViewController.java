@@ -148,7 +148,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
                 }
             });
             Label labelName = new Label(activity.getNombre());
-            labelName.setMaxWidth(250);
+            labelName.setMaxWidth(150);
             labelName.setMaxHeight(100);
             labelName.setWrapText(true);
             labelName.setStyle("-fx-font-weight: bold");
@@ -166,9 +166,9 @@ public class UserViewController extends ListView<Activity> implements Initializa
             hBox.setAlignment(Pos.CENTER);
             hBox.setPadding(new Insets(5, 5, 5, 5));
             HBox.setHgrow(activityButton, Priority.ALWAYS);
-            HBox.setHgrow(activityButton, Priority.ALWAYS);
-            HBox.setHgrow(activityButton, Priority.ALWAYS);
-            HBox.setHgrow(activityButton, Priority.ALWAYS);
+            HBox.setHgrow(labelName, Priority.ALWAYS);
+            //HBox.setHgrow(labelPrice, Priority.ALWAYS);
+            HBox.setHgrow(labelCupos, Priority.ALWAYS);
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
             hBox.getChildren().addAll(activityButton, labelName,labelPrice,labelCupos,button);
             activityBox.getChildren().add(hBox);
