@@ -3,6 +3,7 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
+import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
@@ -111,19 +112,17 @@ public class UserViewController extends ListView<Activity> implements Initializa
         for (List value : activityList) {
             HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
-            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(2).toString()),ActivityCategories.valueOf((String) value.get(3)));
-            Object cupos = value.get(1);
-
-            String nombreClub=value.get(4).toString();
-            String dirClub=value.get(5).toString();
+            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()),ActivityCategories.valueOf((String) value.get(2)));
+            String nombreClub=value.get(3).toString();
+            String dirClub=value.get(4).toString();
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     //fixme
-                    registerToActivity(appUser, Long.valueOf(value.get(6).toString()),2L);
+                    registerToActivity(appUser, Long.valueOf(value.get(5).toString()),2L);
                 }
             });
-            List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(6).toString()));
+            List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(5).toString()));
             ImageView imageView = new ImageView(pictures.get(0));
             imageView.setFitHeight(100);
             imageView.setFitWidth(150);

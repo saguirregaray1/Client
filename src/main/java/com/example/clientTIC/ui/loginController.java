@@ -3,6 +3,7 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.models.ActivityCategories;
+import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,9 +50,14 @@ public class loginController {
         appService.addNewAdmin("aa","bb");
         appService.addNewCompany("coca", 123L);
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
-        appService.addNewClub("um","18");
-      //  appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,100, ActivityCategories.CATEGORY_1);
-       // appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,100,ActivityCategories.CATEGORY_2);
+        appService.addNewClub("um","18","abc","111");
+        List<Quota> quotas = new ArrayList<>();
+        quotas.add(new Quota("Lunes","00:01:00","23:59:00",100));
+        quotas.add(new Quota("Martes","00:01:00","23:59:00",100));
+        quotas.add(new Quota("Miercoles","00:01:00","23:59:00",100));
+
+        appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,quotas, ActivityCategories.CATEGORY_1);
+        appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,quotas,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
         appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L);

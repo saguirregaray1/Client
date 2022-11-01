@@ -30,6 +30,12 @@ public class Quota {
         this.cupos = cupos;
         this.activity = activity;
     }
+    public Quota(String day, String startTime, String finishTime, Integer cupos) {
+        this.day = day;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.cupos = cupos;
+    }
 
     public Quota(){}
 

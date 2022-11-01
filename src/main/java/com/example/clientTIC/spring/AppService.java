@@ -42,13 +42,36 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public void addNewClub(String nombre, String dir) {
+    public void addNewClub(String nombre, String dir, String email, String password) {
+        String json = "";
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            List<String> list = new ArrayList<>();
+            list.add(nombre);
+            list.add(dir);
+            list.add(email);
+            list.add(password);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club")
+                    .header("Content-Type", "application/json")
+                    .body(json).asJson();
+
+            if (apiResponse.getStatus() != 200) {
+                throw new IllegalStateException("club no creado");
+            }
+        } catch (UnirestException | JsonProcessingException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void addNewClubUser(String email, String password, Long clubId) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Club club = new Club(nombre, dir, new ArrayList<Activity>(), new ArrayList<AppUser>());
-            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(club);
-            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club")
+            AppUser appUser = new AppUser(email, password, AppUserRole.CLUB_USER);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/user/" + clubId)
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
         } catch (UnirestException | JsonProcessingException ex) {
@@ -271,7 +294,7 @@ public class AppService {
 
             try {
                 ObjectMapper mapper = new ObjectMapper();
-                List<Long> list=new ArrayList<>();
+                List<Long> list = new ArrayList<>();
                 list.add(appUser.getId());
                 list.add(scheduleId);
                 json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
@@ -371,6 +394,21 @@ public class AppService {
             e.printStackTrace();
         }
     }
+
+    public List<Quota> getActivityQuota(Long activityId) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Quota> activityQuota;
+        try {
+            HttpResponse apiResponse = Unirest.get("http://localhost:8080/image/" + activityId).asJson();
+            activityQuota = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+
+        } catch (IOException | UnirestException e) {
+            throw new RuntimeException(e);
+        }
+        return activityQuota;
+    }
 }
+
 
 
