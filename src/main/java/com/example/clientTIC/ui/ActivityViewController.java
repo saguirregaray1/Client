@@ -2,11 +2,13 @@ package com.example.clientTIC.ui;
 
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.Activity;
+import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -38,12 +42,6 @@ public class ActivityViewController {
     }
 
     @FXML
-    private Button returnButton;
-
-    @FXML
-    private Button registerButton;
-
-    @FXML
     public VBox imagesActivity;
 
     @FXML
@@ -61,9 +59,10 @@ public class ActivityViewController {
 
 
 
-    public void setInfo(String nombreActividad, /*String nombreClub,*/ String costoActividad, List<Image> activityImages){
+    public void setInfo(String nombreActividad, String costoActividad, List<Image> activityImages){
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         nameActivity.setText(nombreActividad);
-        //clubNameActivity.setText("Venga a "+nombreClub+" y disfrute de una buena jornada deportiva");
+        //clubNameActivity.setText("Venga a "+currentActivity.getClub().getNombre()+" y disfrute de una buena jornada deportiva");
         if (activityCost!=null){
             activityCost.setText("Costo de la actividad: " + costoActividad);
         }
@@ -74,6 +73,27 @@ public class ActivityViewController {
             imageView.setFitWidth(150);
             imagesActivity.getChildren().add(imageView);
         }
+
+        for (int i=0; i<currentActivity.getCupos().size();i++){
+            HBox hBox= new HBox(10);
+            Quota quota= currentActivity.getCupos().get(i);
+            String dia = quota.getDay();
+            String horario = quota.getStartTime() +" - "+quota.getFinishTime();
+            Label diaLabel = new Label(dia);
+            Label horarioLabel = new Label(horario);
+            HBox.setHgrow(diaLabel, Priority.ALWAYS);
+            Button registrarAHorario = new Button("Registrar");
+            registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    appService.registerToActivity(currentAppUser,currentActivity.getId(), quota.getQuotaId());
+                }
+            });
+            hBox.getChildren().addAll(diaLabel,horarioLabel,registrarAHorario);
+            horariosActivity.getChildren().add(hBox);
+        }
+
+
 
     }
 

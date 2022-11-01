@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class ClubListViewController implements Initializable {
@@ -372,6 +373,8 @@ public class ClubListViewController implements Initializable {
         if (encontrado==false){
             checkInResult.setText("El usuario no se encuentra registrado en el club");
         }
+
+        String fecha = String.valueOf(LocalDateTime.now());
     }
 
 
