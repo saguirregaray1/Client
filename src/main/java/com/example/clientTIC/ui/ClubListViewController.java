@@ -1,11 +1,15 @@
 package com.example.clientTIC.ui;
 
+import com.example.clientTIC.AppUser;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -20,10 +24,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClubListViewController implements Initializable {
+
+    public AppUser appUser;
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     @FXML
     private Button returnButton;
@@ -42,12 +53,6 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     private TextField createActivityName;
-
-    @FXML
-    private CheckBox hastimeActivity;
-
-    @FXML
-    private AnchorPane timeButtonAnchorpane;
 
     @FXML
     private TextField deleteUserID;
@@ -94,6 +99,18 @@ public class ClubListViewController implements Initializable {
     protected void verifyButton(){
         String name= userCheckIn.getText();
     }
+
+
+    @FXML
+    protected void tieneHorarios(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("setTimesActivity.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
 

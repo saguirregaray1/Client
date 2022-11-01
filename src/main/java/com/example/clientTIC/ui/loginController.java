@@ -86,6 +86,15 @@ public class loginController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            }else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)){
+                FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("ClubsListView.fxml"));
+                Parent root = loader.load();
+                ClubListViewController clubListViewController = loader.getController();
+                clubListViewController.setAppUser(appUser);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
             }
         }
     }
