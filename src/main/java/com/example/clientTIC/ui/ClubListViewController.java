@@ -16,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,7 +25,6 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ClubListViewController implements Initializable {
@@ -50,10 +48,7 @@ public class ClubListViewController implements Initializable {
     private VBox imagesActivity;
 
     @FXML
-    private TextField createActivityNameCupos;
-
-    @FXML
-    private TextField cuposActivity;
+    private TextField createActivityName;
 
     @FXML
     private DatePicker dateActivity;
@@ -161,8 +156,6 @@ public class ClubListViewController implements Initializable {
     private CheckBox habilitarCupos;
 
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Image image = new Image("volver.png");
@@ -179,8 +172,13 @@ public class ClubListViewController implements Initializable {
     }
 
     @FXML
+    protected void crearHorarios(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
     protected void createActivityButtonCupos(){
-        String nombreActividad = createActivityNameCupos.getText();
+        String nombreActividad = createActivityName.getText();
 
 
     }
@@ -377,15 +375,7 @@ public class ClubListViewController implements Initializable {
     }
 
 
-    @FXML
-    protected void tieneHorarios(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("setTimesActivity.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
 
 

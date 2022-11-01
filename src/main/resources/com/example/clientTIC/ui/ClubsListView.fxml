@@ -98,22 +98,22 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="createActivityNameCupos" layoutX="190.0" layoutY="39.0" promptText="Nombre actividad" />
-                        <Button layoutX="186.0" layoutY="151.0" mnemonicParsing="false" onAction="#chargeImagesButton" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
+                        <TextField layoutX="190.0" layoutY="39.0" promptText="Nombre actividad" />
+                        <Button layoutX="186.0" layoutY="151.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
                         <Label layoutX="38.0" layoutY="155.0" text="Quiere cargar imagenes?" />
-                        <Button layoutX="40.0" layoutY="397.0" mnemonicParsing="false" onAction="#createActivityButtonCupos" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
+                        <Button layoutX="40.0" layoutY="397.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="cuposActivity" layoutX="190.0" layoutY="95.0" promptText="Cantidad cupos" />
+                        <TextField layoutX="190.0" layoutY="95.0" promptText="Cantidad cupos" />
                         <DatePicker fx:id="dateActivity" layoutX="186.0" layoutY="241.0" />
                         <Label layoutX="40.0" layoutY="245.0" text="Elija fecha:" />
                         <Label layoutX="40.0" layoutY="43.0" text="Ingrese nombre:" />
                         <Label layoutX="40.0" layoutY="99.0" text="Ingrese cupos:" />
                         <ScrollPane layoutX="369.0" layoutY="111.0" prefHeight="309.0" prefWidth="246.0">
                            <content>
-                              <VBox fx:id="imagesActivity" prefHeight="303.0" prefWidth="242.0" />
+                              <VBox prefHeight="303.0" prefWidth="242.0" />
                            </content>
                         </ScrollPane>
                         <Label layoutX="369.0" layoutY="65.0" text="Imagenes cargadas" underline="true">
@@ -130,8 +130,8 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="681.0">
                      <children>
                         <Label layoutX="40.0" layoutY="28.0" text="Ingrese nombre:" />
-                        <TextField fx:id="createActivityName1" layoutX="180.0" layoutY="24.0" promptText="Nombre actividad" />
-                        <Button layoutX="188.0" layoutY="433.0" mnemonicParsing="false" onAction="#tieneHorarios" text="Ingresar horarios" />
+                        <TextField fx:id="createActivityNameCupos" layoutX="180.0" layoutY="24.0" promptText="Nombre actividad" />
+                        <Button layoutX="188.0" layoutY="433.0" mnemonicParsing="false" onAction="#crearHorarios" text="Ingresar horarios" />
                         <Button layoutX="460.0" layoutY="430.0" mnemonicParsing="false" onAction="#createActivityButtonCupos" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
@@ -146,7 +146,7 @@
                         </Label>
                         <ScrollPane layoutX="445.0" layoutY="84.0" prefHeight="289.0" prefWidth="220.0">
                            <content>
-                              <VBox prefHeight="303.0" prefWidth="242.0" />
+                              <VBox fx:id="imagesActivity" prefHeight="303.0" prefWidth="242.0" />
                            </content>
                         </ScrollPane>
                         <CheckBox fx:id="lunesHorarios" layoutX="92.0" layoutY="148.0" mnemonicParsing="false" onAction="#lunesHoraries" />
