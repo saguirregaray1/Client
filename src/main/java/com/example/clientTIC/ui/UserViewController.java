@@ -7,7 +7,6 @@ import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -86,9 +84,9 @@ public class UserViewController extends ListView<Activity> implements Initializa
     }
 
     @FXML
-    protected void registerToActivity(AppUser appUser, Long activityId){
+    protected void registerToActivity(AppUser appUser, Long activityId, Long scheduleId){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activityId);
+        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activityId,scheduleId);
         if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
@@ -113,11 +111,16 @@ public class UserViewController extends ListView<Activity> implements Initializa
         for (List value : activityList) {
             HBox hBox = new HBox(25);
             Button button = new Button("Registrarse");
-            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()), (Integer) value.get(2), ActivityCategories.valueOf((String) value.get(3)));
+            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(2).toString()),ActivityCategories.valueOf((String) value.get(3)));
+            Object cupos = value.get(1);
+
+            String nombreClub=value.get(4).toString();
+            String dirClub=value.get(5).toString();
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    registerToActivity(appUser, Long.valueOf(value.get(6).toString()));
+                    //fixme
+                    registerToActivity(appUser, Long.valueOf(value.get(6).toString()),2L);
                 }
             });
             List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(6).toString()));

@@ -13,14 +13,14 @@ public class Activity {
 
     private Long precio;
 
-    private int cupos;
+    private List<Quota> cupos;
 
     private ActivityCategories activityCategories;
 
     private List<Imagen> pictures;
 
 
-    public Activity(Long id, Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories, List<Imagen> pictures) {
+    public Activity(Long id, Club club, String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories, List<Imagen> pictures) {
         this.id = id;
         this.club = club;
         this.nombre = nombre;
@@ -30,7 +30,7 @@ public class Activity {
         this.pictures = pictures;
     }
 
-    public Activity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories, List<Imagen> pictures) {
+    public Activity(Club club, String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories, List<Imagen> pictures) {
         this.club = club;
         this.nombre = nombre;
         this.precio = precio;
@@ -39,7 +39,7 @@ public class Activity {
         this.pictures = pictures;
     }
 
-    public Activity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
+    public Activity(Club club, String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories) {
         this.club = club;
         this.nombre = nombre;
         this.precio = precio;
@@ -48,10 +48,17 @@ public class Activity {
         this.pictures = new ArrayList<>();
     }
 
-    public Activity(String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
+    public Activity(String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories) {
         this.nombre = nombre;
         this.precio = precio;
         this.cupos = cupos;
+        this.activityCategories = activityCategories;
+    }
+
+    public Activity(String nombre, Long precio, ActivityCategories activityCategories) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cupos = null;
         this.activityCategories = activityCategories;
     }
 
@@ -90,11 +97,11 @@ public class Activity {
         this.precio = precio;
     }
 
-    public int getCupos() {
+    public List<Quota> getCupos() {
         return cupos;
     }
 
-    public void setCupos(int cupos) {
+    public void setCupos(List<Quota> cupos) {
         this.cupos = cupos;
     }
 

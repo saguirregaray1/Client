@@ -91,7 +91,8 @@ public class ActivityViewController {
     @FXML
     protected void setRegisterButton(ActionEvent event){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        HttpResponse<JsonNode> request= appService.registerToActivity(currentAppUser,currentActivity.getId());
+        //fixme
+        HttpResponse<JsonNode> request= appService.registerToActivity(currentAppUser,currentActivity.getId(),1L);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
         Parent root = null;
         try {

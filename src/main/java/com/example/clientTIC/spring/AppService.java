@@ -227,7 +227,7 @@ public class AppService {
         return list;
     }
 
-    public void addNewActivity(Club club, String nombre, Long precio, int cupos, ActivityCategories activityCategories) {
+    public void addNewActivity(Club club, String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -264,14 +264,17 @@ public class AppService {
         return apiResponse;
     }
 
-    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, Long activityId) {
+    public HttpResponse<JsonNode> registerToActivity(AppUser appUser, Long activityId, Long scheduleId) {
         if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
             String json = "";
             HttpResponse<JsonNode> apiResponse = null;
 
             try {
                 ObjectMapper mapper = new ObjectMapper();
-                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appUser);
+                List<Long> list=new ArrayList<>();
+                list.add(appUser.getId());
+                list.add(scheduleId);
+                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
                 apiResponse = Unirest.post("http://localhost:8080/club/activity/" + activityId)
                         .header("Content-Type", "application/json")
                         .body(json).asJson();
