@@ -117,12 +117,16 @@ public class AppService {
 
     }
 
-    public void addNewCompany(String name, Long nroAccount) {
+    public void addNewCompany(String nombre, Long nroAccount,String email, String password) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Company company = new Company(name, nroAccount, new ArrayList<Employee>(), new ArrayList<AppUser>());
-            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
+            List<String> list = new ArrayList<>();
+            list.add(nombre);
+            list.add(nroAccount.toString());
+            list.add(email);
+            list.add(password);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();

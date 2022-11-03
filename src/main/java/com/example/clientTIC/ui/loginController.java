@@ -48,7 +48,7 @@ public class loginController {
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         appService.addNewAdmin("aa","bb");
-        appService.addNewCompany("coca", 123L);
+        appService.addNewCompany("coca", 123L,"abcd","222");
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
         appService.addNewClub("um","18","abc","111");
         List<Quota> quotas = new ArrayList<>();

@@ -56,12 +56,11 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     private TextField deleteUserID;
-
-    @FXML
-    private TextField registerUserID;
-
     @FXML
     private  TextField registerUserEmail;
+
+    @FXML
+    private TextField registerUserPassword;
 
     @FXML
     private  TextField companyNameEmployee;
@@ -340,15 +339,11 @@ public class ClubListViewController implements Initializable {
     @FXML
     protected void registerUserButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        Long cedula = Long.valueOf(registerUserID.getText());
         String email = registerUserEmail.getText();
+        String password = registerUserPassword.getText();
         String companyName = companyNameEmployee.getText();
-        ObservableList<Company> listOfCompany = appService.getListOfCompanies();
-        for (Company company: listOfCompany){
-            if (company.getNombre() == companyName){
-
-            }
-        }
+        appService.addNewClubUser(email,password,appUser.getClub().getId()
+        );
     }
 
     @FXML
@@ -361,7 +356,11 @@ public class ClubListViewController implements Initializable {
     @FXML
     protected void verifyButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        // if (necesitaReserva){
         Long id = Long.valueOf(userCheckIn.getText());
+        //fixme
+        appService.cameToActivity(id,1L);
+
         ObservableList<Employee> employees= appService.getListOfEmployees();
         Boolean encontrado = false;
         for (Employee employee: employees){
