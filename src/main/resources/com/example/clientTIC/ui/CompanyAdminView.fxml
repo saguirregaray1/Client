@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.CompanyController">
+   <children>
+  <AnchorPane layoutX="1.0" layoutY="58.0" minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="778.0">
+         <children>
+            <TextField fx:id="companyName" layoutX="590.0" layoutY="14.0" prefHeight="26.0" prefWidth="152.0" promptText="Inserte nombre empresa" />
+            <Button layoutX="589.0" layoutY="187.0" mnemonicParsing="false" onAction="#addEnterprise" prefHeight="26.0" prefWidth="129.0" text="Crear empresa" />
+            <TextField fx:id="emailEnterprise" layoutX="590.0" layoutY="54.0" prefHeight="26.0" prefWidth="151.0" promptText="Inserte email" />
+            <PasswordField fx:id="passwordEnterprise" layoutX="590.0" layoutY="140.0" prefHeight="26.0" prefWidth="150.0" promptText="Inserte contraseña" />
+            <Button layoutX="589.0" layoutY="229.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Modificar empresa" />
+            <Button layoutX="590.0" layoutY="400.0" mnemonicParsing="false" onAction="#deleteEnterprise" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
+            <TextField fx:id="nroCuenta" layoutX="589.0" layoutY="96.0" prefHeight="26.0" prefWidth="149.0" promptText="Inserte numero de cuenta" />
+            <TextField fx:id="nameOfCompanyToDelete" layoutX="590.0" layoutY="356.0" prefHeight="26.0" prefWidth="152.0" promptText="Inserte nombre empresa" />
+            <Button layoutX="216.0" layoutY="456.0" mnemonicParsing="false" onAction="#showEnterprises" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #f0b24f;" text="Ver empresas" textFill="#131313">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <TableView fx:id="companyTable" layoutX="20.0" layoutY="19.0" prefHeight="414.0" prefWidth="535.0">
+              <columns>
+                  <TableColumn fx:id="idColumn" prefWidth="62.39999580383301" text="Id" />
+                <TableColumn fx:id="nameColumn" prefWidth="131.99999237060547" text="Nombre" />
+                <TableColumn fx:id="emailColumn" prefWidth="136.60003662109375" text="Email" />
+                  <TableColumn fx:id="nroCuentaColumn" prefWidth="104.199951171875" text="Nro Cuenta" />
+                  <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="99.60000610351562" text="Contraseña" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Region layoutX="-6.0" layoutY="-1.0" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: red;" />
+      <Label layoutX="16.0" prefHeight="58.0" prefWidth="762.0" text="Bienvenido, aqui tiene la lista de empresas" textFill="#1acf1d">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </children>
+</AnchorPane>

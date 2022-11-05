@@ -1,12 +1,12 @@
 package com.example.clientTIC.ui;
 
 import com.example.clientTIC.AppUser;
-import com.example.clientTIC.models.Company;
-import com.example.clientTIC.models.Employee;
+import com.example.clientTIC.models.*;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClubListViewController implements Initializable {
@@ -35,6 +37,10 @@ public class ClubListViewController implements Initializable {
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
     }
+
+
+    @FXML
+    private VBox horariosBox;
 
     @FXML
     private Button returnButton;
@@ -374,6 +380,39 @@ public class ClubListViewController implements Initializable {
         }
 
         String fecha = String.valueOf(LocalDateTime.now());
+    }
+
+    @FXML
+    protected void verHorarios() throws Exception {
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        String nombreActividad = activityNameCheck.getText();
+        List<List> listaActividades = appService.getListOfActivities();
+        List<Quota> cupos= null;
+        for (List value : listaActividades) {
+            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()), ActivityCategories.valueOf((String) value.get(2)));
+            if (activity.getNombre() == nombreActividad){
+               cupos =appService.getActivityQuota(activity.getId());
+            }
+        }
+        if (cupos != null) {
+            for (Quota cupo : cupos) {
+                horariosBox.getChildren().clear();
+                HBox cuposBox = new HBox(10);
+                Label dayName = new Label(cupo.getDay());
+                String inicio = cupo.getStartTime();
+                String fin = cupo.getFinishTime();
+                Label horario= new Label(inicio + " : "+ fin);
+                Button reserveButton = new Button("Reservar");
+                reserveButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        //reservar en el horario especifico
+                    }
+                });
+                cuposBox.getChildren().addAll(dayName,horario,reserveButton);
+                horariosBox.getChildren().add(cuposBox);
+            }
+        }else{throw new Exception("No existe la actividad");}
     }
 
 

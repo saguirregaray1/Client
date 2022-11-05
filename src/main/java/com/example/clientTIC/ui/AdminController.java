@@ -34,9 +34,9 @@ public class AdminController {
 
 
     @FXML
-    void openEntrView(ActionEvent event2) throws IOException {
+    void openCompanyView(ActionEvent event2) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CompanyView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CompanyAdminView.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node)event2.getSource()).getScene().getWindow();
         Scene scene= new Scene(root);
@@ -44,4 +44,29 @@ public class AdminController {
         stage.show();
 
     }
+
+    @FXML
+    void openClubsView(ActionEvent event2) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubsAdminView.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node)event2.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void openUsersView(ActionEvent event2) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UsersAdminView.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node)event2.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
 }

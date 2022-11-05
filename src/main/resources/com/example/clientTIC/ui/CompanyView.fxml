@@ -1,80 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.CompanyController">
+<AnchorPane prefHeight="515.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.CompanyViewController">
    <children>
-  <AnchorPane layoutX="1.0" layoutY="58.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="778.0">
+      <AnchorPane layoutX="627.0" prefHeight="515.0" prefWidth="258.0" style="-fx-background-color: #263f73;">
          <children>
-            <TextField fx:id="companyName" layoutX="590.0" layoutY="14.0" prefHeight="26.0" prefWidth="146.0" promptText="Inserte nombre empresa" />
-            <Button layoutX="596.0" layoutY="213.0" mnemonicParsing="false" onAction="#addEnterprise" prefHeight="26.0" prefWidth="129.0" text="Crear empresa" />
-            <TextField fx:id="emailEnterprise" layoutX="590.0" layoutY="54.0" prefHeight="26.0" prefWidth="151.0" promptText="Inserte email" />
-            <PasswordField fx:id="passwordEnterprise" layoutX="590.0" layoutY="140.0" prefHeight="26.0" prefWidth="141.0" promptText="Inserte contraseña" />
-            <Button layoutX="596.0" layoutY="255.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Modificar empresa" />
-            <Button layoutX="597.0" layoutY="345.0" mnemonicParsing="false" onAction="#deleteEnterprise" prefHeight="26.0" prefWidth="128.0" text="Eliminar empresa" />
-            <TextField fx:id="nroCuenta" layoutX="589.0" layoutY="96.0" prefHeight="26.0" prefWidth="149.0" promptText="Inserte numero de cuenta" />
-            <TextField fx:id="nameOfCompanyToDelete" layoutX="597.0" layoutY="302.0" prefHeight="26.0" prefWidth="152.0" promptText="Inserte nombre empresa" />
-            <Button layoutX="599.0" layoutY="391.0" mnemonicParsing="false" onAction="#showEnterprises" prefHeight="26.0" prefWidth="123.0" text="Ver empresas" />
-            <TableView fx:id="companyTable" layoutX="20.0" layoutY="19.0" prefHeight="414.0" prefWidth="535.0">
-              <columns>
-                  <TableColumn fx:id="idColumn" prefWidth="62.39999580383301" text="Id" />
-                <TableColumn fx:id="nameColumn" prefWidth="131.99999237060547" text="Nombre" />
-                <TableColumn fx:id="emailColumn" prefWidth="136.60003662109375" text="Email" />
-                  <TableColumn fx:id="nroCuentaColumn" prefWidth="104.199951171875" text="Nro Cuenta" />
-                  <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="99.60000610351562" text="Contraseña" />
-              </columns>
-            </TableView>
+            <Circle fill="#e3e4e500" layoutX="130.0" layoutY="232.0" radius="110.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label contentDisplay="CENTER" layoutX="100.0" layoutY="176.0" prefHeight="31.0" prefWidth="97.0" text="Gym" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Verdana Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="104.0" layoutY="253.0" text="App" textFill="#f5f5f5">
+               <font>
+                  <Font name="Verdana Bold" size="24.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" layoutX="130.0" layoutY="231.0" startX="-100.0" />
+            <Button fx:id="returnButton" layoutX="81.0" layoutY="430.0" mnemonicParsing="false" onAction="#volver" prefHeight="31.0" prefWidth="98.0" style="-fx-background-color: transparent;" />
          </children>
       </AnchorPane>
-      <Region layoutX="-6.0" layoutY="-1.0" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: red;" />
-      <Label layoutX="16.0" prefHeight="58.0" prefWidth="762.0" text="Bienvenido, aqui tiene la lista de empresas" textFill="#1acf1d">
+      <Label layoutX="38.0" layoutY="27.0" text="Lista empleados:" underline="true">
          <font>
-            <Font name="System Bold" size="22.0" />
+            <Font size="19.0" />
          </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      </Label>
+      <ScrollPane layoutX="20.0" layoutY="80.0" prefHeight="394.0" prefWidth="362.0">
+         <content>
+            <VBox fx:id="employeeList" prefHeight="389.0" prefWidth="352.0" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="410.0" layoutY="27.0" prefHeight="75.0" prefWidth="194.0" text="Agregue un nuevo empleado" underline="true" wrapText="true">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <TextField fx:id="idField" layoutX="410.0" layoutY="122.0" promptText="Cedula" />
+      <TextField fx:id="emailField" layoutX="410.0" layoutY="169.0" promptText="Email" />
+      <TextField fx:id="passwordField" layoutX="411.0" layoutY="219.0" promptText="Contraseña" />
+      <TextField fx:id="saldoField" layoutX="412.0" layoutY="265.0" promptText="Saldo" />
+      <Button layoutX="417.0" layoutY="329.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" text="Agregar empleado" />
+      <Label fx:id="registeredLabel" layoutX="417.0" layoutY="398.0" prefHeight="18.0" prefWidth="130.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
    </children>
 </AnchorPane>

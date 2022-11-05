@@ -6,9 +6,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.AdminController">
    <children>
-      <Button layoutX="89.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="Ver usuarios" textAlignment="CENTER" />
-      <Button layoutX="90.0" layoutY="70.0" mnemonicParsing="false" onAction="#openEntrView" prefHeight="26.0" prefWidth="170.0" text="Ver empresas" />
-      <Button layoutX="89.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="Ver centros deportivos" />
+      <Button layoutX="89.0" layoutY="170.0" mnemonicParsing="false" onAction="#openUsersView" prefHeight="25.0" prefWidth="171.0" text="Ver usuarios" textAlignment="CENTER" />
+      <Button layoutX="90.0" layoutY="70.0" mnemonicParsing="false" onAction="#openCompanyView" prefHeight="26.0" prefWidth="170.0" text="Ver empresas" />
+      <Button layoutX="89.0" layoutY="118.0" mnemonicParsing="false" onAction="#openClubsView" prefHeight="25.0" prefWidth="171.0" text="Ver centros deportivos" />
       <Label fx:id="TitleLabel" layoutX="32.0" layoutY="14.0" prefHeight="36.0" prefWidth="295.0" text="Que desea hacer?">
          <font>
             <Font name="System Bold" size="18.0" />

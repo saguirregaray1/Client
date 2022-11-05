@@ -59,9 +59,24 @@ public class UserViewController extends ListView<Activity> implements Initializa
     private ChoiceBox<String> filter;
 
     @FXML
-    void searchClubs(ActionEvent event2) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubsListView.fxml"));
+    private Button returnButton;
+
+    @FXML
+    protected void volver(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
         Parent root = loader.load();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void searchClubs(ActionEvent event2) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserInfo.fxml"));
+        Parent root = loader.load();
+        UserInfoController userInfoController = loader.getController();
+        userInfoController.setAppUser(this.appUser);
         Stage stage = (Stage) ((Node)event2.getSource()).getScene().getWindow();
         Scene scene= new Scene(root);
         stage.setScene(scene);
@@ -93,6 +108,9 @@ public class UserViewController extends ListView<Activity> implements Initializa
         }
         activityBox.getChildren().clear();
         setListOfActivities(appService.getListOfActivities());
+        Image image = new Image("volver.png");
+        ImageView img = new ImageView(image);
+        returnButton.setGraphic(img);
     }
 
 
