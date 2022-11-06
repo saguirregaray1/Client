@@ -1,5 +1,10 @@
 package com.example.clientTIC.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Quota {
 
     private Long quotaId;
@@ -10,31 +15,41 @@ public class Quota {
 
     private String finishTime;
 
-    private Integer cupos;
+    private Integer maxCupos;
 
+    private List<Reservation> reservationsReceived;
+
+    private List<CheckIn> confirmedUses;
     private Activity activity;
 
-    public Quota(Long quotaId, String day, String startTime, String finishTime, Integer cupos, Activity activity) {
+    public Quota(Long quotaId, String day, String startTime, String finishTime, Integer maxCupos, Activity activity,List<Reservation> reservationsReceived, List<CheckIn> confirmedUses) {
         this.quotaId = quotaId;
         this.day = day;
         this.startTime = startTime;
         this.finishTime = finishTime;
-        this.cupos = cupos;
+        this.maxCupos = maxCupos;
+        this.activity = activity;
+        this.reservationsReceived = reservationsReceived;
+        this.confirmedUses = confirmedUses;
+    }
+
+    public Quota(String day, String startTime, String finishTime, Integer maxCupos, List<Reservation> reservationsReceived, List<CheckIn> confirmedUses, Activity activity) {
+        this.day = day;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.maxCupos = maxCupos;
+        this.reservationsReceived = reservationsReceived;
+        this.confirmedUses = confirmedUses;
         this.activity = activity;
     }
 
-    public Quota(String day, String startTime, String finishTime, Integer cupos, Activity activity) {
+    public Quota(String day, String startTime, String finishTime, Integer maxCupos) {
         this.day = day;
         this.startTime = startTime;
         this.finishTime = finishTime;
-        this.cupos = cupos;
-        this.activity = activity;
-    }
-    public Quota(String day, String startTime, String finishTime, Integer cupos) {
-        this.day = day;
-        this.startTime = startTime;
-        this.finishTime = finishTime;
-        this.cupos = cupos;
+        this.maxCupos = maxCupos;
+        this.reservationsReceived = new ArrayList<>();
+        this.confirmedUses = new ArrayList<>();
     }
 
     public Quota(){}
@@ -71,12 +86,12 @@ public class Quota {
         this.finishTime = finishTime;
     }
 
-    public Integer getCupos() {
-        return cupos;
+    public Integer getMaxCupos() {
+        return maxCupos;
     }
 
-    public void setCupos(Integer cupos) {
-        this.cupos = cupos;
+    public void setMaxCupos(Integer maxCupos) {
+        this.maxCupos = maxCupos;
     }
 
     public Activity getActivity() {
@@ -85,5 +100,21 @@ public class Quota {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public List<Reservation> getReservationsReceived() {
+        return reservationsReceived;
+    }
+
+    public void setReservationsReceived(List<Reservation> reservationsReceived) {
+        this.reservationsReceived = reservationsReceived;
+    }
+
+    public List<CheckIn> getConfirmedUses() {
+        return confirmedUses;
+    }
+
+    public void setConfirmedUses(List<CheckIn> confirmedUses) {
+        this.confirmedUses = confirmedUses;
     }
 }

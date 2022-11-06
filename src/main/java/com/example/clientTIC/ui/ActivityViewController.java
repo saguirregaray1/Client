@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ActivityViewController {
@@ -86,7 +87,8 @@ public class ActivityViewController {
             registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    appService.registerToActivity(currentAppUser,currentActivity.getId(), quota.getQuotaId());
+                    //fixme
+                    appService.registerToActivity(currentAppUser,quota.getQuotaId().toString(), LocalDate.now().toString());
                 }
             });
             hBox.getChildren().addAll(diaLabel,horarioLabel,registrarAHorario);
@@ -116,7 +118,7 @@ public class ActivityViewController {
     protected void setRegisterButton(ActionEvent event){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //fixme
-        HttpResponse<JsonNode> request= appService.registerToActivity(currentAppUser,currentActivity.getId(),1L);
+     //   HttpResponse<JsonNode> request= appService.registerToActivity(currentAppUser,currentActivity.getId(),1L);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
         Parent root = null;
         try {

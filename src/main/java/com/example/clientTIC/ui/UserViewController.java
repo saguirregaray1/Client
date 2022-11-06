@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -100,9 +101,9 @@ public class UserViewController extends ListView<Activity> implements Initializa
     }
 
     @FXML
-    protected void registerToActivity(AppUser appUser, Long activityId, Long scheduleId){
+    protected void registerToActivity(AppUser appUser,Long scheduleId,String fecha){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,activityId,scheduleId);
+        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,scheduleId.toString(),fecha);
         if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
@@ -137,7 +138,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
                 @Override
                 public void handle(ActionEvent event) {
                     //fixme
-                    registerToActivity(appUser, Long.valueOf(value.get(5).toString()),2L);
+                    registerToActivity(appUser, Long.valueOf(value.get(5).toString()), LocalDate.now().toString());
                 }
             });
             List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(5).toString()));

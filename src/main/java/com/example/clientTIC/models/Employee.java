@@ -1,7 +1,9 @@
 package com.example.clientTIC.models;
 
 import com.example.clientTIC.AppUser;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
@@ -20,9 +22,13 @@ public class Employee {
 
     private List<Activity> favs;
 
+    private List<CheckIn> access;
+
+    private List<Reservation> reservationsMade;
+
     private AppUser appUser;
 
-    public Employee(Long id, Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs,AppUser appUser) {
+    public Employee(Long id, Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs,AppUser appUser,List<CheckIn> access, List<Reservation> reservationsMade) {
         this.id = id;
         this.company = company;
         this.cedula = cedula;
@@ -31,6 +37,20 @@ public class Employee {
         this.password = password;
         this.favs = favs;
         this.appUser = appUser;
+        this.reservationsMade = reservationsMade;
+        this.access = access;
+    }
+
+    public Employee(Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs, AppUser appUser, List<CheckIn> access, List<Reservation> reservationsMade) {
+        this.company = company;
+        this.cedula = cedula;
+        this.saldo = saldo;
+        this.email = email;
+        this.password = password;
+        this.appUser = appUser;
+        this.favs = favs;
+        this.access = access;
+        this.reservationsMade = reservationsMade;
     }
 
     public Employee(Company company, Long cedula, Long saldo, String email, String password, List<Activity> favs, AppUser appUser) {
@@ -41,6 +61,8 @@ public class Employee {
         this.password = password;
         this.appUser = appUser;
         this.favs = favs;
+        this.access = new ArrayList<>();
+        this.reservationsMade = new ArrayList<>();
     }
 
     public Employee(){}
@@ -107,6 +129,22 @@ public class Employee {
 
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
+    }
+
+    public List<CheckIn> getAccess() {
+        return access;
+    }
+
+    public void setAccess(List<CheckIn> access) {
+        this.access = access;
+    }
+
+    public List<Reservation> getReservationsMade() {
+        return reservationsMade;
+    }
+
+    public void setReservationsMade(List<Reservation> reservationsMade) {
+        this.reservationsMade = reservationsMade;
     }
 
     @Override
