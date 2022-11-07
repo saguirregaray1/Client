@@ -67,7 +67,7 @@ public class UserInfoController implements Initializable {
         for (Employee empleado : employees){
             if (this.appUser.getId() == empleado.getId()){
                 nameLabel.setText("Cedula: " + String.valueOf(empleado.getCedula()));
-                emailLabel.setText("Email: " + empleado.getEmail());
+                emailLabel.setText("Email: " + appUser.getEmail());
                 saldoLabel.setText("Saldo disponible: " + String.valueOf(empleado.getSaldo()));
             }
         }

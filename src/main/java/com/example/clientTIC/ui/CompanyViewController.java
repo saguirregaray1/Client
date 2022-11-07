@@ -53,7 +53,6 @@ public class CompanyViewController implements Initializable {
     @FXML
     private Button returnButton;
 
-
     public void setAppuser(AppUser appuser) {
         this.appuser = appuser;
     }
@@ -69,6 +68,7 @@ public class CompanyViewController implements Initializable {
     private void setListOfEmployees(){
         employeeList.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        //     ObservableList<Employee> employees = appService.getListOfCompanyEmployees(appuser.getCompany().getId());
         ObservableList<Employee> employees = appService.getListOfEmployees();
         HBox employeeBox = new HBox(10);
         for(Employee employee : employees){

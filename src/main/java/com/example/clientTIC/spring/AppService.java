@@ -12,7 +12,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.http.utils.ResponseUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -108,7 +107,7 @@ public class AppService {
         List<Company> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/company").asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Company>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
@@ -184,7 +183,20 @@ public class AppService {
         List<Employee> list = null;
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee").asJson();
-            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<List<Employee>>() {
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return FXCollections.observableList(list);
+    }
+
+    public ObservableList<Employee> getListOfCompanyEmployees(Long companyId) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Employee> list = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/company/" + companyId).asJson();
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
         } catch (UnirestException | IOException ex) {
             throw new RuntimeException(ex);
@@ -196,7 +208,7 @@ public class AppService {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Employee employee = new Employee(company, cedula, saldo, email, password, new ArrayList<Activity>(), new AppUser(email, password, AppUserRole.EMPLOYEE));
+            Employee employee = new Employee(company, cedula, saldo, new ArrayList<Activity>(), new AppUser(email, password, AppUserRole.EMPLOYEE));
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(employee);
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/employee")
                     .header("Content-Type", "application/json")

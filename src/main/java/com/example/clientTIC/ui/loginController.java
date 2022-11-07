@@ -104,9 +104,9 @@ public class loginController {
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.COMPANY_USER)) {
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("CompanyView.fxml"));
-                Parent root = loader.load();
                 CompanyViewController companyViewController = loader.getController();
                 companyViewController.setAppuser(appUser);
+                Parent root = loader.load();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
