@@ -19,7 +19,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -47,7 +46,7 @@ public class loginController {
     @FXML
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-      /*  appService.addNewAdmin("aa","bb");
+        appService.addNewAdmin("aa","bb");
         appService.addNewCompany("coca", 123L,"abcd","222");
         appService.addNewClub("um","18","abc","111");
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
@@ -55,12 +54,11 @@ public class loginController {
         quotas.add(new Quota("Lunes","00:01:00","23:59:00",100));
         quotas.add(new Quota("Martes","00:01:00","23:59:00",100));
         quotas.add(new Quota("Miercoles","00:01:00","23:59:00",100));
-
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,quotas, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,quotas,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
-        appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L); */
+        appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L);
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
@@ -87,6 +85,7 @@ public class loginController {
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
+                appService.makeReservation(appUser,"08/11/2022", String.valueOf(1L));
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);

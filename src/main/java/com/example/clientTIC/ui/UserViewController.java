@@ -3,7 +3,6 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
-import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
@@ -103,7 +102,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
     @FXML
     protected void registerToActivity(AppUser appUser,Long scheduleId,String fecha){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        HttpResponse<JsonNode> request= appService.registerToActivity(appUser,scheduleId.toString(),fecha);
+        HttpResponse<JsonNode> request= appService.makeReservation(appUser,scheduleId.toString(),fecha);
         if (request.getStatus()!=200){
             throw new IllegalStateException("no se registró");
         }
