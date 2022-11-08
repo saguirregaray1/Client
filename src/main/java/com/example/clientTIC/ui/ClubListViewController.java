@@ -166,6 +166,8 @@ public class ClubListViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
+        img.setFitHeight(100);
+        img.setFitWidth(200);
         returnButton.setGraphic(img);
         lunesHorarios.setSelected(true);
         martesHorarios.setSelected(true);

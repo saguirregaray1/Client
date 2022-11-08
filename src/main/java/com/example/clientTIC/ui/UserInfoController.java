@@ -48,9 +48,9 @@ public class UserInfoController implements Initializable {
     @FXML
     protected void volver (ActionEvent event)throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
-        Parent root = loader.load();
         UserViewController userViewController = loader.getController();
         userViewController.setAppUser(this.appUser);
+        Parent root = loader.load();
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene= new Scene(root);
         stage.setScene(scene);

@@ -49,8 +49,8 @@ public class loginController {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         appService.addNewAdmin("aa","bb");
         appService.addNewCompany("coca", 123L,"abcd","222");
-        appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
         appService.addNewClub("um","18","abc","111");
+        appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
         List<Quota> quotas = new ArrayList<>();
         quotas.add(new Quota("Lunes","00:01:00","23:59:00",100));
         quotas.add(new Quota("Martes","00:01:00","23:59:00",100));
@@ -86,26 +86,29 @@ public class loginController {
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
-                Parent root = loader.load();
-                UserViewController userViewController = loader.getController();
+                UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
+                loader.setController(userViewController);
+                Parent root = loader.load();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)){
-                FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("ClubsListView.fxml"));
-                Parent root = loader.load();
-                ClubListViewController clubListViewController = loader.getController();
+                FXMLLoader loader = new FXMLLoader(ClubListViewController.class.getResource("ClubsListView.fxml"));
+                ClubListViewController clubListViewController = new ClubListViewController();
                 clubListViewController.setAppUser(appUser);
+                loader.setController(clubListViewController);
+                Parent root = loader.load();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.COMPANY_USER)) {
-                FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("CompanyView.fxml"));
-                CompanyViewController companyViewController = loader.getController();
+                FXMLLoader loader = new FXMLLoader(CompanyViewController.class.getResource("CompanyView.fxml"));
+                CompanyViewController companyViewController = new CompanyViewController();
                 companyViewController.setAppuser(appUser);
+                loader.setController(companyViewController);
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
