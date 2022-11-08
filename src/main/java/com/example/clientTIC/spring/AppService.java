@@ -425,7 +425,74 @@ public class AppService {
         }
         return activityQuota;
     }
+
+    public Company appUserGetCompany(Long appUserId){
+        ObjectMapper mapper = new ObjectMapper();
+        Company company = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/login/"+appUserId).asJson();
+            company = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return company;
+    }
+
+    public Employee appUserGetEmployee(Long appUserId){
+        ObjectMapper mapper = new ObjectMapper();
+        Employee employee = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/login/"+appUserId).asJson();
+            employee = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return employee;
+    }
+
+    public Admin appUserGetAdmin(Long appUserId){
+        ObjectMapper mapper = new ObjectMapper();
+        Admin admin = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/login/"+appUserId).asJson();
+            admin = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return admin;
+    }
+
+    public Club appUserGetClub(Long appUserId){
+        ObjectMapper mapper = new ObjectMapper();
+        Club club = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/login/"+appUserId).asJson();
+            club = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return club;
+    }
+
+    public Long getCostsForTheMonth(Long companyId){
+        ObjectMapper mapper = new ObjectMapper();
+        Long cost = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/company/costs/"+companyId).asJson();
+            cost = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return cost;
+    }
 }
+
+
 
 
 

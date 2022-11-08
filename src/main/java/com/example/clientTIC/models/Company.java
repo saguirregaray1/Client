@@ -15,6 +15,10 @@ public class Company {
 
     private List<AppUser> companyUsers;
 
+    public Company(Long id, String nombre){
+        this.id = id;
+        this.nombre=nombre;
+    }
     public Company(Long id, String nombre,Long nroCuenta, List<Employee> companyEmployees, List<AppUser> companyUsers) {
         this.id = id;
         this.nombre = nombre;

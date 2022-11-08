@@ -74,6 +74,7 @@ public class loginController {
             ObjectMapper mapper = new ObjectMapper();
             AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>(){});
             if(appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
+                appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                 Parent root = loader.load();
 
@@ -85,6 +86,7 @@ public class loginController {
                 stage.setScene(scene);
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
+                appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
@@ -95,6 +97,7 @@ public class loginController {
                 stage.setScene(scene);
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)){
+                appUser.setClub(appService.appUserGetClub(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(ClubListViewController.class.getResource("ClubsListView.fxml"));
                 ClubListViewController clubListViewController = new ClubListViewController();
                 clubListViewController.setAppUser(appUser);
@@ -105,11 +108,13 @@ public class loginController {
                 stage.setScene(scene);
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.COMPANY_USER)) {
+                appUser.setCompany(appService.appUserGetCompany(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(CompanyViewController.class.getResource("CompanyView.fxml"));
                 CompanyViewController companyViewController = new CompanyViewController();
-                companyViewController.setAppuser(appUser);
                 loader.setController(companyViewController);
                 Parent root = loader.load();
+                companyViewController.setAppuser(appUser);
+                companyViewController.setListOfEmployees();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

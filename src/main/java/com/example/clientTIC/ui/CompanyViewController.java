@@ -62,14 +62,13 @@ public class CompanyViewController implements Initializable {
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
         returnButton.setGraphic(img);
-        setListOfEmployees();
     }
 
-    private void setListOfEmployees(){
+    public void setListOfEmployees(){
         employeeList.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        //     ObservableList<Employee> employees = appService.getListOfCompanyEmployees(appuser.getCompany().getId());
-        ObservableList<Employee> employees = appService.getListOfEmployees();
+         ObservableList<Employee> employees = appService.getListOfCompanyEmployees(appuser.getCompany().getId());
+  //      ObservableList<Employee> employees = appService.getListOfEmployees();
         HBox employeeBox = new HBox(10);
         for(Employee employee : employees){
             Label idLabel = new Label(String.valueOf(employee.getCedula()));
