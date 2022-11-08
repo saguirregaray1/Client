@@ -65,7 +65,7 @@ public class CompanyViewController implements Initializable {
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
         returnButton.setGraphic(img);
-        setListOfEmployees();
+       // setListOfEmployees();
     }
 
     public void setListOfEmployees(){
