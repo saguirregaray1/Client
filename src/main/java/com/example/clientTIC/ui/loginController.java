@@ -87,8 +87,9 @@ public class loginController {
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
-                appService.makeReservation(appUser,"08/11/2022", String.valueOf(1L));
-                appService.checkInWithReservation(123L,"00:01:00", 1L);
+        //        appService.makeReservation(appUser,"08/11/2022", String.valueOf(2L));
+          //      appService.checkInWithReservation(123L,"00:01:00", 1L);
+            //    appService.getCostsForTheMonth(1L);
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);

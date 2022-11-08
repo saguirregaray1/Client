@@ -527,7 +527,7 @@ public class AppService {
             List<String> list = new ArrayList<>();
             list.add(clubId.toString());
             list.add(nombre);
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/company/activity/byName").asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company/activity/byName").asJson();
             activity = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -536,11 +536,16 @@ public class AppService {
         return activity;
     }
 
-    public Long getCostsForTheMonth(Long companyId){
+    public Long getCostsForTheMonth(Long companyId,String fechaMesAño){
         ObjectMapper mapper = new ObjectMapper();
+        String json = "";
         Long cost = null;
         try {
-            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/company/costs/"+companyId).asJson();
+            List<String> list = new ArrayList<>();
+            list.add(companyId.toString());
+            list.add(fechaMesAño);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company/costs").header("Content-Type", "application/json").body(json).asJson();
             cost = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
         } catch (UnirestException | IOException ex) {
