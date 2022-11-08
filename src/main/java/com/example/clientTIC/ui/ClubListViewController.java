@@ -45,6 +45,9 @@ public class ClubListViewController implements Initializable {
     private TextField activityPrice;
 
     @FXML
+    private CheckBox checkInTieneReservas;
+
+    @FXML
     private VBox horariosBox;
 
     @FXML
@@ -210,14 +213,9 @@ public class ClubListViewController implements Initializable {
     protected void verHorarios() throws Exception {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String nombreActividad = activityNameCheck.getText();
-        List<List> listaActividades = appService.getListOfActivities();
+        Activity currentActivity = appService.getActivityByNombre(appUser.getClub().getId(),nombreActividad);
         List<Quota> cupos= null;
-        for (List value : listaActividades) {
-            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()), ActivityCategories.valueOf((String) value.get(2)));
-            if (activity.getNombre() == nombreActividad){
-               cupos =appService.getActivityQuota(activity.getId());
-            }
-        }
+        cupos = currentActivity.getCupos();
         if (cupos != null) {
             for (Quota cupo : cupos) {
                 horariosBox.getChildren().clear();
@@ -227,12 +225,21 @@ public class ClubListViewController implements Initializable {
                 String fin = cupo.getFinishTime();
                 Label horario= new Label(inicio + " : "+ fin);
                 Button reserveButton = new Button("Reservar");
-                reserveButton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        //appService.che
-                    }
-                });
+                if (checkInTieneReservas.isSelected()){
+                    reserveButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            appService.checkInWithReservation(1L,cupo.getStartTime(),currentActivity.getId());
+                        }
+                    });
+                }else{
+                    reserveButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            appService.checkInWithoutReservation(1L,currentActivity.getId(),cupo.getStartTime());
+                        }
+                    });
+                }
                 cuposBox.getChildren().addAll(dayName,horario,reserveButton);
                 horariosBox.getChildren().add(cuposBox);
             }

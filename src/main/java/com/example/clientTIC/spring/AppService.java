@@ -522,12 +522,15 @@ public class AppService {
 
     public Activity getActivityByNombre(Long clubId,String nombre){
         ObjectMapper mapper = new ObjectMapper();
+        String json = "";
         Activity activity = null;
         try {
             List<String> list = new ArrayList<>();
             list.add(clubId.toString());
             list.add(nombre);
-            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company/activity/byName").asJson();
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company/activity/byName").header("Content-Type", "application/json").body(json).asJson();
             activity = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
         } catch (UnirestException | IOException ex) {
