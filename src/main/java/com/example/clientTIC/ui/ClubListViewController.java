@@ -230,7 +230,7 @@ public class ClubListViewController implements Initializable {
                 reserveButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        //reservar en el horario especifico
+                        //appService.che
                     }
                 });
                 cuposBox.getChildren().addAll(dayName,horario,reserveButton);

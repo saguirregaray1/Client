@@ -73,10 +73,11 @@ public class UserViewController extends ListView<Activity> implements Initializa
 
     @FXML
     void searchClubs(ActionEvent event2) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserInfo.fxml"));
+        FXMLLoader loader = new FXMLLoader(UserInfoController.class.getResource("UserInfo.fxml"));
+        UserInfoController userInfoController = new UserInfoController();
+        userInfoController.setAppUser(appUser);
+        loader.setController(userInfoController);
         Parent root = loader.load();
-        UserInfoController userInfoController = loader.getController();
-        userInfoController.setAppUser(this.appUser);
         Stage stage = (Stage) ((Node)event2.getSource()).getScene().getWindow();
         Scene scene= new Scene(root);
         stage.setScene(scene);
@@ -123,6 +124,12 @@ public class UserViewController extends ListView<Activity> implements Initializa
 
         filter.setOnAction(this::setFilter);
         setListOfActivities(appService.getListOfActivities());
+        Image image = new Image("volver.png");
+        ImageView img = new ImageView(image);
+        img.setFitHeight(50);
+        img.setFitWidth(100);
+        returnButton.setBackground(null);
+        returnButton.setGraphic(img);
     }
 
     private void setListOfActivities(List<List> activityList){

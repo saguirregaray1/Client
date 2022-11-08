@@ -48,8 +48,9 @@ public class UserInfoController implements Initializable {
     @FXML
     protected void volver (ActionEvent event)throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
-        UserViewController userViewController = loader.getController();
+        UserViewController userViewController = new UserViewController();
         userViewController.setAppUser(this.appUser);
+        loader.setController(userViewController);
         Parent root = loader.load();
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene= new Scene(root);
@@ -62,6 +63,9 @@ public class UserInfoController implements Initializable {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
+        img.setFitHeight(50);
+        img.setFitWidth(100);
+        returnButton.setBackground(null);
         returnButton.setGraphic(img);
         ObservableList<Employee> employees= appService.getListOfEmployees();
         for (Employee empleado : employees){
