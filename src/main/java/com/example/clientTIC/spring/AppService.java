@@ -520,6 +520,22 @@ public class AppService {
         return club;
     }
 
+    public Activity getActivityByNombre(Long clubId,String nombre){
+        ObjectMapper mapper = new ObjectMapper();
+        Activity activity = null;
+        try {
+            List<String> list = new ArrayList<>();
+            list.add(clubId.toString());
+            list.add(nombre);
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/company/activity/byName").asJson();
+            activity = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return activity;
+    }
+
     public Long getCostsForTheMonth(Long companyId){
         ObjectMapper mapper = new ObjectMapper();
         Long cost = null;

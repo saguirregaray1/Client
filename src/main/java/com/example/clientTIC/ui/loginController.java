@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +52,10 @@ public class loginController {
         appService.addNewClub("um","18","abc","111");
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
         List<Quota> quotas = new ArrayList<>();
-        quotas.add(new Quota("Lunes","00:01:00","23:59:00",100));
-        quotas.add(new Quota("Martes","00:01:00","23:59:00",100));
-        quotas.add(new Quota("Miercoles","00:01:00","23:59:00",100));
+        quotas.add(new Quota(DayOfWeek.MONDAY.toString(),"00:01:00","23:59:00",100));
+        quotas.add(new Quota(DayOfWeek.TUESDAY.toString(),"00:01:00","23:59:00",100));
+        quotas.add(new Quota(DayOfWeek.WEDNESDAY.toString() +
+                "","00:01:00","23:59:00",100));
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,quotas, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,quotas,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
@@ -86,6 +88,7 @@ public class loginController {
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
                 appService.makeReservation(appUser,"08/11/2022", String.valueOf(1L));
+                appService.checkInWithReservation(123L,"00:01:00", 1L);
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
