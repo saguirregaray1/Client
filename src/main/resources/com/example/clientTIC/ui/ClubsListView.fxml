@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="514.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="514.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="-5.0" layoutY="-1.0" prefHeight="515.0" prefWidth="260.0" style="-fx-background-color: #263f73;">
          <children>
             <Circle fill="#e3e4e500" layoutX="127.0" layoutY="258.0" radius="110.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="204.0" prefHeight="54.0" prefWidth="83.0" text="Gym" textFill="#eeeeee">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="200.0" prefHeight="62.0" prefWidth="94.0" text="Gym" textFill="#eeeeee">
                <font>
                   <Font name="Megrim" size="42.0" />
                </font>
@@ -140,44 +150,14 @@
                               <VBox fx:id="imagesActivity" prefHeight="303.0" prefWidth="254.0" />
                            </content>
                         </ScrollPane>
-                        <CheckBox fx:id="lunesHorarios" layoutX="92.0" layoutY="148.0" mnemonicParsing="false" onAction="#lunesHoraries" />
-                        <CheckBox fx:id="martesHorarios" layoutX="93.0" layoutY="189.0" mnemonicParsing="false" onAction="#martesHoraries" />
-                        <CheckBox fx:id="miercolesHorarios" layoutX="93.0" layoutY="230.0" mnemonicParsing="false" onAction="#miercolesHoraries" />
-                        <CheckBox fx:id="juevesHorarios" layoutX="92.0" layoutY="266.0" mnemonicParsing="false" onAction="#juevesHoraries" />
-                        <CheckBox fx:id="viernesHorarios" layoutX="93.0" layoutY="303.0" mnemonicParsing="false" onAction="#viernesHoraries" />
-                        <CheckBox fx:id="sabadoHorarios" layoutX="93.0" layoutY="343.0" mnemonicParsing="false" onAction="#sabadoHoraries" />
-                        <CheckBox fx:id="domingosHorarios" layoutX="93.0" layoutY="385.0" mnemonicParsing="false" onAction="#domingoHoraries" />
-                        <Label layoutX="33.0" layoutY="148.0" text="Lunes" />
-                        <Label layoutX="33.0" layoutY="189.0" text="Martes" />
-                        <Label layoutX="33.0" layoutY="230.0" text="Miercoles" />
-                        <Label layoutX="31.0" layoutY="266.0" text="Jueves" />
-                        <Label layoutX="31.0" layoutY="303.0" text="Viernes" />
-                        <Label layoutX="31.0" layoutY="343.0" text="Sabado" />
-                        <Label layoutX="34.0" layoutY="385.0" text="Domingo" />
-                        <Label layoutX="145.0" layoutY="117.0" prefHeight="18.0" prefWidth="53.0" text="Inicio" />
-                        <Label layoutX="241.0" layoutY="118.0" text="Final" />
-                        <TextField fx:id="lunesInicio" layoutX="125.0" layoutY="141.0" prefHeight="10.0" prefWidth="67.0" />
-                        <TextField fx:id="lunesFin" layoutX="218.0" layoutY="143.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="martesInicio" layoutX="125.0" layoutY="184.0" prefHeight="26.0" prefWidth="70.0" />
-                        <TextField fx:id="miercolesInicio" layoutX="123.0" layoutY="225.0" prefHeight="26.0" prefWidth="70.0" />
-                        <TextField fx:id="juevesInicio" layoutX="123.0" layoutY="261.0" prefHeight="26.0" prefWidth="70.0" />
-                        <TextField fx:id="viernesInicio" layoutX="123.0" layoutY="298.0" prefHeight="26.0" prefWidth="70.0" />
-                        <TextField fx:id="domingoInicio" layoutX="123.0" layoutY="380.0" prefHeight="26.0" prefWidth="70.0" />
-                        <TextField fx:id="sabadoInicio" layoutX="125.0" layoutY="338.0" prefHeight="26.0" prefWidth="70.0" />
-                        <TextField fx:id="martesFin" layoutX="220.0" layoutY="184.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="miercolesFin" layoutX="220.0" layoutY="225.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="juevesFin" layoutX="220.0" layoutY="261.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="viernesFin" layoutX="220.0" layoutY="298.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="sabadoFin" layoutX="218.0" layoutY="338.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="domingoFin" layoutX="218.0" layoutY="380.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposLunes" layoutX="330.0" layoutY="143.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposMartes" layoutX="330.0" layoutY="184.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposMiercoles" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposJueves" layoutX="330.0" layoutY="261.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposViernes" layoutX="330.0" layoutY="298.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposSabado" layoutX="330.0" layoutY="338.0" prefHeight="26.0" prefWidth="69.0" />
-                        <TextField fx:id="cuposDomingo" layoutX="330.0" layoutY="380.0" prefHeight="26.0" prefWidth="69.0" />
-                        <CheckBox fx:id="habilitarCupos" layoutX="325.0" layoutY="118.0" mnemonicParsing="false" onAction="#tieneCupos" text="Con cupos" />
+                        <Label layoutX="240.0" layoutY="126.0" prefHeight="18.0" prefWidth="53.0" text="Inicio" />
+                        <Label layoutX="242.0" layoutY="196.0" text="Final" />
+                        <TextField fx:id="lunesInicio" layoutX="221.0" layoutY="156.0" prefHeight="18.0" prefWidth="67.0" />
+                        <TextField fx:id="lunesFin" layoutX="220.0" layoutY="225.0" prefHeight="26.0" prefWidth="69.0" />
+                        <TextField fx:id="cuposLunes" layoutX="330.0" layoutY="155.0" prefHeight="26.0" prefWidth="69.0" />
+                        <CheckBox fx:id="habilitarCupos" layoutX="325.0" layoutY="126.0" mnemonicParsing="false" onAction="#tieneCupos" text="Con cupos" />
+                        <ChoiceBox fx:id="dias" layoutX="27.0" layoutY="156.0" prefWidth="150.0" />
+                        <Label layoutX="26.0" layoutY="126.0" prefHeight="18.0" prefWidth="83.0" text="Elija el dia:" />
                      </children></AnchorPane>
               </content>
             </Tab>

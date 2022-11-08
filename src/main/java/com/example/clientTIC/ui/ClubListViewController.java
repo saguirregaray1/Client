@@ -81,85 +81,14 @@ public class ClubListViewController implements Initializable {
     private TextField lunesFin;
 
     @FXML
-    private TextField martesInicio;
-
-    @FXML
-    private TextField martesFin;
-
-    @FXML
-    private TextField miercolesInicio;
-
-    @FXML
-    private TextField miercolesFin;
-
-    @FXML
-    private TextField juevesInicio;
-
-    @FXML
-    private TextField juevesFin;
-
-    @FXML
-    private TextField viernesInicio;
-
-    @FXML
-    private TextField viernesFin;
-
-    @FXML
-    private TextField sabadoInicio;
-
-    @FXML
-    private TextField sabadoFin;
-
-    @FXML
-    private TextField domingoInicio;
-
-    @FXML
-    private TextField domingoFin;
-
-    @FXML
     private TextField cuposLunes;
 
-    @FXML
-    private TextField cuposMartes;
-
-    @FXML
-    private TextField cuposMiercoles;
-
-    @FXML
-    private TextField cuposJueves;
-
-    @FXML
-    private TextField cuposViernes;
-
-    @FXML
-    private TextField cuposSabado;
-
-    @FXML
-    private TextField cuposDomingo;
-
-    @FXML
-    private CheckBox lunesHorarios;
-
-    @FXML
-    private CheckBox martesHorarios;
-
-    @FXML
-    private CheckBox miercolesHorarios;
-
-    @FXML
-    private CheckBox juevesHorarios;
-
-    @FXML
-    private CheckBox viernesHorarios;
-
-    @FXML
-    private CheckBox sabadoHorarios;
-
-    @FXML
-    private CheckBox domingosHorarios;
 
     @FXML
     private CheckBox habilitarCupos;
+
+    @FXML
+    private ChoiceBox<String> dias;
 
 
     @Override
@@ -169,19 +98,21 @@ public class ClubListViewController implements Initializable {
         img.setFitHeight(100);
         img.setFitWidth(200);
         returnButton.setGraphic(img);
-        lunesHorarios.setSelected(true);
-        martesHorarios.setSelected(true);
-        miercolesHorarios.setSelected(true);
-        juevesHorarios.setSelected(true);
-        viernesHorarios.setSelected(true);
-        sabadoHorarios.setSelected(true);
-        domingosHorarios.setSelected(true);
         habilitarCupos.setSelected(true);
+        dias.getItems().addAll("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo");
     }
 
     @FXML
     protected void crearHorarios(ActionEvent event) throws IOException {
-
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        String dia = dias.getValue();
+        String inicio = lunesInicio.getText();
+        String finale = lunesFin.getText();
+        int cupos = Integer.MAX_VALUE;
+        if (habilitarCupos.isSelected()){
+            cupos = Integer.parseInt(cuposLunes.getText());
+        }
+        Quota horario = new Quota(dia,inicio,finale,cupos);
     }
 
     @FXML
@@ -192,143 +123,13 @@ public class ClubListViewController implements Initializable {
     }
 
     @FXML
-    protected void lunesHoraries(){
-        if (lunesHorarios.isSelected()){
-            lunesInicio.setVisible(true);
-            lunesFin.setVisible(true);
-            lunesInicio.setEditable(true);
-            lunesFin.setEditable(true);
-        }else{
-            lunesInicio.setVisible(false);
-            lunesFin.setVisible(false);
-            lunesInicio.setEditable(false);
-            lunesFin.setEditable(false);
-        }
-    }
-
-    @FXML
-    protected void martesHoraries(){
-        if (martesHorarios.isSelected()){
-            martesInicio.setVisible(true);
-            martesFin.setVisible(true);
-            martesInicio.setEditable(true);
-            martesFin.setEditable(true);
-        }else{
-            martesInicio.setVisible(false);
-            martesFin.setVisible(false);
-            martesInicio.setEditable(false);
-            martesFin.setEditable(false);
-        }
-    }
-
-    @FXML
-    protected void miercolesHoraries(){
-        if (miercolesHorarios.isSelected()){
-            miercolesInicio.setVisible(true);
-            miercolesFin.setVisible(true);
-            miercolesInicio.setEditable(true);
-            miercolesFin.setEditable(true);
-        }else{
-            miercolesInicio.setVisible(false);
-            miercolesFin.setVisible(false);
-            miercolesInicio.setEditable(false);
-            miercolesFin.setEditable(false);
-        }
-    }
-
-    @FXML
-    protected void juevesHoraries(){
-        if (juevesHorarios.isSelected()){
-            juevesInicio.setVisible(true);
-            juevesFin.setVisible(true);
-            juevesInicio.setEditable(true);
-            juevesFin.setEditable(true);
-        }else{
-            juevesInicio.setVisible(false);
-            juevesFin.setVisible(false);
-            juevesInicio.setEditable(false);
-            juevesFin.setEditable(false);
-        }
-    }
-
-    @FXML
-    protected void viernesHoraries(){
-        if (viernesHorarios.isSelected()){
-            viernesInicio.setVisible(true);
-            viernesFin.setVisible(true);
-            viernesInicio.setEditable(true);
-            viernesFin.setEditable(true);
-        }else{
-            viernesInicio.setVisible(false);
-            viernesFin.setVisible(false);
-            viernesInicio.setEditable(false);
-            viernesFin.setEditable(false);
-        }
-    }
-
-    @FXML
-    protected void sabadoHoraries(){
-        if (sabadoHorarios.isSelected()){
-            sabadoInicio.setVisible(true);
-            sabadoFin.setVisible(true);
-            sabadoInicio.setEditable(true);
-            sabadoFin.setEditable(true);
-        }else{
-            sabadoInicio.setVisible(false);
-            sabadoFin.setVisible(false);
-            sabadoInicio.setEditable(false);
-            sabadoFin.setEditable(false);
-        }
-    }
-
-    @FXML
-    protected void domingoHoraries(){
-        if (domingosHorarios.isSelected()){
-            domingoInicio.setVisible(true);
-            domingoFin.setVisible(true);
-            domingoInicio.setEditable(true);
-            domingoFin.setEditable(true);
-        }else{
-            domingoInicio.setVisible(false);
-            domingoFin.setVisible(false);
-            domingoInicio.setEditable(false);
-            domingoFin.setEditable(false);
-        }
-    }
-
-    @FXML
     protected void tieneCupos(){
         if (habilitarCupos.isSelected()){
             cuposLunes.setVisible(true);
             cuposLunes.setEditable(true);
-            cuposMartes.setVisible(true);
-            cuposMartes.setEditable(true);
-            cuposMiercoles.setEditable(true);
-            cuposMiercoles.setVisible(true);
-            cuposJueves.setEditable(true);
-            cuposJueves.setVisible(true);
-            cuposViernes.setEditable(true);
-            cuposViernes.setVisible(true);
-            cuposSabado.setEditable(true);
-            cuposSabado.setVisible(true);
-            cuposDomingo.setEditable(true);
-            cuposDomingo.setEditable(true);
         }else{
             cuposLunes.setVisible(false);
             cuposLunes.setEditable(false);
-            cuposMartes.setVisible(false);
-            cuposMartes.setEditable(false);
-            cuposMiercoles.setEditable(false);
-            cuposMiercoles.setVisible(false);
-            cuposJueves.setEditable(false);
-            cuposJueves.setVisible(false);
-            cuposViernes.setEditable(false);
-            cuposViernes.setVisible(false);
-            cuposSabado.setEditable(false);
-            cuposSabado.setVisible(false);
-            cuposDomingo.setEditable(false);
-            cuposDomingo.setEditable(false);
-
         }
     }
 
@@ -340,6 +141,8 @@ public class ClubListViewController implements Initializable {
         if (file != null) {
             Image image1 = new Image(file.toURI().toString());
             ImageView ip = new ImageView(image1);
+            ip.setFitHeight(100);
+            ip.setFitWidth(200);
             imagesActivity.getChildren().add(ip);
             }
     }

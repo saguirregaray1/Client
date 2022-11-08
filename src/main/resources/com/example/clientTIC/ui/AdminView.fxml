@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.AdminController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.AdminController">
    <children>
-      <Button layoutX="90.0" layoutY="164.0" mnemonicParsing="false" onAction="#openUsersView" prefHeight="25.0" prefWidth="171.0" text="Ver usuarios" textAlignment="CENTER" />
-      <Button layoutX="90.0" layoutY="70.0" mnemonicParsing="false" onAction="#openCompanyView" prefHeight="26.0" prefWidth="170.0" text="Ver empresas" />
-      <Button layoutX="89.0" layoutY="118.0" mnemonicParsing="false" onAction="#openClubsView" prefHeight="25.0" prefWidth="171.0" text="Ver centros deportivos" />
-      <Region layoutY="-1.0" prefHeight="51.0" prefWidth="339.0" style="-fx-background-color: #263f73;" />
-      <Label fx:id="TitleLabel" alignment="CENTER" layoutX="82.0" layoutY="-1.0" prefHeight="51.0" prefWidth="193.0" text="Que desea hacer?" textFill="WHITESMOKE">
+      <Button layoutX="131.0" layoutY="156.0" mnemonicParsing="false" onAction="#openUsersView" prefHeight="25.0" prefWidth="171.0" text="Ver usuarios" textAlignment="CENTER" />
+      <Button layoutX="131.0" layoutY="72.0" mnemonicParsing="false" onAction="#openCompanyView" prefHeight="26.0" prefWidth="170.0" text="Ver empresas" />
+      <Button layoutX="131.0" layoutY="112.0" mnemonicParsing="false" onAction="#openClubsView" prefHeight="25.0" prefWidth="171.0" text="Ver centros deportivos" />
+      <Region layoutY="-1.0" prefHeight="51.0" prefWidth="408.0" style="-fx-background-color: #263f73;" />
+      <Label fx:id="TitleLabel" alignment="CENTER" layoutX="108.0" layoutY="-1.0" prefHeight="51.0" prefWidth="193.0" text="Que desea hacer?" textFill="WHITESMOKE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button layoutX="30.0" layoutY="202.0" mnemonicParsing="false" onAction="#volver" text="Salir" />
    </children>
 </Pane>

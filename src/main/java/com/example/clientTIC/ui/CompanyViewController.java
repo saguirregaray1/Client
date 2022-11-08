@@ -36,6 +36,9 @@ public class CompanyViewController implements Initializable {
     private TextField idField;
 
     @FXML
+    private Label costosCompania;
+
+    @FXML
     private TextField emailField;
 
     @FXML
@@ -62,6 +65,7 @@ public class CompanyViewController implements Initializable {
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
         returnButton.setGraphic(img);
+        setListOfEmployees();
     }
 
     public void setListOfEmployees(){
@@ -101,11 +105,15 @@ public class CompanyViewController implements Initializable {
 
     @FXML
     protected void volver(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene= new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        final Node source = (Node) event.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    protected void verCostosCompania(ActionEvent event){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        Long costos = appService.getCostsForTheMonth(appuser.getCompany().getId());
+        costosCompania.setText("Costo total: " + costos);
     }
 }

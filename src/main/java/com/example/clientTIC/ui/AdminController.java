@@ -69,4 +69,11 @@ public class AdminController {
 
     }
 
+    @FXML
+    protected void volver(ActionEvent event) throws IOException {
+        final Node source = (Node) event.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+
 }
