@@ -326,51 +326,47 @@ public class AppService {
         throw new IllegalStateException("usuario no es empleado");
     }
 
-    public HttpResponse<JsonNode> checkInWithReservation(AppUser appUser, String hora, Long activityId) {
-        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
-            String json = "";
-            HttpResponse<JsonNode> apiResponse = null;
+    public HttpResponse<JsonNode> checkInWithReservation(Long cedula, String hora, Long activityId) {
 
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                List<String> list = new ArrayList<>();
-                list.add(activityId.toString());
-                list.add(appUser.getId().toString());
-                list.add(hora);
-                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-                apiResponse = Unirest.post("http://localhost:8080/club/activity/checkIn")
-                        .header("Content-Type", "application/json")
-                        .body(json).asJson();
+        String json = "";
+        HttpResponse<JsonNode> apiResponse = null;
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            List<String> list = new ArrayList<>();
+            list.add(activityId.toString());
+            list.add(cedula.toString());
+            list.add(hora);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            apiResponse = Unirest.post("http://localhost:8080/club/activity/checkIn")
+                    .header("Content-Type", "application/json")
+                    .body(json).asJson();
             } catch (UnirestException | JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
             return apiResponse;
         }
-        throw new IllegalStateException("usuario no es empleado");
-    }
 
-    public HttpResponse<JsonNode> checkInWithoutReservation(AppUser appUser, Long activityId, String hora) {
-        if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
-            String json = "";
-            HttpResponse<JsonNode> apiResponse = null;
 
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                List<String> list = new ArrayList<>();
-                list.add(appUser.getId().toString());
-                list.add(activityId.toString());
-                list.add(hora);
-                json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-                apiResponse = Unirest.put("http://localhost:8080/club/activity/checkIn")
-                        .header("Content-Type", "application/json")
-                        .body(json).asJson();
+    public HttpResponse<JsonNode> checkInWithoutReservation(Long cedula, Long activityId, String hora) {
+        String json = "";
+        HttpResponse<JsonNode> apiResponse = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            List<String> list = new ArrayList<>();
+            list.add(activityId.toString());
+            list.add(cedula.toString());
+            list.add(hora);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            apiResponse = Unirest.put("http://localhost:8080/club/activity/checkIn")
+                    .header("Content-Type", "application/json")
+                    .body(json).asJson();
             } catch (UnirestException | JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
             return apiResponse;
         }
-        throw new IllegalStateException("usuario no es empleado");
-    }
+
 
     public void addFavourite(AppUser appUser, Long activityId) {
         if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
