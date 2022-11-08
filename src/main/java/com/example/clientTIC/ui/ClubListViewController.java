@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,6 +39,10 @@ public class ClubListViewController implements Initializable {
         this.appUser = appUser;
     }
 
+    private List<Quota> horariosIngresados;
+
+    @FXML
+    private TextField activityPrice;
 
     @FXML
     private VBox horariosBox;
@@ -62,6 +67,9 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     private TextField deleteUserID;
+
+    @FXML
+    private TextField createActivityNameCupos;
     @FXML
     private  TextField registerUserEmail;
 
@@ -104,22 +112,33 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     protected void crearHorarios(ActionEvent event) throws IOException {
-        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String dia = dias.getValue();
         String inicio = lunesInicio.getText();
         String finale = lunesFin.getText();
-        int cupos = Integer.MAX_VALUE;
+        Quota horario = null;
         if (habilitarCupos.isSelected()){
-            cupos = Integer.parseInt(cuposLunes.getText());
+            int cupos = Integer.parseInt(cuposLunes.getText());
+            horario = new Quota(dia,inicio,finale,cupos);
+        }else {
+            horario = new Quota(dia, inicio, finale);
         }
-        Quota horario = new Quota(dia,inicio,finale,cupos);
+        if (horariosIngresados == null){
+            horariosIngresados= new ArrayList<Quota>();
+            horariosIngresados.add(horario);
+        }else{
+            this.horariosIngresados.add(horario);
+        }
     }
+
 
     @FXML
     protected void createActivityButtonCupos(){
-        String nombreActividad = createActivityName.getText();
-
-
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        String nombreActividad = createActivityNameCupos.getText();
+        List<Quota> cuposActividad = horariosIngresados;
+        Long precio = Long.valueOf(activityPrice.getText());
+        Activity actividad = new Activity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
+        appService.addNewActivity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
     }
 
     @FXML

@@ -52,6 +52,15 @@ public class Quota {
         this.confirmedUses = new ArrayList<>();
     }
 
+    public Quota(String day, String startTime, String finishTime) {
+        this.day = day;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.maxCupos = -1;
+        this.reservationsReceived = new ArrayList<>();
+        this.confirmedUses = new ArrayList<>();
+    }
+
     public Quota(){}
 
     public Long getQuotaId() {
