@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.clientTIC.ui.ClubsAdminController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.ClubsAdminController">
+   <children>
+      <ButtonBar layoutY="360.0" prefHeight="40.0" prefWidth="606.0">
+        <buttons>
+            <Button layoutX="541.0" layoutY="18.0" minWidth="57.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Button" />
+          <Button minWidth="57.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" />
+        </buttons>
+      </ButtonBar>
+   </children>
 </AnchorPane>
