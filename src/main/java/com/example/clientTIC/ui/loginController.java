@@ -47,7 +47,7 @@ public class loginController {
     @FXML
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        appService.addNewAdmin("aa","bb");
+      /*  appService.addNewAdmin("aa","bb");
         appService.addNewCompany("coca", 123L,"abcd","222");
         appService.addNewClub("um","18","abc","111");
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
@@ -60,7 +60,7 @@ public class loginController {
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,quotas,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
-        appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L);
+        appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L); */
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
