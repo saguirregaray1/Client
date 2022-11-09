@@ -56,7 +56,7 @@ public class loginController {
         quotas.add(new Quota(DayOfWeek.TUESDAY.toString(),"00:01:00","23:59:00",100));
         quotas.add(new Quota(DayOfWeek.WEDNESDAY.toString() +
                 "","00:01:00","23:59:00",100));
-        appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",1L,quotas, ActivityCategories.CATEGORY_1);
+        appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",120L,quotas, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,quotas,ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
@@ -87,9 +87,9 @@ public class loginController {
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
-        //        appService.makeReservation(appUser,"08/11/2022", String.valueOf(2L));
-          //      appService.checkInWithReservation(123L,"00:01:00", 1L);
-            //    appService.getCostsForTheMonth(1L);
+                appService.makeReservation(appUser,"08/11/2022", String.valueOf(2L));
+                appService.checkInWithReservation(123L,"00:01:00", 1L);
+                appService.getCostsForTheMonth(1L,"2022-11");
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
