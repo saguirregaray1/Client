@@ -23,7 +23,46 @@ public class CheckIn {
         this.fecha = fecha;
     }
 
+
+    public CheckIn(Long checkInId,String fecha) {
+        this.checkInId = checkInId;
+        this.fecha = fecha;
+    }
+
+
     public CheckIn(){}
+
+    public Long getCheckInId() {
+        return checkInId;
+    }
+
+    public void setCheckInId(Long checkInId) {
+        this.checkInId = checkInId;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Quota getQuota() {
+        return quota;
+    }
+
+    public void setQuota(Quota quota) {
+        this.quota = quota;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 }
 
 

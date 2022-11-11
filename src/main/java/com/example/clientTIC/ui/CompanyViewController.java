@@ -124,7 +124,7 @@ public class CompanyViewController implements Initializable {
     protected void verCostosCompania(ActionEvent event){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //fixme
-        Long costos = appService.getCostsForTheMonth(appuser.getCompany().getId(),"");
+        Long costos = appService.getCostsForTheMonth(appuser.getCompany().getId(),"").getTotalCosts();
         costosCompania.setText("Costo total: " + costos);
     }
 }

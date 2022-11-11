@@ -539,10 +539,10 @@ public class AppService {
         return activity;
     }
 
-    public Long getCostsForTheMonth(Long companyId,String fechaMesAño){
+    public Costs getCostsForTheMonth(Long companyId,String fechaMesAño){
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
-        Long cost = null;
+        Costs cost = null;
         try {
             List<String> list = new ArrayList<>();
             list.add(companyId.toString());
@@ -555,6 +555,34 @@ public class AppService {
             throw new RuntimeException(ex);
         }
         return cost;
+    }
+
+    public List<CheckIn> getCheckInsForTheMonth(Long companyId,String fechaMesAño){
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        List<CheckIn> checkIns = null;
+        List<Employee> employees = null;
+        try {
+            List<String> list = new ArrayList<>();
+            list.add(companyId.toString());
+            list.add(fechaMesAño);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company/checkIn").header("Content-Type", "application/json").body(json).asJson();
+            checkIns = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+            HttpResponse<JsonNode> apiResponse2 = Unirest.put("http://localhost:8080/company/checkIn").header("Content-Type", "application/json").body(json).asJson();
+            employees = mapper.readValue(apiResponse2.getBody().toString(), new TypeReference<>() {
+            });
+            int count=0;
+
+            for (Employee employee:employees){
+                checkIns.get(count).setEmployee(employee);
+                count++;
+            }
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return checkIns;
     }
 }
 

@@ -65,6 +65,11 @@ public class Employee {
         this.reservationsMade = new ArrayList<>();
     }
 
+    public Employee(Long id, Long cedula) {
+        this.id = id;
+        this.cedula = cedula;
+    }
+
     public Employee(){}
 
     public Long getId() {

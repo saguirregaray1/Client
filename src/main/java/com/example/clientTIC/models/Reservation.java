@@ -2,7 +2,7 @@ package com.example.clientTIC.models;
 
 public class Reservation {
 
-    private Long id;
+    private Long reservationId;
 
     private Employee employee;
 
@@ -12,8 +12,8 @@ public class Reservation {
 
     private String fecha;
 
-    public Reservation(Long id, Employee employee, Quota quota, ReservationStatus reservationStatus, String fecha) {
-        this.id = id;
+    public Reservation(Long reservationId, Employee employee, Quota quota, ReservationStatus reservationStatus, String fecha) {
+        this.reservationId = reservationId;
         this.employee = employee;
         this.quota = quota;
         this.reservationStatus = reservationStatus;
@@ -29,8 +29,8 @@ public class Reservation {
         this.fecha = fecha;
     }
 
-    public Long getId() {
-        return id;
+    public Long getReservationId() {
+        return reservationId;
     }
 
     public Employee getEmployee() {
@@ -65,7 +65,7 @@ public class Reservation {
         this.fecha = fecha;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setReservationId(Long reservationId) {
+        this.reservationId = reservationId;
     }
 }

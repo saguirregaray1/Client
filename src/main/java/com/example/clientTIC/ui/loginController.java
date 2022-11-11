@@ -3,6 +3,8 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.models.ActivityCategories;
+import com.example.clientTIC.models.CheckIn;
+import com.example.clientTIC.models.Costs;
 import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -53,7 +55,7 @@ public class loginController {
         appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
         List<Quota> quotas = new ArrayList<>();
         quotas.add(new Quota(DayOfWeek.MONDAY.toString(),"00:01:00","23:59:00",100));
-        quotas.add(new Quota(DayOfWeek.TUESDAY.toString(),"00:01:00","23:59:00",100));
+        quotas.add(new Quota(DayOfWeek.FRIDAY.toString(),"00:01:00","23:59:00",100));
         quotas.add(new Quota(DayOfWeek.WEDNESDAY.toString() +
                 "","00:01:00","23:59:00",100));
         appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",120L,quotas, ActivityCategories.CATEGORY_1);
@@ -87,9 +89,10 @@ public class loginController {
                 stage.show();
             }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
-                appService.makeReservation(appUser,"08/11/2022", String.valueOf(2L));
+                appService.makeReservation(appUser,"2022-11-11", String.valueOf(2L));
                 appService.checkInWithReservation(123L,"00:01:00", 1L);
-                appService.getCostsForTheMonth(1L,"2022-11");
+                Costs cost =appService.getCostsForTheMonth(1L,"2022-11");
+                List<CheckIn> checkIns = appService.getCheckInsForTheMonth(1L,"2022-11");
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
