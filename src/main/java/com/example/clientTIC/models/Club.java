@@ -2,6 +2,7 @@ package com.example.clientTIC.models;
 
 import com.example.clientTIC.AppUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Club {
@@ -29,6 +30,13 @@ public class Club {
         this.dir = dir;
         this.clubActivities = clubActivities;
         this.clubUsers = clubUsers;
+    }
+
+    public Club(String nombre, String dir) {
+        this.nombre = nombre;
+        this.dir = dir;
+        this.clubActivities = new ArrayList<>();
+        this.clubUsers = new ArrayList<>();
     }
 
     public Club(){}

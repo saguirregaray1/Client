@@ -20,7 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
@@ -64,6 +66,8 @@ public class CompanyViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
+        img.setFitHeight(100);
+        img.setFitWidth(150);
         returnButton.setGraphic(img);
        // setListOfEmployees();
     }
@@ -73,10 +77,10 @@ public class CompanyViewController implements Initializable {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
          ObservableList<Employee> employees = appService.getListOfCompanyEmployees(appuser.getCompany().getId());
   //      ObservableList<Employee> employees = appService.getListOfEmployees();
-        HBox employeeBox = new HBox(10);
         for(Employee employee : employees){
-            Label idLabel = new Label(String.valueOf(employee.getCedula()));
-            Label saldoLabel = new Label(String.valueOf(employee.getSaldo()));
+            HBox employeeBox = new HBox(30);
+            Label idLabel = new Label("C.I: " + String.valueOf(employee.getCedula()));
+            Label saldoLabel = new Label("Saldo: " + String.valueOf(employee.getSaldo()));
             Button borrar = new Button("Borrar empleado");
             borrar.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -85,6 +89,12 @@ public class CompanyViewController implements Initializable {
                     employeeList.getChildren().remove(employeeBox);
                 }
             });
+            idLabel.setStyle("-fx-font-weight: bold");
+            idLabel.setFont(new Font("Arial", 20));
+            saldoLabel.setStyle("-fx-font-weight: bold");
+            saldoLabel.setFont(new Font("Arial", 20));
+            HBox.setHgrow(idLabel, Priority.ALWAYS);
+            HBox.setHgrow(saldoLabel, Priority.ALWAYS);
             employeeBox.getChildren().addAll(idLabel,saldoLabel,borrar);
             employeeList.getChildren().add(employeeBox);
         }

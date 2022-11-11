@@ -15,7 +15,7 @@
       <AnchorPane layoutX="627.0" prefHeight="515.0" prefWidth="258.0" style="-fx-background-color: #263f73;">
          <children>
             <Circle fill="#e3e4e500" layoutX="129.0" layoutY="258.0" radius="110.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="204.0" prefHeight="54.0" prefWidth="83.0" text="Gym" textFill="#eeeeee">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="204.0" prefHeight="62.0" prefWidth="94.0" text="Gym" textFill="#eeeeee">
                <font>
                   <Font name="Megrim" size="42.0" />
                </font>
@@ -48,7 +48,7 @@
       <TextField fx:id="emailField" layoutX="410.0" layoutY="169.0" promptText="Email" />
       <TextField fx:id="passwordField" layoutX="411.0" layoutY="219.0" promptText="Contraseña" />
       <TextField fx:id="saldoField" layoutX="412.0" layoutY="265.0" promptText="Saldo" />
-      <Button layoutX="412.0" layoutY="310.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" text="Agregar empleado" />
+      <Button layoutX="412.0" layoutY="310.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="26.0" prefWidth="124.0" text="Agregar empleado" />
       <Label fx:id="registeredLabel" layoutX="419.0" layoutY="366.0" prefHeight="18.0" prefWidth="130.0">
          <font>
             <Font name="System Bold" size="14.0" />

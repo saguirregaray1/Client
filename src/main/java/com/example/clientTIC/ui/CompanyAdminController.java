@@ -4,19 +4,23 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.models.Company;
 import com.example.clientTIC.spring.AppService;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.example.clientTIC.spring.ApplicationContextProvider.getApplicationContext;
 
-public class CompanyController implements Initializable {
+public class CompanyAdminController implements Initializable {
 
     @FXML
     private TextField companyName;
@@ -61,7 +65,7 @@ public class CompanyController implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("nombre"));
         nroCuentaColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("nroCuenta"));
-        // agregar companyEmployees
+        showEnterprises();
     }
 
     @FXML
@@ -72,10 +76,12 @@ public class CompanyController implements Initializable {
         String password = passwordEnterprise.getText(); //fixme agregar campo
         AppService appService=getApplicationContext().getBean(AppService.class);
         appService.addNewCompany(name,nroAccount,email,password);
+        showEnterprises();
     }
 
     @FXML
     protected void showEnterprises(){
+        companyTable.getItems().clear();
         AppService appService=getApplicationContext().getBean(AppService.class);
         ObservableList<Company> list= appService.getListOfCompanies();
         companyTable.setItems(list);
@@ -86,6 +92,14 @@ public class CompanyController implements Initializable {
         String companyName=nameOfCompanyToDelete.getText();
         AppService appService=getApplicationContext().getBean(AppService.class);
         appService.deleteCompanies(companyName);
+        showEnterprises();
+    }
+
+    @FXML
+    protected void volver(ActionEvent event) throws IOException {
+        final Node source = (Node) event.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 
 
