@@ -48,34 +48,40 @@ public class loginController {
 
     @FXML
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
-        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        appService.addNewAdmin("aa","bb");
-        appService.addNewCompany("coca", 123L,"abcd","222");
-        appService.addNewClub("um","18","abc","111");
-        appService.addNewEmployee(123L,appService.getListOfCompanies().get(0),1000L,"aaa","bbb");
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        //fixme para que funcione el checkIn se debe ajustar el id a la quota correspondiente (1 si es lunes, 2 si es martes etc)
+        appService.addNewAdmin("aa", "bb");
+        appService.addNewCompany("coca", 123L, "abcd", "222");
+        appService.addNewClub("um", "18", "abc", "111");
+        appService.addNewEmployee(123L, appService.getListOfCompanies().get(0), 1000L, "aaa", "bbb");
         List<Quota> quotas = new ArrayList<>();
-        quotas.add(new Quota(DayOfWeek.MONDAY.toString(),"00:01:00","23:59:00",100));
-        quotas.add(new Quota(DayOfWeek.FRIDAY.toString(),"00:01:00","23:59:00",100));
+        quotas.add(new Quota(DayOfWeek.MONDAY.toString(), "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.TUESDAY.toString(), "00:01:00", "23:59:00", 100));
         quotas.add(new Quota(DayOfWeek.WEDNESDAY.toString() +
-                "","00:01:00","23:59:00",100));
-        appService.addNewActivity(appService.getListOfClubs().get(0),"futbol",120L,quotas, ActivityCategories.CATEGORY_1);
-        appService.addNewActivity(appService.getListOfClubs().get(0),"basketball",1L,quotas,ActivityCategories.CATEGORY_2);
-        appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(),1L);
-        appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"),1L);
-        appService.uploadActivityPicture(new File("src/main/resources/python.png"),2L);
+                "", "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.THURSDAY.toString(), "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.FRIDAY.toString(), "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.SATURDAY.toString() +
+                "", "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.SUNDAY.toString(), "00:01:00", "23:59:00", 100));
+        appService.addNewActivity(appService.getListOfClubs().get(0), "futbol", 120L, quotas, ActivityCategories.CATEGORY_1);
+        appService.addNewActivity(appService.getListOfClubs().get(0), "basketball", 1L, quotas, ActivityCategories.CATEGORY_2);
+        appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(), 1L);
+        appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"), 1L);
+        appService.uploadActivityPicture(new File("src/main/resources/python.png"), 2L);
 
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
 
-        HttpResponse<JsonNode> apiResponse=appService.login(email,password);
+        HttpResponse<JsonNode> apiResponse = appService.login(email, password);
 
-        if (apiResponse.getStatus()!=200){ //?
+        if (apiResponse.getStatus() != 200) { //?
             throw new IllegalStateException("usuario o contraseña incorrecta");
-            }
-        else {
+        } else {
             ObjectMapper mapper = new ObjectMapper();
-            AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>(){});
-            if(appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
+            AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>() {
+            });
+            if (appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
                 appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                 Parent root = loader.load();
@@ -87,12 +93,12 @@ public class loginController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            }else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
+            } else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
-                appService.makeReservation(appUser,"2022-11-11", String.valueOf(2L));
-                appService.checkInWithReservation(123L,"00:01:00", 1L);
-                Costs cost =appService.getCostsForTheMonth(1L,"2022-11");
-                List<CheckIn> checkIns = appService.getCheckInsForTheMonth(1L,"2022-11");
+                appService.makeReservation(appUser, "2022-11-11", String.valueOf(2L));
+                appService.checkInWithReservation(123L, "00:01:00", 1L);
+                Costs cost = appService.getCostsForTheMonth(1L, "2022-11");
+                List<CheckIn> checkIns = appService.getCheckInsForTheMonth(1L, "2022-11");
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
@@ -102,7 +108,7 @@ public class loginController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            }else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)){
+            } else if (appUser.getAppUserRole().equals(AppUserRole.CLUB_USER)) {
                 appUser.setClub(appService.appUserGetClub(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(ClubListViewController.class.getResource("ClubsListView.fxml"));
                 ClubListViewController clubListViewController = new ClubListViewController();
@@ -113,7 +119,7 @@ public class loginController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            }else if (appUser.getAppUserRole().equals(AppUserRole.COMPANY_USER)) {
+            } else if (appUser.getAppUserRole().equals(AppUserRole.COMPANY_USER)) {
                 appUser.setCompany(appService.appUserGetCompany(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(CompanyViewController.class.getResource("CompanyView.fxml"));
                 CompanyViewController companyViewController = new CompanyViewController();
@@ -130,6 +136,8 @@ public class loginController {
     }
 
     @FXML
-    void cancelButton(){System.exit(0);}
+    void cancelButton() {
+        System.exit(0);
+    }
 }
 
