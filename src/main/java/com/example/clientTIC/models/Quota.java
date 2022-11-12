@@ -2,6 +2,7 @@ package com.example.clientTIC.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,38 @@ public class Quota {
     }
 
     public Quota(){}
+
+    public Integer calculateCupos(String fecha) {
+        LocalDate now = LocalDate.now();
+        Integer cupos = this.maxCupos;
+        for (Reservation reservation : this.reservationsReceived) {
+            if (reservation.getReservationStatus().equals(ReservationStatus.PENDIENTE) && reservation.getFecha().equals(fecha)) {
+                cupos = cupos - 1;
+            }
+        }
+        for (CheckIn checkIn : this.confirmedUses) {
+            if (checkIn.getFecha().equals(fecha)) {
+                cupos = cupos - 1;
+            }
+        }
+        return cupos;
+    }
+
+    public Integer calculateCuposForToday() {
+        LocalDate now = LocalDate.now();
+        Integer cupos = this.maxCupos;
+        for (Reservation reservation : this.reservationsReceived) {
+            if (reservation.getReservationStatus().equals(ReservationStatus.PENDIENTE) && reservation.getFecha().equals(LocalDate.now().toString())) {
+                cupos = cupos - 1;
+            }
+        }
+        for (CheckIn checkIn : this.confirmedUses) {
+            if (checkIn.getFecha().equals(LocalDate.now().toString())) {
+                cupos = cupos - 1;
+            }
+        }
+        return cupos;
+    }
 
     public Long getQuotaId() {
         return quotaId;

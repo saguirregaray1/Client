@@ -1,7 +1,6 @@
 package com.example.clientTIC.ui;
 
 import com.example.clientTIC.AppUser;
-import com.example.clientTIC.models.Company;
 import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -9,11 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +20,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -124,7 +119,7 @@ public class CompanyViewController implements Initializable {
     protected void verCostosCompania(ActionEvent event){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //fixme
-        Long costos = appService.getCostsForTheMonth(appuser.getCompany().getId(),"").getTotalCosts();
+        Long costos = appService.getCompanyCostsForTheMonth(appuser.getCompany().getId(),"").getTotal();
         costosCompania.setText("Costo total: " + costos);
     }
 }
