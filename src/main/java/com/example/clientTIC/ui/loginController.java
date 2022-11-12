@@ -83,7 +83,7 @@ public class loginController {
             AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>() {
             });
             if (appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
-                appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
+                //appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                 Parent root = loader.load();
 

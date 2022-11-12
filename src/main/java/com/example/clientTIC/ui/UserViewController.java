@@ -132,39 +132,30 @@ public class UserViewController extends ListView<Activity> implements Initializa
     private void setListOfActivities(List<List> activityList){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         for (List value : activityList) {
-            HBox hBox = new HBox(25);
-            Button button = new Button("Registrarse");
+            HBox hBox = new HBox(15);
             Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()),ActivityCategories.valueOf((String) value.get(2)));
             String nombreClub=value.get(3).toString();
             String dirClub=value.get(4).toString();
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    //fixme
-                    registerToActivity(appUser, Long.valueOf(value.get(5).toString()), LocalDate.now().toString());
-                }
-            });
             List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(5).toString()));
             ImageView imageView = new ImageView(pictures.get(0));
-            imageView.setFitHeight(100);
-            imageView.setFitWidth(150);
+            imageView.setFitHeight(75);
+            imageView.setFitWidth(100);
             Button activityButton= new Button();
             activityButton.setGraphic(imageView);
             activityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(ActionEvent event) {
+                public void handle(ActionEvent event){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("ActivityView.fxml"));
+                    ActivityViewController activityViewController = new ActivityViewController();
+                    activityViewController.setCurrentActivity(activity);
+                    activityViewController.setCurrentAppUser(appUser);
+                    loader.setController(activityViewController);
                     Parent root = null;
                     try {
                         root = loader.load();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    ActivityViewController activityViewController = loader.getController();
-                    activityViewController.setCurrentActivity(activity);
-                    activityViewController.setCurrentAppUser(appUser);
-                    activityViewController.setInfo(activity.getNombre(),/*activity.getClub().getNombre(),*/
-                            String.valueOf(activity.getPrecio()),appService.getActivityImages(activity.getId()));
                     Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     Scene scene= new Scene(root);
                     stage.setScene(scene);
@@ -182,19 +173,13 @@ public class UserViewController extends ListView<Activity> implements Initializa
             labelPrice.setMaxHeight(100);
             labelPrice.setWrapText(true);
             labelPrice.setFont(new Font("Arial", 20));
-            Label labelCupos = new Label(" Cupos disponibles: " + activity.getCupos());
-            labelCupos.setMaxWidth(250);
-            labelCupos.setMaxHeight(100);
-            labelCupos.setWrapText(true);
-            labelCupos.setFont(new Font("Arial", 20));
             hBox.setAlignment(Pos.CENTER);
             hBox.setPadding(new Insets(5, 5, 5, 5));
-            HBox.setHgrow(activityButton, Priority.ALWAYS);
+            //HBox.setHgrow(activityButton, Priority.ALWAYS);
             HBox.setHgrow(labelName, Priority.ALWAYS);
-            //HBox.setHgrow(labelPrice, Priority.ALWAYS);
-            HBox.setHgrow(labelCupos, Priority.ALWAYS);
+            HBox.setHgrow(labelPrice, Priority.ALWAYS);
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
-            hBox.getChildren().addAll(activityButton, labelName,labelPrice,labelCupos,button);
+            hBox.getChildren().addAll(activityButton, labelName,labelPrice);
             activityBox.getChildren().add(hBox);
         }
     }

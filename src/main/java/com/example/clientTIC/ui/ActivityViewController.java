@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,10 +23,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ActivityViewController {
+public class ActivityViewController implements Initializable {
 
     private AppUser currentAppUser;
 
@@ -54,68 +57,58 @@ public class ActivityViewController {
     @FXML
     public Label activityCost;
 
+    private void setImagesActivity(){
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        List<Image> images = appService.getActivityImages(currentActivity.getId());
+        for(Image imagen : images){
+            ImageView img = new ImageView(imagen);
+            img.setFitHeight(100);
+            img.setFitWidth(150);
+            imagesActivity.getChildren().add(img);
+        }
+    }
 
 
-
-    public void setInfo(String nombreActividad, String costoActividad, List<Image> activityImages){
+    private void setInfo(String nombreActividad, String costoActividad){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         nameActivity.setText(nombreActividad);
-        //clubNameActivity.setText("Venga a "+currentActivity.getClub().getNombre()+" y disfrute de una buena jornada deportiva");
+        /*if(nombreClub!=null) {
+            clubNameActivity.setText("Venga a " + nombreClub + " y disfrute de una buena jornada deportiva");
+        }*/
         if (activityCost!=null){
             activityCost.setText("Costo de la actividad: " + costoActividad);
         }
-        for (int i =0; i<activityImages.size(); i++){
-            Image imagen = activityImages.get(i);
-            ImageView imageView = new ImageView(imagen);
-            imageView.setFitHeight(100);
-            imageView.setFitWidth(150);
-            imagesActivity.getChildren().add(imageView);
-        }
-
-        for (int i=0; i<currentActivity.getCupos().size();i++){
-            HBox hBox= new HBox(10);
-            Quota quota= currentActivity.getCupos().get(i);
-            String dia = quota.getDay();
-            String horario = quota.getStartTime() +" - "+quota.getFinishTime();
-            Label diaLabel = new Label(dia);
-            Label horarioLabel = new Label(horario);
-            HBox.setHgrow(diaLabel, Priority.ALWAYS);
-            Button registrarAHorario = new Button("Registrar");
+        List<Quota> horarios= appService.getActivityQuota(currentActivity.getId());
+        for (Quota horario : horarios){
+            HBox hBox= new HBox(20);
+            String cupos = String.valueOf(horario.getMaxCupos());
+            Label cuposLabel = new Label(cupos);
+            HBox.setHgrow(cuposLabel, Priority.ALWAYS);
+            Button registrarAHorario = new Button("Reservar");
             registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     //fixme
-                    appService.makeReservation(currentAppUser,quota.getQuotaId().toString(), LocalDate.now().toString());
+                    appService.makeReservation(currentAppUser,horario.getQuotaId().toString(), LocalDate.now().toString());
                 }
             });
-            hBox.getChildren().addAll(diaLabel,horarioLabel,registrarAHorario);
+            hBox.getChildren().addAll(cuposLabel,registrarAHorario);
             horariosActivity.getChildren().add(hBox);
         }
-
-
-
     }
 
     @FXML
     protected void setReturnButton(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene= new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        final Node source = (Node) event.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     protected void setRegisterButton(ActionEvent event){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //fixme
-     //   HttpResponse<JsonNode> request= appService.registerToActivity(currentAppUser,currentActivity.getId(),1L);
+     //  HttpResponse<JsonNode> request=*/ appService.registerToActivity(currentAppUser,currentActivity.getId(),1L);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
         Parent root = null;
         try {
@@ -130,6 +123,9 @@ public class ActivityViewController {
     }
 
 
-
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setInfo(currentActivity.getNombre(), String.valueOf(currentActivity.getPrecio()));
+        setImagesActivity();
+    }
 }

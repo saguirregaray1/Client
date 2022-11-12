@@ -116,6 +116,8 @@ public class AppService {
 
     }
 
+
+
     public void addNewCompany(String nombre, Long nroAccount, String email, String password) {
         String json = "";
         try {

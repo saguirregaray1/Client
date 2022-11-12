@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="472.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutX="60.0" layoutY="100.0" prefHeight="318.0" prefWidth="434.0">
+         <content>
+            <VBox fx:id="costsBox" prefHeight="287.0" prefWidth="428.0" />
+         </content>
+      </ScrollPane>
+      <Region prefHeight="74.0" prefWidth="752.0" style="-fx-background-color: #263f78;" />
+      <Label alignment="CENTER" layoutX="244.0" layoutY="8.0" prefHeight="58.0" prefWidth="206.0" text="Check in" textFill="WHITE">
+         <font>
+            <Font name="Elephant" size="25.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Button layoutX="35.0" layoutY="24.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+      <Label layoutX="549.0" layoutY="90.0" text="Empleados en el horario">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="employeeTable" layoutX="542.0" layoutY="115.0" prefHeight="244.0" prefWidth="174.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="172.80001220703124" text="Cedula empleado" />
+        </columns>
+      </TableView>
+      <Label fx:id="gananciasLabel" layoutX="542.0" layoutY="410.0" prefHeight="26.0" prefWidth="199.0" text="Label">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

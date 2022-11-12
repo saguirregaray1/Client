@@ -77,10 +77,10 @@ public class ClubsAdminController implements Initializable {
             verCheckIn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    FXMLLoader loader = new FXMLLoader(CheckInListController.class.getResource("CheckInList.fxml"));
-                    CheckInListController checkInListController = new CheckInListController();
-                    loader.setController(checkInListController);
-                    checkInListController.setClub(currentClub);
+                    FXMLLoader loader = new FXMLLoader(CheckInActivityController.class.getResource("CheckInClub.fxml"));
+                    CheckInClubController checkInClubController = new CheckInClubController();
+                    checkInClubController.setCurrentClub(currentClub);
+                    loader.setController(checkInClubController);
                     Parent root = null;
                     try {
                         root = loader.load();
@@ -102,9 +102,12 @@ public class ClubsAdminController implements Initializable {
 
     @FXML
     protected void volver(ActionEvent event) throws IOException {
-        final Node source = (Node) event.getSource();
-        final Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override

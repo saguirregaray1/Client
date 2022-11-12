@@ -1,6 +1,7 @@
 package com.example.clientTIC.ui;
 
 import com.example.clientTIC.AppUser;
+import com.example.clientTIC.models.Costs;
 import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -119,7 +120,7 @@ public class CompanyViewController implements Initializable {
     protected void verCostosCompania(ActionEvent event){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //fixme
-        Long costos = appService.getCompanyCostsForTheMonth(appuser.getCompany().getId(),"").getTotal();
+        Long costos = appService.getTotalCompanyCostsForTheMonth(appuser.getCompany().getId(),"").getTotal();
         costosCompania.setText("Costo total: " + costos);
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="726.0" style="-fx-background-color: #e8e1ed;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.ActivityViewController">
+<AnchorPane prefHeight="530.0" prefWidth="726.0" style="-fx-background-color: #e8e1ed;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region layoutY="72.0" prefHeight="460.0" prefWidth="726.0" style="-fx-background-color: #af6be3;" />
       <Label fx:id="nameActivity" layoutX="196.0" layoutY="14.0" prefHeight="47.0" prefWidth="355.0" text="Nombre de la actividad" textAlignment="CENTER" underline="true">
@@ -16,37 +16,37 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="35.0" layoutY="179.0" prefHeight="318.0" prefWidth="274.0" style="-fx-border-color: white;">
+      <ScrollPane layoutX="47.0" layoutY="262.0" prefHeight="188.0" prefWidth="355.0" style="-fx-border-color: white;">
          <content>
-            <VBox fx:id="imagesActivity" prefHeight="310.0" prefWidth="268.0" />
+            <VBox fx:id="horariosActivity" prefHeight="183.0" prefWidth="339.0" />
          </content>
       </ScrollPane>
       <Button layoutX="374.0" layoutY="474.0" mnemonicParsing="false" onAction="#setReturnButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Volver" textFill="#1f201feb" />
-      <Label fx:id="clubNameActivity" graphicTextGap="0.0" layoutX="338.0" layoutY="94.0" prefHeight="90.0" prefWidth="257.0" text="Venga a (nombre del club) y disfrute de una buena jornada deportiva" wrapText="true">
+      <Label fx:id="clubNameActivity" graphicTextGap="0.0" layoutX="55.0" layoutY="91.0" prefHeight="90.0" prefWidth="257.0" text="Venga a (nombre del club) y disfrute de una buena jornada deportiva" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <VBox layoutX="558.0" layoutY="426.0" prefHeight="47.0" prefWidth="100.0" />
       <Button layoutX="596.0" layoutY="474.0" mnemonicParsing="false" onAction="#setRegisterButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Registrarse" />
-      <Label graphicTextGap="0.0" layoutX="338.0" layoutY="156.0" prefHeight="90.0" prefWidth="147.0" text="Horarios disponibles:" wrapText="true">
+      <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="413.0" layoutY="90.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="338.0" layoutY="348.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="35.0" layoutY="109.0" prefHeight="47.0" prefWidth="355.0" text="Imagenes" textAlignment="CENTER" underline="true">
+      <Label layoutX="47.0" layoutY="193.0" prefHeight="47.0" prefWidth="355.0" text="Horarios disponibles:" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="333.0" layoutY="238.0" prefHeight="118.0" prefWidth="379.0">
+      <Label layoutX="448.0" layoutY="169.0" prefHeight="47.0" prefWidth="264.0" text="Imagenes:" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="458.0" layoutY="240.0" prefHeight="200.0" prefWidth="246.0">
          <content>
-            <VBox prefHeight="114.0" prefWidth="370.0" />
+            <VBox fx:id="imagesActivity" prefHeight="200.0" prefWidth="226.0" />
          </content>
       </ScrollPane>
    </children>
