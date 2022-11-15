@@ -105,6 +105,7 @@ public class CompanyViewController implements Initializable {
         String email = emailField.getText();
         String password= passwordField.getText();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        // label
         appService.addNewEmployee(cedula,this.appuser.getCompany(),saldo,email,password);
         registeredLabel.setText("Usuario registrado");
         setListOfEmployees();

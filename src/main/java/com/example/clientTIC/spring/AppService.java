@@ -41,7 +41,7 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public void addNewClub(String nombre, String dir, String email, String password) {
+    public HttpResponse<JsonNode> addNewClub(String nombre, String dir, String email, String password) {
         String json = "";
 
         try {
@@ -56,15 +56,13 @@ public class AppService {
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
 
-            if (apiResponse.getStatus() != 200) {
-                throw new IllegalStateException("club no creado");
-            }
+            return apiResponse;
         } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public void addNewClubUser(String email, String password, Long clubId) {
+    public HttpResponse<JsonNode> addNewClubUser(String email, String password, Long clubId) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -73,6 +71,7 @@ public class AppService {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/user/" + clubId)
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
+            return apiResponse;
         } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
@@ -118,7 +117,7 @@ public class AppService {
 
 
 
-    public void addNewCompany(String nombre, Long nroAccount, String email, String password) {
+    public HttpResponse<JsonNode> addNewCompany(String nombre, Long nroAccount, String email, String password) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -131,15 +130,16 @@ public class AppService {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
+            return apiResponse;
         } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public void deleteCompanies(String companyName) {
+    public HttpResponse<JsonNode> deleteCompanies(String companyName) {
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/company/" + companyName).asJson();
-            String list = String.valueOf(apiResponse.getBody()); //lista que debemos mostrar
+            return apiResponse;
         } catch (UnirestException ex) {
             throw new RuntimeException(ex);
         }
@@ -206,7 +206,7 @@ public class AppService {
         return FXCollections.observableList(list);
     }
 
-    public void addNewEmployee(Long cedula, Company company, Long saldo, String email, String password) {
+    public HttpResponse<JsonNode> addNewEmployee(Long cedula, Company company, Long saldo, String email, String password) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -215,14 +215,16 @@ public class AppService {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/employee")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
+            return apiResponse;
         } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public void deleteEmployees(String cedula) {
+    public HttpResponse<JsonNode> deleteEmployees(String cedula) {
         try {
             HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/employee/" + cedula).asJson();
+            return apiResponse;
         } catch (UnirestException ex) {
             throw new RuntimeException(ex);
         }

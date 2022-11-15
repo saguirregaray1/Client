@@ -65,7 +65,7 @@ public class UsersAdminController implements Initializable {
             if (comp.getNombre().equals(compania)){
                 currentCompany=comp;
             }
-        }
+        } // label
         appService.addNewEmployee(nombre,currentCompany,saldo,email,contraseña);
         showUsers();
     }

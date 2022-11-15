@@ -202,6 +202,7 @@ public class ClubListViewController implements Initializable {
         String email = registerUserEmail.getText();
         String password = registerUserPassword.getText();
         String companyName = companyNameEmployee.getText();
+        // label
         appService.addNewClubUser(email,password,appUser.getClub().getId()
         );
     }

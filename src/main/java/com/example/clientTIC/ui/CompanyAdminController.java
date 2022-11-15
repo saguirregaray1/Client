@@ -75,6 +75,7 @@ public class CompanyAdminController implements Initializable {
         String email = emailEnterprise.getText(); //fixme agregar campo
         String password = passwordEnterprise.getText(); //fixme agregar campo
         AppService appService=getApplicationContext().getBean(AppService.class);
+        // label
         appService.addNewCompany(name,nroAccount,email,password);
         showEnterprises();
     }
