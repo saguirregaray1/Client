@@ -107,7 +107,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="146.0" layoutY="329.0" promptText="Nombre actividad" />
-                        <Button layoutX="196.0" layoutY="43.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
+                        <Button layoutX="196.0" layoutY="43.0" mnemonicParsing="false" onAction="#chargeImagesButton" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
                         <Label layoutX="40.0" layoutY="47.0" text="Quiere cargar imagenes?" />
                         <Button layoutX="40.0" layoutY="397.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Insertar imagenes" textFill="WHITE">
                            <font>
