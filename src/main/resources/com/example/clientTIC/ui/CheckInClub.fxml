@@ -4,8 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -15,7 +13,7 @@
    <children>
       <ScrollPane layoutX="60.0" layoutY="100.0" prefHeight="318.0" prefWidth="434.0">
          <content>
-            <VBox fx:id="costsBox" prefHeight="287.0" prefWidth="428.0" />
+            <VBox fx:id="costsBox" prefHeight="312.0" prefWidth="428.0" />
          </content>
       </ScrollPane>
       <Region prefHeight="74.0" prefWidth="752.0" style="-fx-background-color: #263f78;" />
@@ -33,14 +31,14 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="employeeTable" layoutX="542.0" layoutY="115.0" prefHeight="244.0" prefWidth="174.0">
-        <columns>
-          <TableColumn fx:id="idColumn" prefWidth="172.80001220703124" text="Cedula empleado" />
-        </columns>
-      </TableView>
-      <Label fx:id="gananciasLabel" layoutX="542.0" layoutY="410.0" prefHeight="26.0" prefWidth="199.0" text="Label">
+      <Label fx:id="gananciasLabel" layoutX="542.0" layoutY="410.0" prefHeight="26.0" prefWidth="199.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
+      <ScrollPane layoutX="548.0" layoutY="126.0" prefHeight="200.0" prefWidth="181.0">
+         <content>
+            <VBox fx:id="employeeTable" prefHeight="200.0" prefWidth="162.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
