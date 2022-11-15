@@ -5,6 +5,8 @@ import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,7 +92,13 @@ public class ActivityViewController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     //fixme
-                    appService.makeReservation(currentAppUser,LocalDate.now().toString(),horario.getQuotaId().toString());
+                    HttpResponse<JsonNode> response= appService.makeReservation(currentAppUser,LocalDate.now().toString(),horario.getQuotaId().toString());
+                    if (response.getStatus()==200){
+                       // response.getBody().toString();
+                    }
+                    else{
+
+                    }
                 }
             });
             hBox.getChildren().addAll(cuposLabel,registrarAHorario);
