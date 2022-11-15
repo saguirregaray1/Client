@@ -68,6 +68,10 @@ public class loginController {
         appService.addNewActivity(appService.getListOfClubs().get(0), "futbol", 120L, quotas, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0), "basketball", 1L, quotas, ActivityCategories.CATEGORY_2);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(), 1L);
+        AppUser temp = new AppUser();
+        temp.setId(5L);
+        appService.makeReservation(temp, "2022-11-14", String.valueOf(1L));
+    //    appService.checkInWithReservation(1234L, "00:01:00", 1L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"), 1L);
         appService.uploadActivityPicture(new File("src/main/resources/python.png"), 2L);
 
@@ -96,10 +100,7 @@ public class loginController {
                 stage.show();
             } else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
-                appService.makeReservation(appUser, "2022-11-12", String.valueOf(6L));
-                AppUser temp = new AppUser();
-                temp.setId(5L);
-                appService.makeReservation(temp, "2022-11-12", String.valueOf(6L));
+                appService.makeReservation(appUser, "2022-11-14", String.valueOf(1L));
                 appService.checkInWithReservation(123L, "00:01:00", 1L);
                 Costs cost = appService.getTotalCompanyCostsForTheMonth(1L, "2022-11");
                 Costs earnings = appService.getTotalClubEarningsForTheMonth(1L,"2022-11");

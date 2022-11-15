@@ -182,8 +182,9 @@ public class ClubListViewController implements Initializable {
     @FXML
     protected void deleteUserButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        String cedula = deleteUserID.getText();
-        appService.deleteEmployees(cedula);
+        String email = deleteUserID.getText();
+        //no es cedula, es email
+        appService.deleteClubUser(email);
     }
 
     @FXML
@@ -214,11 +215,10 @@ public class ClubListViewController implements Initializable {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String nombreActividad = activityNameCheck.getText();
         Activity currentActivity = appService.getActivityByNombre(appUser.getClub().getId(),nombreActividad);
-        List<Quota> cupos= null;
-        cupos = currentActivity.getCupos();
+        List<Quota> cupos= currentActivity.getCupos();
         if (cupos != null) {
+            horariosBox.getChildren().clear();
             for (Quota cupo : cupos) {
-                horariosBox.getChildren().clear();
                 HBox cuposBox = new HBox(10);
                 Label dayName = new Label(cupo.getDay());
                 String inicio = cupo.getStartTime();
@@ -229,7 +229,8 @@ public class ClubListViewController implements Initializable {
                     reserveButton.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            appService.checkInWithReservation(1L,cupo.getStartTime(),currentActivity.getId());
+                            //cedula
+                            appService.checkInWithReservation(1234L,cupo.getStartTime(),currentActivity.getId());
                         }
                     });
                 }else{

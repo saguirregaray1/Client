@@ -530,7 +530,7 @@ public class AppService {
             list.add(nombre);
             json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
 
-            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/company/activity/byName").header("Content-Type", "application/json").body(json).asJson();
+            HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/activity/byName").header("Content-Type", "application/json").body(json).asJson();
             activity = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
         } catch (UnirestException | IOException ex) {
@@ -638,6 +638,14 @@ public class AppService {
         Costs cost = getClubCheckInsForTheMonth(clubId, fechaMesAño);
         cost.setTotal(getClubEarningsForTheMonth(clubId, fechaMesAño).getTotal());
         return cost;
+    }
+
+    public void deleteClubUser(String cedula) {
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.delete("http://localhost:8080/club/user/" + cedula).asJson();
+        } catch (UnirestException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
 
