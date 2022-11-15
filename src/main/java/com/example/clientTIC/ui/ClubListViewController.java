@@ -268,8 +268,7 @@ public class ClubListViewController implements Initializable {
                 String fin = cupo.getFinishTime();
                 Label horario= new Label(inicio + " : "+ fin);
                 Button reserveButton = new Button("Reservar");
-                if (checkInTieneReservas.isSelected()){
-                    reserveButton.setOnAction(new EventHandler<ActionEvent>() {
+                reserveButton.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //cedula
@@ -279,18 +278,10 @@ public class ClubListViewController implements Initializable {
                                 //registrado correctamente
                             }
                             else{
-                                notificationLabelTAB1.setText(response.getBody().toString());
-                            }
+                                notificationLabelTAB1.setText(response.getBody().toString());}
                         }
-                    });
-                }else{
-                    reserveButton.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            appService.checkInWithoutReservation(1L,currentActivity.getId(),cupo.getStartTime());
-                        }
-                    });
-                }
+                });
+
                 cuposBox.getChildren().addAll(dayName,horario,reserveButton);
                 horariosBox.getChildren().add(cuposBox);
             }

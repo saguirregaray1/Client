@@ -88,7 +88,7 @@ public class ActivityViewController implements Initializable {
         for (Quota horario : horarios){
             HBox hBox= new HBox(20);
             String cupos = String.valueOf(horario.getMaxCupos());
-            Label cuposLabel = new Label(cupos);
+            Label cuposLabel = new Label("Cupos disponibles:" + cupos);
             HBox.setHgrow(cuposLabel, Priority.ALWAYS);
             Button registrarAHorario = new Button("Reservar");
             registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
@@ -111,10 +111,16 @@ public class ActivityViewController implements Initializable {
     }
 
     @FXML
-    protected void setReturnButton(ActionEvent event){
-        final Node source = (Node) event.getSource();
-        final Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    protected void setReturnButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
+        UserViewController userViewController = new UserViewController();
+        userViewController.setAppUser(this.currentAppUser);
+        loader.setController(userViewController);
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

@@ -90,9 +90,9 @@ public class CompanyViewController implements Initializable {
                 }
             });
             idLabel.setStyle("-fx-font-weight: bold");
-            idLabel.setFont(new Font("Arial", 20));
+            idLabel.setFont(new Font("Arial", 16));
             saldoLabel.setStyle("-fx-font-weight: bold");
-            saldoLabel.setFont(new Font("Arial", 20));
+            saldoLabel.setFont(new Font("Arial", 16));
             HBox.setHgrow(idLabel, Priority.ALWAYS);
             HBox.setHgrow(saldoLabel, Priority.ALWAYS);
             employeeBox.getChildren().addAll(idLabel,saldoLabel,borrar);

@@ -3,10 +3,12 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.models.Employee;
+import com.example.clientTIC.models.Reservation;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,10 +19,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserInfoController implements Initializable {
@@ -33,6 +38,9 @@ public class UserInfoController implements Initializable {
 
     @FXML
     private Button returnButton;
+
+    @FXML
+    private VBox reservationsBox;
 
 
     @FXML
@@ -71,7 +79,30 @@ public class UserInfoController implements Initializable {
         nameLabel.setText("Cedula: " + String.valueOf(empleado.getCedula()));
         emailLabel.setText("Email: " + appUser.getEmail());
         saldoLabel.setText("Saldo disponible: " + String.valueOf(empleado.getSaldo()));
-
+        setReservations();
         }
+
+    protected void setReservations(){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        List<Reservation> reservaciones = appService.getPendingReservations(appUser.getId());
+        for (Reservation reservacion : reservaciones){
+            HBox box = new HBox(10);
+            Label nombreAct = new Label(reservacion.getQuota().getActivity().getNombre());
+            Label diaAct = new Label(reservacion.getQuota().getDay());
+            Label horaInicio = new Label(reservacion.getQuota().getStartTime());
+            Button cancelarReserva = new Button("Cancelar reserva");
+            cancelarReserva.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                }
+            });
+            box.getChildren().addAll(nombreAct,diaAct,horaInicio,cancelarReserva);
+            reservationsBox.getChildren().add(box);
+        }
+
     }
+}
+
+
 
