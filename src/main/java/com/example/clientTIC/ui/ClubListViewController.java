@@ -53,6 +53,9 @@ public class ClubListViewController implements Initializable {
     private VBox horariosBox;
 
     @FXML
+    private TextField addImageActivity;
+
+    @FXML
     private Button returnButton;
 
     @FXML
@@ -108,6 +111,7 @@ public class ClubListViewController implements Initializable {
     @FXML
     private TextField cuposLunes;
 
+    private List<File> imagenes;
 
     @FXML
     private CheckBox habilitarCupos;
@@ -194,17 +198,28 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     protected void chargeImagesButton(ActionEvent event){
-        final FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(((Node) event.getTarget()).getScene().getWindow());
+        final FileChooser f = new FileChooser();
+        File file = f.showOpenDialog(((Node) event.getTarget()).getScene().getWindow());
         if (file != null) {
+            imagenes.add(file);
             Image image1 = new Image(file.toURI().toString());
             ImageView ip = new ImageView(image1);
             ip.setFitHeight(100);
             ip.setFitWidth(200);
             imagesActivity.getChildren().add(ip);
+            imagePrev.setImage(image1);
             }
     }
 
+    @FXML
+    protected void insertImages(ActionEvent event){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        Activity actividad = appService.getActivityByNombre(appUser.getClub().getId(),addImageActivity.getText());
+        for(File archivo : imagenes){
+            appService.uploadActivityPicture(archivo,actividad.getId());
+        }
+        imagenes.clear();
+    }
     @FXML
     protected void registerUserButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
