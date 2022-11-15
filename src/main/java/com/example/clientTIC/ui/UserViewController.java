@@ -147,6 +147,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
             imageView.setFitHeight(75);
             imageView.setFitWidth(100);
             Button activityButton= new Button();
+            activityButton.setBackground(null);
             activityButton.setGraphic(imageView);
             activityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
