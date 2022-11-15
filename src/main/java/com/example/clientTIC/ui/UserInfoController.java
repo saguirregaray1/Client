@@ -3,6 +3,7 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.models.Employee;
+import com.example.clientTIC.models.Reservation;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import javafx.collections.ObservableList;
@@ -17,10 +18,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserInfoController implements Initializable {
@@ -33,6 +36,9 @@ public class UserInfoController implements Initializable {
 
     @FXML
     private Button returnButton;
+
+    @FXML
+    private VBox reservationsBox;
 
 
     @FXML
@@ -73,5 +79,12 @@ public class UserInfoController implements Initializable {
         saldoLabel.setText("Saldo disponible: " + String.valueOf(empleado.getSaldo()));
 
         }
+
+    protected void setReservations(){
+        List<Reservation> reservaciones = null;
+
     }
+}
+
+
 

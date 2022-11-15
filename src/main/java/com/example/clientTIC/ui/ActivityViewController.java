@@ -88,7 +88,7 @@ public class ActivityViewController implements Initializable {
         for (Quota horario : horarios){
             HBox hBox= new HBox(20);
             String cupos = String.valueOf(horario.getMaxCupos());
-            Label cuposLabel = new Label(cupos);
+            Label cuposLabel = new Label("Cupos disponibles:" + cupos);
             HBox.setHgrow(cuposLabel, Priority.ALWAYS);
             Button registrarAHorario = new Button("Reservar");
             registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
