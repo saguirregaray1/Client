@@ -63,6 +63,12 @@ public class ClubListViewController implements Initializable {
     private VBox imagesActivity;
 
     @FXML
+    private VBox horariosCreateActivity;
+
+    @FXML
+    private ImageView imagePrev;
+
+    @FXML
     private TextField createActivityName;
 
     @FXML
@@ -118,9 +124,10 @@ public class ClubListViewController implements Initializable {
         String dia = dias.getValue();
         String inicio = lunesInicio.getText();
         String finale = lunesFin.getText();
+        int cupos = 0;
         Quota horario = null;
         if (habilitarCupos.isSelected()){
-            int cupos = Integer.parseInt(cuposLunes.getText());
+            cupos = Integer.parseInt(cuposLunes.getText());
             horario = new Quota(dia,inicio,finale,cupos);
         }else {
             horario = new Quota(dia, inicio, finale);
@@ -128,10 +135,28 @@ public class ClubListViewController implements Initializable {
         if (horariosIngresados == null){
             horariosIngresados= new ArrayList<Quota>();
             horariosIngresados.add(horario);
+            visualizarHorarios(dia,inicio,finale,cupos);
         }else{
             this.horariosIngresados.add(horario);
         }
     }
+
+    private void visualizarHorarios(String dia, String start, String finale, int cupes){
+        Label day = new Label(dia);
+        Label inicio = new Label(start);
+        Label finish = new Label(finale);
+        Label cupos = new Label(String.valueOf(cupes));
+        if (cupes==0){
+            HBox box = new HBox(10);
+            box.getChildren().addAll(day,inicio,finish);
+            horariosCreateActivity.getChildren().add(box);
+        }else{
+            HBox box = new HBox(10);
+            box.getChildren().addAll(day,inicio,finish,cupos);
+            horariosCreateActivity.getChildren().add(box);
+        }
+    }
+
 
 
     @FXML
@@ -142,6 +167,8 @@ public class ClubListViewController implements Initializable {
         Long precio = Long.valueOf(activityPrice.getText());
         Activity actividad = new Activity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
+        horariosCreateActivity.getChildren().clear();
+        horariosIngresados.clear();
     }
 
     @FXML
@@ -187,7 +214,7 @@ public class ClubListViewController implements Initializable {
         appService.deleteClubUser(email);
     }
 
-    @FXML
+    /*FXML
     protected void verifyButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         // if (necesitaReserva){
@@ -208,7 +235,7 @@ public class ClubListViewController implements Initializable {
         }
 
         String fecha = String.valueOf(LocalDateTime.now());
-    }
+    }*/
 
     @FXML
     protected void verHorarios() throws Exception {
