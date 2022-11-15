@@ -650,6 +650,19 @@ public class AppService {
             throw new RuntimeException(ex);
         }
     }
+
+    public List<Reservation> getPendingReservations(Long appUserId) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Reservation> reservations = null;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/employee/reservations/" + appUserId).asJson();
+            reservations = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return reservations;
+    }
 }
 
 
