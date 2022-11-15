@@ -72,7 +72,7 @@ public class CheckInClubController implements Initializable {
 
     void setCosts(){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),"2022-11");
+        Costs costs = appService.getTotalClubEarningsForTheMonth(currentClub.getId(),"2022-11");
         List<CheckIn> checks = costs.getCheckIns();
         ObservableList<Employee> empleados = (ObservableList<Employee>) costs.getUsers();
         gananciasLabel.setText("Ganancias totales: " +costs.getTotal());
