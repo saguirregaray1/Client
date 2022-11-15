@@ -16,38 +16,41 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="47.0" layoutY="262.0" prefHeight="188.0" prefWidth="355.0" style="-fx-border-color: white;">
+      <ScrollPane layoutX="47.0" layoutY="216.0" prefHeight="188.0" prefWidth="355.0" style="-fx-border-color: white;">
          <content>
             <VBox fx:id="horariosActivity" prefHeight="183.0" prefWidth="339.0" />
          </content>
       </ScrollPane>
       <Button layoutX="604.0" layoutY="473.0" mnemonicParsing="false" onAction="#setReturnButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Volver" textFill="#1f201feb" />
-      <Label fx:id="clubNameActivity" graphicTextGap="0.0" layoutX="55.0" layoutY="91.0" prefHeight="90.0" prefWidth="257.0" text="Venga a (nombre del club) y disfrute de una buena jornada deportiva" wrapText="true">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
       <VBox layoutX="558.0" layoutY="426.0" prefHeight="47.0" prefWidth="100.0" />
-      <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="413.0" layoutY="90.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
+      <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="55.0" layoutY="404.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="47.0" layoutY="193.0" prefHeight="47.0" prefWidth="355.0" text="Horarios disponibles:" textAlignment="CENTER" underline="true">
+      <Label layoutX="47.0" layoutY="156.0" prefHeight="47.0" prefWidth="355.0" text="Horarios disponibles:" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="448.0" layoutY="169.0" prefHeight="47.0" prefWidth="264.0" text="Imagenes:" textAlignment="CENTER" underline="true">
+      <Label layoutX="449.0" layoutY="156.0" prefHeight="47.0" prefWidth="264.0" text="Imagenes:" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="458.0" layoutY="240.0" prefHeight="200.0" prefWidth="246.0">
+      <ScrollPane layoutX="449.0" layoutY="216.0" prefHeight="200.0" prefWidth="246.0">
          <content>
             <VBox fx:id="imagesActivity" prefHeight="200.0" prefWidth="226.0" />
          </content>
       </ScrollPane>
-      <Label fx:id="notificationLabel" layoutX="55.0" layoutY="486.0" prefHeight="18.0" prefWidth="348.0" />
+      <Label fx:id="notificationLabel" layoutX="55.0" layoutY="486.0" prefHeight="18.0" prefWidth="348.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="clubNameActivity" graphicTextGap="0.0" layoutX="184.0" layoutY="78.0" prefHeight="90.0" prefWidth="453.0" text="Venga y disfrute de una buena jornada deportiva" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

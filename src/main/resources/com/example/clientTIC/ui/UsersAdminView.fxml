@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="418.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientTIC.ui.UsersAdminController">
    <children>
       <ScrollPane layoutX="46.0" layoutY="109.0" prefHeight="240.0" prefWidth="290.0">
@@ -40,5 +39,10 @@
       <Button layoutX="408.0" layoutY="345.0" mnemonicParsing="false" onAction="#borrarUser" text="Borrar usuario" />
       <TextField fx:id="createUserEmail" layoutX="408.0" layoutY="158.0" promptText="Ingrese nombre compania" />
       <TextField fx:id="createUserPassword" layoutX="408.0" layoutY="196.0" promptText="Ingrese nombre compania" />
+      <Label fx:id="notificationLabel" layoutX="165.0" layoutY="375.0" prefHeight="18.0" prefWidth="171.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

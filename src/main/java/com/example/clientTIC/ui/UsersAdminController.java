@@ -3,6 +3,8 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.models.Company;
 import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.spring.AppService;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,6 +49,9 @@ public class UsersAdminController implements Initializable {
 
     @FXML
     private VBox UserList;
+
+    @FXML
+    private Label notificationLabel;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showUsers();
@@ -66,7 +72,14 @@ public class UsersAdminController implements Initializable {
                 currentCompany=comp;
             }
         } // label
-        appService.addNewEmployee(nombre,currentCompany,saldo,email,contraseña);
+        HttpResponse<JsonNode> response = appService.addNewEmployee(nombre,currentCompany,saldo,email,contraseña);
+        if (response.getStatus()==200){
+            notificationLabel.setText("Registrado correctamente");
+            //registrado correctamente
+        }
+        else{
+            notificationLabel.setText(response.getBody().toString());
+        }
         showUsers();
     }
 

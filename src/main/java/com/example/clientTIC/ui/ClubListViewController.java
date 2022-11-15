@@ -4,6 +4,8 @@ import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.*;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,7 +74,7 @@ public class ClubListViewController implements Initializable {
     private TextField createActivityName;
 
     @FXML
-    private DatePicker dateActivity;
+    private Label notificationLabel;
 
     @FXML
     private TextField deleteUserID;
@@ -90,6 +92,12 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     private TextField activityNameCheck;
+
+    @FXML
+    private Label notificationLabelTAB1;
+
+    @FXML
+    private Label notificationLabelTAB2;
 
     @FXML
     private TextField lunesInicio;
@@ -203,15 +211,21 @@ public class ClubListViewController implements Initializable {
         String password = registerUserPassword.getText();
         String companyName = companyNameEmployee.getText();
         // label
-        appService.addNewClubUser(email,password,appUser.getClub().getId()
-        );
+        HttpResponse<JsonNode> response=appService.addNewClubUser(email,password,appUser.getClub().getId());
+        if (response.getStatus()==200){
+            notificationLabelTAB2.setText("Registrado correctamente");
+            //registrado correctamente
+        }
+        else{
+            notificationLabelTAB2.setText(response.getBody().toString());
+        }
+
     }
 
     @FXML
     protected void deleteUserButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = deleteUserID.getText();
-        //no es cedula, es email
         appService.deleteClubUser(email);
     }
 
@@ -258,7 +272,14 @@ public class ClubListViewController implements Initializable {
                         @Override
                         public void handle(ActionEvent event) {
                             //cedula
-                            appService.checkInWithReservation(1234L,cupo.getStartTime(),currentActivity.getId());
+                            HttpResponse<JsonNode> response= appService.checkInWithReservation(1234L,cupo.getStartTime(),currentActivity.getId());
+                            if (response.getStatus()==200){
+                                notificationLabelTAB1.setText("Reservado correctamente");
+                                //registrado correctamente
+                            }
+                            else{
+                                notificationLabelTAB1.setText(response.getBody().toString());
+                            }
                         }
                     });
                 }else{
@@ -272,7 +293,7 @@ public class ClubListViewController implements Initializable {
                 cuposBox.getChildren().addAll(dayName,horario,reserveButton);
                 horariosBox.getChildren().add(cuposBox);
             }
-        }else{throw new Exception("No existe la actividad");}
+        }else{notificationLabel.setText("No existe la actividad");}
 
 
     }

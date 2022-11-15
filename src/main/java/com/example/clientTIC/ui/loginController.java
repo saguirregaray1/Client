@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +45,9 @@ public class loginController {
 
     @FXML
     public javafx.scene.control.Button LogInButton;
+
+    @FXML
+    private Label notificationLabel;
 
 
     @FXML
@@ -81,7 +85,7 @@ public class loginController {
         HttpResponse<JsonNode> apiResponse = appService.login(email, password);
 
         if (apiResponse.getStatus() != 200) { //?
-            throw new IllegalStateException("usuario o contraseña incorrecta");
+            notificationLabel.setText("Usuario o contraseña incorrecta");
         } else {
             ObjectMapper mapper = new ObjectMapper();
             AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>() {

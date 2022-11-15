@@ -5,6 +5,8 @@ import com.example.clientTIC.models.Costs;
 import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,7 +50,7 @@ public class CompanyViewController implements Initializable {
     private TextField saldoField;
 
     @FXML
-    private Label registeredLabel;
+    private Label notificationLabel;
 
     @FXML
     private VBox employeeList;
@@ -106,8 +108,14 @@ public class CompanyViewController implements Initializable {
         String password= passwordField.getText();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         // label
-        appService.addNewEmployee(cedula,this.appuser.getCompany(),saldo,email,password);
-        registeredLabel.setText("Usuario registrado");
+        HttpResponse<JsonNode> response=appService.addNewEmployee(cedula,this.appuser.getCompany(),saldo,email,password);
+        if (response.getStatus()==200){
+            notificationLabel.setText("Registrado correctamente");
+            //registrado correctamente
+        }
+        else{
+            notificationLabel.setText(response.getBody().toString());
+        }
         setListOfEmployees();
 
     }

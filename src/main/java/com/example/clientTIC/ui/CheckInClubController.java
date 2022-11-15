@@ -3,6 +3,7 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.models.*;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -74,7 +76,7 @@ public class CheckInClubController implements Initializable {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         Costs costs = appService.getTotalClubEarningsForTheMonth(currentClub.getId(),"2022-11");
         List<CheckIn> checks = costs.getCheckIns();
-        ObservableList<Employee> empleados = (ObservableList<Employee>) costs.getUsers();
+        ObservableList<Employee> empleados = FXCollections.observableArrayList(costs.getUsers());
         gananciasLabel.setText("Ganancias totales: " +costs.getTotal());
         for(CheckIn check : checks){
             HBox checkInBox = new HBox(10);
