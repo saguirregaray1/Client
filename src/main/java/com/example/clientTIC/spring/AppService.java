@@ -270,7 +270,7 @@ public class AppService {
         return list;
     }
 
-    public void addNewActivity(Club club, String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories) {
+    public HttpResponse<JsonNode> addNewActivity(Club club, String nombre, Long precio, List<Quota> cupos, ActivityCategories activityCategories) {
         String json = "";
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -280,6 +280,7 @@ public class AppService {
             HttpResponse<JsonNode> apiResponse = Unirest.post("http://localhost:8080/club/activity")
                     .header("Content-Type", "application/json")
                     .body(json).asJson();
+            return apiResponse;
         } catch (UnirestException | JsonProcessingException ex) {
             throw new RuntimeException(ex);
         }

@@ -174,6 +174,7 @@ public class ClubListViewController implements Initializable {
         List<Quota> cuposActividad = horariosIngresados;
         Long precio = Long.valueOf(activityPrice.getText());
         Activity actividad = new Activity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
+        // label
         appService.addNewActivity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
         horariosCreateActivity.getChildren().clear();
         horariosIngresados.clear();
