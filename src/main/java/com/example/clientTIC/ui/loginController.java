@@ -77,6 +77,7 @@ public class loginController {
         appService.makeReservation(temp, "2022-11-15", String.valueOf(2L));
         appService.makeReservation(temp, "2022-11-15", String.valueOf(5L));
         appService.checkInWithReservation(1234L, "00:01:00", 1L);
+        appService.checkInWithReservation(1234L,"00:01:00",2L);
         appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"), 1L);
         appService.uploadActivityPicture(new File("src/main/resources/python.png"), 2L);
 
