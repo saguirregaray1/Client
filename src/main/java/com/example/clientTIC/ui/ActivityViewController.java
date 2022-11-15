@@ -111,10 +111,16 @@ public class ActivityViewController implements Initializable {
     }
 
     @FXML
-    protected void setReturnButton(ActionEvent event){
-        final Node source = (Node) event.getSource();
-        final Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    protected void setReturnButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
+        UserViewController userViewController = new UserViewController();
+        userViewController.setAppUser(this.currentAppUser);
+        loader.setController(userViewController);
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

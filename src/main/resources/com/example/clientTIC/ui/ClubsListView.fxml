@@ -68,7 +68,6 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="checkInTieneReservas" layoutX="299.0" layoutY="119.0" mnemonicParsing="false" text="Tiene reserva" />
                         <Label fx:id="notificationLabelTAB1" layoutX="46.0" layoutY="425.0" prefHeight="18.0" prefWidth="589.0" />
                      </children>
                   </AnchorPane>
