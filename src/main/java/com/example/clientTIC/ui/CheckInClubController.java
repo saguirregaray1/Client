@@ -25,8 +25,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class CheckInClubController implements Initializable {
 
@@ -40,10 +42,7 @@ public class CheckInClubController implements Initializable {
     private VBox costsBox;
 
     @FXML
-    private TableView<Employee> employeeTable;
-
-    @FXML
-    private TableColumn<Employee,String> idColumn;
+    private VBox employeeTable;
 
     @FXML
     private Label gananciasLabel;
@@ -61,13 +60,19 @@ public class CheckInClubController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Employee,String>("cedula"));
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         setCosts();
+        String fecha = LocalDate.now().toString();
+        Scanner scanner = new Scanner(fecha);
+        scanner.useDelimiter("-");
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        Costs costs = appService.getTotalClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
+        gananciasLabel.setText(String.valueOf(costs.getTotal()));
     }
 
     void setCosts(){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),"11/2022");
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),"2022-11");
         List<CheckIn> checks = costs.getCheckIns();
         ObservableList<Employee> empleados = (ObservableList<Employee>) costs.getUsers();
         gananciasLabel.setText("Ganancias totales: " +costs.getTotal());
@@ -82,7 +87,11 @@ public class CheckInClubController implements Initializable {
             mostrar.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    employeeTable.setItems(empleados);
+                    employeeTable.getChildren().clear();
+                    for(Employee empleado: empleados){
+                        Label cedula = new Label("C.I: "+empleado.getCedula());
+                        employeeTable.getChildren().add(cedula);
+                    }
                 }
             });
             fechaLabel.setStyle("-fx-font-weight: bold");

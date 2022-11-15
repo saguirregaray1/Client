@@ -57,6 +57,9 @@ public class ActivityViewController implements Initializable {
     @FXML
     public Label activityCost;
 
+    @FXML
+    private Label notificationLabel;
+
     private void setImagesActivity(){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         List<Image> images = appService.getActivityImages(currentActivity.getId());

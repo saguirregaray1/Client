@@ -21,14 +21,13 @@
             <VBox fx:id="horariosActivity" prefHeight="183.0" prefWidth="339.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="374.0" layoutY="474.0" mnemonicParsing="false" onAction="#setReturnButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Volver" textFill="#1f201feb" />
+      <Button layoutX="604.0" layoutY="473.0" mnemonicParsing="false" onAction="#setReturnButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Volver" textFill="#1f201feb" />
       <Label fx:id="clubNameActivity" graphicTextGap="0.0" layoutX="55.0" layoutY="91.0" prefHeight="90.0" prefWidth="257.0" text="Venga a (nombre del club) y disfrute de una buena jornada deportiva" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <VBox layoutX="558.0" layoutY="426.0" prefHeight="47.0" prefWidth="100.0" />
-      <Button layoutX="596.0" layoutY="474.0" mnemonicParsing="false" onAction="#setRegisterButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Registrarse" />
       <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="413.0" layoutY="90.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -49,5 +48,6 @@
             <VBox fx:id="imagesActivity" prefHeight="200.0" prefWidth="226.0" />
          </content>
       </ScrollPane>
+      <Label fx:id="notificationLabel" layoutX="55.0" layoutY="486.0" prefHeight="18.0" prefWidth="348.0" />
    </children>
 </AnchorPane>
