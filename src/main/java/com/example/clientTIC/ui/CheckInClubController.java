@@ -68,23 +68,26 @@ public class CheckInClubController implements Initializable {
         Scanner scanner = new Scanner(fecha);
         scanner.useDelimiter("-");
         String fechaMesAño = scanner.next()+"-"+ scanner.next();
-        Costs costs = appService.getTotalClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
         gananciasLabel.setText(String.valueOf(costs.getTotal()));
     }
 
     void setCosts(){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        Costs costs = appService.getTotalClubEarningsForTheMonth(currentClub.getId(),"2022-11");
-        List<CheckIn> checks = costs.getCheckIns();
-        ObservableList<Employee> empleados = FXCollections.observableArrayList(costs.getUsers());
+        String now = LocalDate.now().toString();
+        Scanner scanner = new Scanner(now);
+        scanner.useDelimiter("-");
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
+        List<List> checks = appService.getClubCheckInsForTheMonth(currentClub.getId(),fechaMesAño);
+        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMesAño));
         gananciasLabel.setText("Ganancias totales: " +costs.getTotal());
-        for(CheckIn check : checks){
+        for(List check : checks){
             HBox checkInBox = new HBox(10);
-            Quota currenQuota = check.getQuota();
-            String fecha = check.getFecha();
+            String fecha = check.get(0).toString();
             Label fechaLabel = new Label("Fecha: " + fecha);
-            Label diaLabel = new Label("Dia: " +currenQuota.getDay());
-            Label horaInicio= new Label("Hora inicio:" + currenQuota.getStartTime());
+            Label diaLabel = new Label("Dia: " + check.get(1));
+            Label horaInicio= new Label("Hora inicio:" + check.get(2));
             Button mostrar = new Button("Ver empleados");
             mostrar.setOnAction(new EventHandler<ActionEvent>() {
                 @Override

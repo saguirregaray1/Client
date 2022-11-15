@@ -23,11 +23,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cglib.core.Local;
 import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +131,7 @@ public class ClubListViewController implements Initializable {
         img.setFitWidth(200);
         returnButton.setGraphic(img);
         habilitarCupos.setSelected(true);
-        dias.getItems().addAll("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo");
+        dias.getItems().addAll("MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY");
     }
 
     @FXML
@@ -225,7 +228,6 @@ public class ClubListViewController implements Initializable {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = registerUserEmail.getText();
         String password = registerUserPassword.getText();
-        String companyName = companyNameEmployee.getText();
         // label
         HttpResponse<JsonNode> response=appService.addNewClubUser(email,password,appUser.getClub().getId());
         if (response.getStatus()==200){
@@ -245,29 +247,6 @@ public class ClubListViewController implements Initializable {
         appService.deleteClubUser(email);
     }
 
-    /*FXML
-    protected void verifyButton(){
-        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        // if (necesitaReserva){
-        Long id = Long.valueOf(userCheckIn.getText());
-        //fixme
-        appService.cameToActivity(id,1L);
-
-        ObservableList<Employee> employees= appService.getListOfEmployees();
-        Boolean encontrado = false;
-        for (Employee employee: employees){
-            if (employee.getId() == id){
-                checkInResult.setText("El usuario se encuentra registrado");
-                encontrado = true;
-            }
-        }
-        if (encontrado==false){
-            checkInResult.setText("El usuario no se encuentra registrado en el club");
-        }
-
-        String fecha = String.valueOf(LocalDateTime.now());
-    }*/
-
     @FXML
     protected void verHorarios() throws Exception {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
@@ -277,6 +256,7 @@ public class ClubListViewController implements Initializable {
         if (cupos != null) {
             horariosBox.getChildren().clear();
             for (Quota cupo : cupos) {
+                if (cupo.getDay().equals(DayOfWeek.from(LocalDate.now()).toString())){
                 HBox cuposBox = new HBox(10);
                 Label dayName = new Label(cupo.getDay());
                 String inicio = cupo.getStartTime();
@@ -299,7 +279,7 @@ public class ClubListViewController implements Initializable {
 
                 cuposBox.getChildren().addAll(dayName,horario,reserveButton);
                 horariosBox.getChildren().add(cuposBox);
-            }
+            }}
         }else{notificationLabel.setText("No existe la actividad");}
 
 

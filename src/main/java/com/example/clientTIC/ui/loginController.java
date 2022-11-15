@@ -53,35 +53,9 @@ public class loginController {
     @FXML
     void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        //fixme para que funcione el checkIn se debe ajustar el id a la quota correspondiente (1 si es lunes, 2 si es martes etc)
-        appService.addNewAdmin("aa", "bb");
-        appService.addNewCompany("coca", 123L, "abcd", "222");
-        appService.addNewClub("um", "18", "abc", "111");
-        appService.addNewEmployee(123L, appService.getListOfCompanies().get(0), 1000L, "aaa", "bbb");
-        appService.addNewEmployee(1234L, appService.getListOfCompanies().get(0), 1000L, "a123", "b123");
-        List<Quota> quotas = new ArrayList<>();
-        quotas.add(new Quota(DayOfWeek.MONDAY.toString(), "00:01:00", "23:59:00", 100));
-        quotas.add(new Quota(DayOfWeek.TUESDAY.toString(), "00:01:00", "23:59:00", 100));
-        quotas.add(new Quota(DayOfWeek.WEDNESDAY.toString() +
-                "", "00:01:00", "23:59:00", 100));
-        quotas.add(new Quota(DayOfWeek.THURSDAY.toString(), "00:01:00", "23:59:00", 100));
-        quotas.add(new Quota(DayOfWeek.FRIDAY.toString(), "00:01:00", "23:59:00", 100));
-        quotas.add(new Quota(DayOfWeek.SATURDAY.toString() +
-                "", "00:01:00", "23:59:00", 100));
-        quotas.add(new Quota(DayOfWeek.SUNDAY.toString(), "00:01:00", "23:59:00", 100));
-        appService.addNewActivity(appService.getListOfClubs().get(0), "futbol", 120L, quotas, ActivityCategories.CATEGORY_1);
-        appService.addNewActivity(appService.getListOfClubs().get(0), "basketball", 1L, quotas, ActivityCategories.CATEGORY_2);
-        appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(), 1L);
-        AppUser temp = new AppUser();
-        temp.setId(5L);
-        appService.makeReservation(temp, "2022-11-15", String.valueOf(2L));
-        appService.checkInWithReservation(1234L, "00:01:00", 1L);
-        appService.checkInWithReservation(1234L,"00:01:00",2L);
-        appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"), 1L);
-        appService.uploadActivityPicture(new File("src/main/resources/python.png"), 2L);
-
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
+     //   insertCosas();
 
         HttpResponse<JsonNode> apiResponse = appService.login(email, password);
 
@@ -95,21 +69,14 @@ public class loginController {
                 //appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                 Parent root = loader.load();
-
                 AdminController adminController = loader.getController();
                 adminController.displayName(appUser.getEmail());
-
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             } else if (appUser.getAppUserRole().equals(AppUserRole.EMPLOYEE)) {
                 appUser.setEmployee(appService.appUserGetEmployee(appUser.getId()));
-              //  appService.makeReservation(appUser, "2022-11-14", String.valueOf(1L));
-             //   appService.checkInWithReservation(123L, "00:01:00", 1L);
-                Costs cost = appService.getTotalCompanyCostsForTheMonth(1L, "2022-11");
-                Costs earnings = appService.getTotalClubEarningsForTheMonth(1L,"2022-11");
-                List<Quota> activityQuota = appService.getActivityQuota(1L);
                 FXMLLoader loader = new FXMLLoader(UserViewController.class.getResource("UserView.fxml"));
                 UserViewController userViewController = new UserViewController();
                 userViewController.setAppUser(appUser);
@@ -144,6 +111,43 @@ public class loginController {
                 stage.show();
             }
         }
+    }
+
+    private void insertCosas(){
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        //fixme para que funcione el checkIn se debe ajustar el id a la quota correspondiente (1 si es lunes, 2 si es martes etc)
+        appService.addNewAdmin("aa", "bb");
+        appService.addNewCompany("coca", 123L, "abcd", "222");
+        appService.addNewClub("um", "18", "abc", "111");
+        appService.addNewEmployee(123L, appService.getListOfCompanies().get(0), 1000L, "aaa", "bbb");
+        appService.addNewEmployee(1234L, appService.getListOfCompanies().get(0), 1000L, "a123", "b123");
+        List<Quota> quotas = new ArrayList<>();
+        quotas.add(new Quota(DayOfWeek.MONDAY.toString(), "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.TUESDAY.toString(), "00:01:00", "11:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.TUESDAY.toString(), "12:00:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.WEDNESDAY.toString() +
+                "", "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.THURSDAY.toString(), "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.FRIDAY.toString(), "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.SATURDAY.toString() +
+                "", "00:01:00", "23:59:00", 100));
+        quotas.add(new Quota(DayOfWeek.SUNDAY.toString(), "00:01:00", "23:59:00", 100));
+        appService.addNewActivity(appService.getListOfClubs().get(0), "futbol", 120L, quotas, ActivityCategories.CATEGORY_1);
+        appService.addNewActivity(appService.getListOfClubs().get(0), "basketball", 1L, quotas, ActivityCategories.CATEGORY_2);
+        appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(), 1L);
+        AppUser temp = new AppUser();
+        temp.setId(5L);
+        appService.makeReservation(temp, "2022-11-15", String.valueOf(2L));
+        appService.checkInWithReservation(1234L, "00:01:00", 1L);
+        appService.checkInWithReservation(1234L,"00:01:00",2L);
+        appService.uploadActivityPicture(new File("src/main/resources/descarga.jpg"), 1L);
+        appService.uploadActivityPicture(new File("src/main/resources/python.png"), 2L);
+
+        //  appService.makeReservation(appUser, "2022-11-14", String.valueOf(1L));
+        //   appService.checkInWithReservation(123L, "00:01:00", 1L);
+       // Costs cost = appService.getTotalCompanyCostsForTheMonth(1L, "2022-11");
+       // Costs earnings = appService.getTotalClubEarningsForTheMonth(1L,"2022-11");
+        //List<Quota> activityQuota = appService.getActivityQuota(1L);
     }
 
     @FXML

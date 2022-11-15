@@ -94,11 +94,9 @@ public class ActivityViewController implements Initializable {
             registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //fixme
                     HttpResponse<JsonNode> response= appService.makeReservation(currentAppUser,LocalDate.now().toString(),horario.getQuotaId().toString());
                     if (response.getStatus()==200){
                         notificationLabel.setText("Registrado correctamente");
-                        //registrado correctamente
                     }
                     else{
                         notificationLabel.setText(response.getBody().toString());

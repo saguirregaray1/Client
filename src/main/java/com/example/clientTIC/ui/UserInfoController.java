@@ -84,12 +84,12 @@ public class UserInfoController implements Initializable {
 
     protected void setReservations(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        List<Reservation> reservaciones = appService.getPendingReservations(appUser.getId());
-        for (Reservation reservacion : reservaciones){
+        List<List> reservaciones = appService.getPendingReservations(appUser.getId());
+        for (List element : reservaciones){
             HBox box = new HBox(10);
-            Label nombreAct = new Label(reservacion.getQuota().getActivity().getNombre());
-            Label diaAct = new Label(reservacion.getQuota().getDay());
-            Label horaInicio = new Label(reservacion.getQuota().getStartTime());
+            Label nombreAct = new Label(element.get(2).toString());
+            Label diaAct = new Label(element.get(0).toString());
+            Label horaInicio = new Label(element.get(1).toString());
             Button cancelarReserva = new Button("Cancelar reserva");
             cancelarReserva.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
