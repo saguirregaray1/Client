@@ -50,7 +50,8 @@ public class UserViewController extends ListView<Activity> implements Initializa
     ObservableList<String> categorias = FXCollections.observableArrayList(ActivityCategories.CATEGORY_1.toString(),
             ActivityCategories.CATEGORY_2.toString(),
             ActivityCategories.CATEGORY_3.toString(),
-            ActivityCategories.CATEGORY_4.toString());
+            ActivityCategories.CATEGORY_4.toString(),
+            "Sin filtro");
 
     @FXML
     private VBox activityBox;
@@ -86,7 +87,12 @@ public class UserViewController extends ListView<Activity> implements Initializa
         activityBox.getChildren().clear();
         String category = filter.getValue();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        setListOfActivities(appService.getListOfActivitiesByCategory(category));
+        if (filter.getValue().equals("Sin filtro")){
+            setListOfActivities(appService.getListOfActivities());
+        }else{
+            setListOfActivities(appService.getListOfActivitiesByCategory(category));
+        }
+
     }
 
     @FXML
@@ -178,8 +184,15 @@ public class UserViewController extends ListView<Activity> implements Initializa
             //HBox.setHgrow(activityButton, Priority.ALWAYS);
             HBox.setHgrow(labelName, Priority.ALWAYS);
             HBox.setHgrow(labelPrice, Priority.ALWAYS);
+            Button favoriteButton = new Button("Agregar favoritos");
+            favoriteButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    appService.addFavourite(appUser,activity.getId());
+                }
+            });
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
-            hBox.getChildren().addAll(activityButton, labelName,labelPrice);
+            hBox.getChildren().addAll(activityButton, labelName,labelPrice, favoriteButton);
             activityBox.getChildren().add(hBox);
         }
     }

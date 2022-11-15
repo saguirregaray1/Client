@@ -282,14 +282,14 @@ public class ClubListViewController implements Initializable {
                 String inicio = cupo.getStartTime();
                 String fin = cupo.getFinishTime();
                 Label horario= new Label(inicio + " : "+ fin);
-                Button reserveButton = new Button("Reservar");
+                Button reserveButton = new Button("Check In");
                 reserveButton.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             //cedula
                             HttpResponse<JsonNode> response= appService.checkInWithReservation(1234L,cupo.getStartTime(),currentActivity.getId());
                             if (response.getStatus()==200){
-                                notificationLabelTAB1.setText("Reservado correctamente");
+                                notificationLabelTAB1.setText("Check In realizado correctamente");
                                 //registrado correctamente
                             }
                             else{
