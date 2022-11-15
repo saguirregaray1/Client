@@ -47,9 +47,6 @@ public class ClubListViewController implements Initializable {
     private TextField activityPrice;
 
     @FXML
-    private CheckBox checkInTieneReservas;
-
-    @FXML
     private VBox horariosBox;
 
     @FXML
@@ -127,7 +124,6 @@ public class ClubListViewController implements Initializable {
         img.setFitHeight(100);
         img.setFitWidth(200);
         returnButton.setGraphic(img);
-        habilitarCupos.setSelected(true);
         dias.getItems().addAll("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo");
     }
 
@@ -200,16 +196,29 @@ public class ClubListViewController implements Initializable {
     protected void chargeImagesButton(ActionEvent event){
         final FileChooser f = new FileChooser();
         File file = f.showOpenDialog(((Node) event.getTarget()).getScene().getWindow());
+        imagePrev.setImage(null);
         if (file != null) {
-            imagenes.add(file);
-            Image image1 = new Image(file.toURI().toString());
-            ImageView ip = new ImageView(image1);
-            ip.setFitHeight(100);
-            ip.setFitWidth(200);
-            imagesActivity.getChildren().add(ip);
-            imagePrev.setImage(image1);
+            if (imagenes == null) {
+                imagenes= new ArrayList<File>();
+                imagenes.add(file);
+                Image image1 = new Image(file.toURI().toString());
+                ImageView ip = new ImageView(image1);
+                ip.setFitHeight(100);
+                ip.setFitWidth(200);
+                imagesActivity.getChildren().add(ip);
+                imagePrev.setImage(image1);
+                }
+            }else {
+                imagenes.add(file);
+                Image image1 = new Image(file.toURI().toString());
+                ImageView ip = new ImageView(image1);
+                ip.setFitHeight(100);
+                ip.setFitWidth(200);
+                imagesActivity.getChildren().add(ip);
+                imagePrev.setImage(image1);
             }
-    }
+        }
+
 
     @FXML
     protected void insertImages(ActionEvent event){
@@ -219,6 +228,8 @@ public class ClubListViewController implements Initializable {
             appService.uploadActivityPicture(archivo,actividad.getId());
         }
         imagenes.clear();
+        imagesActivity.getChildren().clear();
+        imagePrev.setImage(null);
     }
     @FXML
     protected void registerUserButton(){
