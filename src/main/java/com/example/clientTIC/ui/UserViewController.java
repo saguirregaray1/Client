@@ -133,7 +133,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         for (List value : activityList) {
             HBox hBox = new HBox(15);
-            Activity activity = new Activity((String) value.get(0), Long.valueOf(value.get(1).toString()),ActivityCategories.valueOf((String) value.get(2)));
+            Activity activity = new Activity(Long.valueOf(value.get(5).toString()),(String) value.get(0), Long.valueOf(value.get(1).toString()),ActivityCategories.valueOf((String) value.get(2)));
             String nombreClub=value.get(3).toString();
             String dirClub=value.get(4).toString();
             List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(5).toString()));

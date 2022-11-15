@@ -24,7 +24,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class CompanyViewController implements Initializable {
 
@@ -119,8 +121,11 @@ public class CompanyViewController implements Initializable {
     @FXML
     protected void verCostosCompania(ActionEvent event){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        //fixme
-        Long costos = appService.getTotalCompanyCostsForTheMonth(appuser.getCompany().getId(),"").getTotal();
+        String fecha = LocalDate.now().toString();
+        Scanner scanner = new Scanner(fecha);
+        scanner.useDelimiter("-");
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        Long costos = appService.getTotalCompanyCostsForTheMonth(appuser.getCompany().getId(), fechaMesAño).getTotal();
         costosCompania.setText("Costo total: " + costos);
     }
 }

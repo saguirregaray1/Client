@@ -78,7 +78,7 @@ public class ActivityViewController implements Initializable {
         if (activityCost!=null){
             activityCost.setText("Costo de la actividad: " + costoActividad);
         }
-        List<Quota> horarios= appService.getActivityQuota(currentActivity.getId());
+        List<Quota> horarios= appService.getActivityQuota(Long.parseLong(currentActivity.getId().toString()));
         for (Quota horario : horarios){
             HBox hBox= new HBox(20);
             String cupos = String.valueOf(horario.getMaxCupos());
@@ -89,7 +89,7 @@ public class ActivityViewController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     //fixme
-                    appService.makeReservation(currentAppUser,horario.getQuotaId().toString(), LocalDate.now().toString());
+                    appService.makeReservation(currentAppUser,LocalDate.now().toString(),horario.getQuotaId().toString());
                 }
             });
             hBox.getChildren().addAll(cuposLabel,registrarAHorario);

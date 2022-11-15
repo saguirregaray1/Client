@@ -62,6 +62,14 @@ public class Activity {
         this.activityCategories = activityCategories;
     }
 
+    public Activity(Long id,String nombre, Long precio, ActivityCategories activityCategories) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cupos = null;
+        this.activityCategories = activityCategories;
+    }
+
     public Activity() {
     }
 
