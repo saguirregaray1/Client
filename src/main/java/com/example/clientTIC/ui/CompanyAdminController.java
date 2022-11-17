@@ -65,9 +65,9 @@ public class CompanyAdminController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Company,String>("nombre"));
-        nroCuentaColumn.setCellValueFactory(new PropertyValueFactory<Company,Long>("nroCuenta"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        nroCuentaColumn.setCellValueFactory(new PropertyValueFactory<>("nroCuenta"));
         showEnterprises();
     }
 

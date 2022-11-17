@@ -51,10 +51,10 @@ public class ClubsAdminController implements Initializable {
         String nombre = createClubName.getText();
         String direccion = createClubDir.getText();
         String email = createClubEmail.getText();
-        String contraseña = createClubPassword.getText();
+        String password = createClubPassword.getText();
         AppService appService=getApplicationContext().getBean(AppService.class);
         // label
-        appService.addNewClub(nombre,direccion,email,contraseña);
+        appService.addNewClub(nombre,direccion,email,password);
         showClubs();
     }
 

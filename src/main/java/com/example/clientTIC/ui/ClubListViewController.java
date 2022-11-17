@@ -204,6 +204,9 @@ public class ClubListViewController implements Initializable {
         final FileChooser f = new FileChooser();
         File file = f.showOpenDialog(((Node) event.getTarget()).getScene().getWindow());
         if (file != null) {
+            if (imagenes == null){
+                imagenes = new ArrayList<>();
+            }
             imagenes.add(file);
             Image image1 = new Image(file.toURI().toString());
             ImageView ip = new ImageView(image1);

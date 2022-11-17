@@ -6,6 +6,8 @@ import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.models.Reservation;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -90,11 +92,13 @@ public class UserInfoController implements Initializable {
             Label nombreAct = new Label(element.get(2).toString());
             Label diaAct = new Label(element.get(0).toString());
             Label horaInicio = new Label(element.get(1).toString());
+            Label fechaAct = new Label(element.get(3).toString());
             Button cancelarReserva = new Button("Cancelar reserva");
             cancelarReserva.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                    HttpResponse<JsonNode> apiResponse=appService.cancelReservation(appUser,nombreAct.getText(),diaAct.getText(),horaInicio.getText(),fechaAct.getText());
+                    //label
                 }
             });
             box.getChildren().addAll(nombreAct,diaAct,horaInicio,cancelarReserva);

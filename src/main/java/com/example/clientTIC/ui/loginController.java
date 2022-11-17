@@ -3,8 +3,6 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.AppUserRole;
 import com.example.clientTIC.models.ActivityCategories;
-import com.example.clientTIC.models.CheckIn;
-import com.example.clientTIC.models.Costs;
 import com.example.clientTIC.models.Quota;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -12,7 +10,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,7 +48,7 @@ public class loginController {
 
 
     @FXML
-    void AdminButtonClick(ActionEvent event) throws IOException, UnirestException {
+    void AdminButtonClick(ActionEvent event) throws IOException {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
@@ -63,7 +60,7 @@ public class loginController {
             notificationLabel.setText("Usuario o contraseña incorrecta");
         } else {
             ObjectMapper mapper = new ObjectMapper();
-            AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<AppUser>() {
+            AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
             if (appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
                 //appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
