@@ -63,6 +63,9 @@ public class UserViewController extends ListView<Activity> implements Initializa
     private Button returnButton;
 
     @FXML
+    private Label notificationLabel;
+
+    @FXML
     protected void volver(ActionEvent event) throws IOException{
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
@@ -190,6 +193,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
                 @Override
                 public void handle(ActionEvent event) {
                     appService.addFavourite(appUser,activity.getId());
+                    notificationLabel.setText(activity.getNombre()+ " agregada a favoritos");
                 }
             });
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");

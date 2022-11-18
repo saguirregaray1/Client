@@ -102,35 +102,6 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Agregar imagen a actividad">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField fx:id="addImageActivity" layoutX="146.0" layoutY="329.0" promptText="Nombre actividad" />
-                        <Button layoutX="196.0" layoutY="43.0" mnemonicParsing="false" onAction="#chargeImagesButton" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
-                        <Label layoutX="40.0" layoutY="47.0" text="Quiere cargar imagenes?" />
-                        <Button layoutX="40.0" layoutY="397.0" mnemonicParsing="false" onAction="#insertImages" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Insertar imagenes" textFill="WHITE">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Label layoutX="40.0" layoutY="333.0" text="Ingrese nombre:" />
-                        <ScrollPane layoutX="388.0" layoutY="111.0" prefHeight="310.0" prefWidth="288.0">
-                           <content>
-                              <VBox fx:id="imagesActivity" prefHeight="303.0" prefWidth="281.0" />
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="395.0" layoutY="65.0" text="Imagenes cargadas" underline="true">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="imagePrev" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="36.0" layoutY="103.0" text="Previsualizacion" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
             <Tab text="Crear actividades">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="681.0">
@@ -165,10 +136,39 @@
                         <TextField fx:id="activityPrice" layoutX="180.0" layoutY="62.0" promptText="Precio actividad" />
                         <Label fx:id="notificationLabel" layoutX="26.0" layoutY="437.0" prefHeight="18.0" prefWidth="343.0">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                      </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Agregar imagen a actividad">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="addImageActivity" layoutX="146.0" layoutY="329.0" promptText="Nombre actividad" />
+                        <Button layoutX="196.0" layoutY="43.0" mnemonicParsing="false" onAction="#chargeImagesButton" prefHeight="20.0" prefWidth="79.0" text="Cargar" />
+                        <Label layoutX="40.0" layoutY="47.0" text="Quiere cargar imagenes?" />
+                        <Button layoutX="40.0" layoutY="397.0" mnemonicParsing="false" onAction="#insertImages" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Insertar imagenes" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="40.0" layoutY="333.0" text="Ingrese nombre:" />
+                        <ScrollPane layoutX="388.0" layoutY="111.0" prefHeight="310.0" prefWidth="288.0">
+                           <content>
+                              <VBox fx:id="imagesActivity" prefHeight="303.0" prefWidth="281.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="395.0" layoutY="65.0" text="Imagenes cargadas" underline="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="imagePrev" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label layoutX="36.0" layoutY="103.0" text="Previsualizacion" />
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>

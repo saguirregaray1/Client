@@ -77,7 +77,7 @@ public class ActivityViewController implements Initializable {
 
     private void setInfo(String nombreActividad, String costoActividad){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        nameActivity.setText(nombreActividad);
+        nameActivity.setText("Actividad: "+ nombreActividad);
         /*if(nombreClub!=null) {
             clubNameActivity.setText("Venga a " + nombreClub + " y disfrute de una buena jornada deportiva");
         }*/
@@ -96,7 +96,7 @@ public class ActivityViewController implements Initializable {
                 public void handle(ActionEvent event) {
                     HttpResponse<JsonNode> response= appService.makeReservation(currentAppUser,LocalDate.now().toString(),horario.getQuotaId().toString());
                     if (response.getStatus()==200){
-                        notificationLabel.setText("Registrado correctamente");
+                        notificationLabel.setText("Reservado correctamente");
                     }
                     else{
                         notificationLabel.setText(response.getBody().toString());

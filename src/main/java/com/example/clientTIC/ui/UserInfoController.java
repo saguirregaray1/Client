@@ -54,6 +54,9 @@ public class UserInfoController implements Initializable {
     @FXML
     private Label saldoLabel;
 
+    @FXML
+    private Label notificationLabel;
+
 
     @FXML
     protected void volver (ActionEvent event)throws IOException {
@@ -98,7 +101,12 @@ public class UserInfoController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     HttpResponse<JsonNode> apiResponse=appService.cancelReservation(appUser,nombreAct.getText(),diaAct.getText(),horaInicio.getText(),fechaAct.getText());
-                    //label
+                    if (apiResponse.getStatus()==200){
+                        notificationLabel.setText("Reserva cancelada correctamente");
+                        reservationsBox.getChildren().remove(box);
+                    }
+                    else{
+                        notificationLabel.setText(apiResponse.getBody().toString());}
                 }
             });
             box.getChildren().addAll(nombreAct,diaAct,horaInicio,cancelarReserva);

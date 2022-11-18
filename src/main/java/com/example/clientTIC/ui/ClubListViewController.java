@@ -153,6 +153,7 @@ public class ClubListViewController implements Initializable {
             visualizarHorarios(dia,inicio,finale,cupos);
         }else{
             this.horariosIngresados.add(horario);
+            visualizarHorarios(dia,inicio,finale,cupos);
         }
     }
 
@@ -165,10 +166,12 @@ public class ClubListViewController implements Initializable {
             HBox box = new HBox(10);
             box.getChildren().addAll(day,inicio,finish);
             horariosCreateActivity.getChildren().add(box);
+            notificationLabel.setText(dia+ " de " + start +" a "+finale + " agregado");
         }else{
             HBox box = new HBox(10);
             box.getChildren().addAll(day,inicio,finish,cupos);
             horariosCreateActivity.getChildren().add(box);
+            notificationLabel.setText(dia+ " de " + start +" a" +finale + " agregado");
         }
     }
 
