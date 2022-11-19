@@ -52,7 +52,7 @@ public class loginController {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
-        insertCosas();
+        //insertCosas();
 
         HttpResponse<JsonNode> apiResponse = appService.login(email, password);
 
