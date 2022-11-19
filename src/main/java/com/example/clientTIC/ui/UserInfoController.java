@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -109,6 +110,12 @@ public class UserInfoController implements Initializable {
                         notificationLabel.setText(apiResponse.getBody().toString());}
                 }
             });
+            nombreAct.setStyle("-fx-font-weight: bold");
+            diaAct.setStyle("-fx-font-weight: bold");
+            horaInicio.setStyle("-fx-font-weight: bold");
+            HBox.setHgrow(horaInicio, Priority.ALWAYS);
+            HBox.setHgrow(diaAct, Priority.ALWAYS);
+            HBox.setHgrow(nombreAct, Priority.ALWAYS);
             box.getChildren().addAll(nombreAct,diaAct,horaInicio,cancelarReserva);
             reservationsBox.getChildren().add(box);
         }

@@ -8,42 +8,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="532.0" prefWidth="688.0" style="-fx-background-color: #e8e1ed;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="588.0" prefWidth="761.0" style="-fx-background-color: #e8e1ed;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Region layoutY="72.0" prefHeight="460.0" prefWidth="701.0" style="-fx-background-color: #af6be3;" />
-      <Label fx:id="nameActivity" layoutX="185.0" layoutY="14.0" prefHeight="47.0" prefWidth="355.0" text="Nombre de la actividad" underline="true">
+      <Region layoutY="72.0" prefHeight="516.0" prefWidth="761.0" style="-fx-background-color: #af6be3;" />
+      <Label fx:id="nameActivity" layoutX="224.0" layoutY="14.0" prefHeight="47.0" prefWidth="355.0" text="Nombre de la actividad" underline="true">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="47.0" layoutY="216.0" prefHeight="188.0" prefWidth="325.0" style="-fx-border-color: white;">
+      <ScrollPane layoutX="47.0" layoutY="216.0" prefHeight="236.0" prefWidth="355.0" style="-fx-border-color: white;">
          <content>
-            <VBox fx:id="horariosActivity" prefHeight="183.0" prefWidth="315.0" />
+            <VBox fx:id="horariosActivity" prefHeight="230.0" prefWidth="342.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="558.0" layoutY="464.0" mnemonicParsing="false" onAction="#setReturnButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Volver" textFill="#1f201feb" />
+      <Button layoutX="622.0" layoutY="518.0" mnemonicParsing="false" onAction="#setReturnButton" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #af6be3;" text="Volver" textFill="#1f201feb" />
       <VBox layoutX="558.0" layoutY="426.0" prefHeight="47.0" prefWidth="100.0" />
-      <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="55.0" layoutY="404.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
+      <Label fx:id="activityCost" graphicTextGap="0.0" layoutX="56.0" layoutY="450.0" prefHeight="90.0" prefWidth="257.0" text="Costo de la actividad:" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="47.0" layoutY="156.0" prefHeight="47.0" prefWidth="355.0" text="Horarios disponibles:" textAlignment="CENTER" underline="true">
+      <Label layoutX="47.0" layoutY="156.0" prefHeight="47.0" prefWidth="355.0" text="Horarios disponibles por dia:" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="449.0" layoutY="156.0" prefHeight="47.0" prefWidth="188.0" text="Imagenes:" textAlignment="CENTER" underline="true">
+      <Label layoutX="528.0" layoutY="156.0" prefHeight="47.0" prefWidth="188.0" text="Imagenes:" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="449.0" layoutY="216.0" prefHeight="200.0" prefWidth="210.0">
+      <ScrollPane layoutX="517.0" layoutY="210.0" prefHeight="200.0" prefWidth="210.0">
          <content>
             <VBox fx:id="imagesActivity" prefHeight="200.0" prefWidth="186.0" />
          </content>
       </ScrollPane>
-      <Label fx:id="notificationLabel" layoutX="55.0" layoutY="486.0" prefHeight="18.0" prefWidth="348.0">
+      <Label fx:id="notificationLabel" layoutX="51.0" layoutY="538.0" prefHeight="18.0" prefWidth="348.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>

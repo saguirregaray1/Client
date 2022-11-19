@@ -44,7 +44,10 @@ public class CheckInClubController implements Initializable {
     private VBox costsBox;
 
     @FXML
-    private VBox employeeTable;
+    private TableView<Employee> employeeTable;
+
+    @FXML
+    private TableColumn<Employee,Long> idColumn;
 
     @FXML
     private Label gananciasLabel;
@@ -63,13 +66,14 @@ public class CheckInClubController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         setCosts();
         String fecha = LocalDate.now().toString();
         Scanner scanner = new Scanner(fecha);
         scanner.useDelimiter("-");
         String fechaMesAño = scanner.next()+"-"+ scanner.next();
         Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
-        gananciasLabel.setText(String.valueOf(costs.getTotal()));
+        gananciasLabel.setText("Ganancias de la actividad: "+String.valueOf(costs.getTotal()));
     }
 
     void setCosts(){
@@ -92,11 +96,12 @@ public class CheckInClubController implements Initializable {
             mostrar.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    employeeTable.getChildren().clear();
-                    for(Employee empleado: empleados){
+                    employeeTable.getItems().clear();
+                    /*for(Employee empleado: empleados){
                         Label cedula = new Label("C.I: "+empleado.getCedula());
                         employeeTable.getChildren().add(cedula);
-                    }
+                    }*/
+                    employeeTable.setItems(empleados);
                 }
             });
             fechaLabel.setStyle("-fx-font-weight: bold");

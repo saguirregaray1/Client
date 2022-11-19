@@ -109,7 +109,7 @@
                         <Label layoutX="40.0" layoutY="28.0" text="Ingrese nombre:" />
                         <TextField fx:id="createActivityNameCupos" layoutX="180.0" layoutY="24.0" promptText="Nombre actividad" />
                         <Button layoutX="202.0" layoutY="296.0" mnemonicParsing="false" onAction="#crearHorarios" text="Ingresar horarios" />
-                        <Button layoutX="460.0" layoutY="430.0" mnemonicParsing="false" onAction="#createActivityButtonCupos" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
+                        <Button layoutX="74.0" layoutY="426.0" mnemonicParsing="false" onAction="#createActivityButtonCupos" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #263f78;" text="Crear actividad" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -125,20 +125,21 @@
                            </content>
                         </ScrollPane>
                         <Label layoutX="240.0" layoutY="146.0" prefHeight="18.0" prefWidth="53.0" text="Inicio" />
-                        <Label layoutX="231.0" layoutY="208.0" prefHeight="42.0" prefWidth="70.0" text="Final" />
-                        <TextField fx:id="lunesInicio" layoutX="221.0" layoutY="183.0" prefHeight="18.0" prefWidth="67.0" />
-                        <TextField fx:id="lunesFin" layoutX="220.0" layoutY="247.0" prefHeight="26.0" prefWidth="69.0" />
+                        <Label layoutX="240.0" layoutY="208.0" prefHeight="42.0" prefWidth="70.0" text="Final" />
                         <TextField fx:id="cuposLunes" layoutX="330.0" layoutY="183.0" prefHeight="26.0" prefWidth="69.0" />
                         <CheckBox fx:id="habilitarCupos" layoutX="325.0" layoutY="146.0" mnemonicParsing="false" onAction="#tieneCupos" text="Con cupos" />
                         <ChoiceBox fx:id="dias" layoutX="34.0" layoutY="183.0" prefWidth="150.0" />
                         <Label layoutX="39.0" layoutY="145.0" prefHeight="18.0" prefWidth="83.0" text="Elija el dia:" />
                         <Label layoutX="81.0" layoutY="65.0" prefHeight="18.0" prefWidth="56.0" text="Precio:" />
                         <TextField fx:id="activityPrice" layoutX="180.0" layoutY="62.0" promptText="Precio actividad" />
-                        <Label fx:id="notificationLabel" layoutX="26.0" layoutY="437.0" prefHeight="18.0" prefWidth="343.0">
+                        <Label fx:id="notificationLabel" layoutX="346.0" layoutY="442.0" prefHeight="20.0" prefWidth="338.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <ChoiceBox fx:id="horarioInicio" layoutX="215.0" layoutY="183.0" prefHeight="26.0" prefWidth="86.0" />
+                        <ChoiceBox fx:id="horarioFin" layoutX="215.0" layoutY="250.0" prefHeight="26.0" prefWidth="86.0" />
+                        <Button layoutX="491.0" layoutY="396.0" mnemonicParsing="false" onAction="#borrarHorarios" prefHeight="26.0" prefWidth="114.0" text="Borrar horarios" />
                      </children></AnchorPane>
               </content>
             </Tab>

@@ -88,6 +88,7 @@ public class ActivityViewController implements Initializable {
         for (Quota horario : horarios){
             HBox hBox= new HBox(20);
             String cupos = String.valueOf(horario.getMaxCupos());
+            Label diaLabel = new Label("Hora inicio: "+ horario.getStartTime());
             Label cuposLabel = new Label("Cupos disponibles:" + cupos);
             HBox.setHgrow(cuposLabel, Priority.ALWAYS);
             Button registrarAHorario = new Button("Reservar");
@@ -103,7 +104,7 @@ public class ActivityViewController implements Initializable {
                     }
                 }
             });
-            hBox.getChildren().addAll(cuposLabel,registrarAHorario);
+            hBox.getChildren().addAll(diaLabel,cuposLabel,registrarAHorario);
             horariosActivity.getChildren().add(hBox);
         }
     }
