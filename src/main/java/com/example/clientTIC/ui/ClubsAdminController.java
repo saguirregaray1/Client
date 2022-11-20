@@ -72,33 +72,11 @@ public class ClubsAdminController implements Initializable {
         ObservableList<Club> clubs =appService.getListOfClubs();
         for(Club currentClub : clubs){
             HBox hBox = new HBox(10);
-            Button verCheckIn = new Button("Ver CheckIn");
             Label nombreLabel = new Label("Nombre: " +currentClub.getNombre());
             Label dirLabel= new Label("Direccion: "+ currentClub.getDir());
-            verCheckIn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    FXMLLoader loader = new FXMLLoader(CheckInActivityController.class.getResource("CheckInClub.fxml"));
-                    CheckInClubController checkInClubController = new CheckInClubController();
-                    checkInClubController.setCurrentClub(currentClub);
-                    loader.setController(checkInClubController);
-                    Parent root = null;
-                    try {
-                        root = loader.load();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                }
-            });
-            hBox.getChildren().addAll(nombreLabel,dirLabel,verCheckIn);
+            hBox.getChildren().addAll(nombreLabel,dirLabel);
             clubList.getChildren().add(hBox);
         }
-
-
     }
 
     @FXML

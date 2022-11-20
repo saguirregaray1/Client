@@ -135,18 +135,9 @@ public class ClubListViewController implements Initializable {
     @FXML
     private ChoiceBox<String> dias;
 
-    @FXML
-    private Label clubNameLabel;
-
-    @FXML
-    private Label clubDirLabel;
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clubNameLabel.setText("Club: " + appUser.getClub().getNombre());
-        clubDirLabel.setText("Direccion: " + appUser.getClub().getDir());
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
         img.setFitHeight(100);

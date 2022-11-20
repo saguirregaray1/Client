@@ -34,6 +34,7 @@ import java.util.Scanner;
 
 public class CheckInClubController implements Initializable {
 
+
     private Club currentClub;
 
     public void setCurrentClub(Club currentClub) {
@@ -115,5 +116,16 @@ public class CheckInClubController implements Initializable {
             checkInBox.getChildren().addAll(fechaLabel,diaLabel,horaInicio,mostrar);
             costsBox.getChildren().add(checkInBox);
         }
+    }
+
+    @FXML
+    protected void setEmployeeTable(){
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        String now = LocalDate.now().toString();
+        Scanner scanner = new Scanner(now);
+        scanner.useDelimiter("-");
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        //ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(appUser.getClub().getId(),fechaMesAño));
+        //employeeTable.setItems(empleados);
     }
 }
