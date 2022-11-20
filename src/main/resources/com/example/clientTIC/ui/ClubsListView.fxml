@@ -169,6 +169,11 @@
                         <ImageView fx:id="imagePrev" fitHeight="132.0" fitWidth="295.0" layoutX="36.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" />
                         <Label layoutX="36.0" layoutY="103.0" text="Previsualizacion" />
                         <ChoiceBox fx:id="imagesActivityBox" layoutX="161.0" layoutY="329.0" prefWidth="150.0" />
+                        <Label fx:id="notificationLabelImages" layoutX="331.0" layoutY="442.0" prefHeight="20.0" prefWidth="338.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
               </content>
