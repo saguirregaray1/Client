@@ -23,16 +23,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.core.Local;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -96,10 +92,10 @@ public class ClubListViewController implements Initializable {
     private ChoiceBox<ActivityCategories> categoriesBox;
 
 
-    ObservableList<ActivityCategories> categorias = FXCollections.observableArrayList(ActivityCategories.CATEGORY_1,
-            ActivityCategories.CATEGORY_2,
-            ActivityCategories.CATEGORY_3,
-            ActivityCategories.CATEGORY_4);
+    ObservableList<ActivityCategories> categorias = FXCollections.observableArrayList(ActivityCategories.Deportes_En_Equipo,
+            ActivityCategories.Piscina,
+            ActivityCategories.Gimnasio,
+            ActivityCategories.Clases);
     @FXML
     private  TextField registerUserEmail;
 

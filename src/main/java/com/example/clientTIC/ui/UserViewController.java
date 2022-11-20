@@ -4,7 +4,6 @@ import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
 import com.example.clientTIC.models.Club;
-import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
@@ -33,7 +32,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -51,10 +49,10 @@ public class UserViewController extends ListView<Activity> implements Initializa
     }
 
     //ejemplo de categorias para el filtrado
-    ObservableList<String> categorias = FXCollections.observableArrayList(ActivityCategories.CATEGORY_1.toString(),
-            ActivityCategories.CATEGORY_2.toString(),
-            ActivityCategories.CATEGORY_3.toString(),
-            ActivityCategories.CATEGORY_4.toString(),
+    ObservableList<String> categorias = FXCollections.observableArrayList(ActivityCategories.Deportes_En_Equipo.toString(),
+            ActivityCategories.Clases.toString(),
+            ActivityCategories.Gimnasio.toString(),
+            ActivityCategories.Piscina.toString(),
             "Sin filtro");
 
     @FXML

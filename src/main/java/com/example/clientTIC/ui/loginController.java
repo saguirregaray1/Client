@@ -52,7 +52,7 @@ public class loginController {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
-      ///  insertCosas();
+        insertCosas();
 
         HttpResponse<JsonNode> apiResponse = appService.login(email, password);
 
@@ -131,16 +131,17 @@ public class loginController {
         appService.addNewEmployee(311L, appService.getListOfCompanies().get(2), 2000L, "google1@gmail.com", "google123");
         appService.addNewEmployee(312L, appService.getListOfCompanies().get(2), 2500L, "google2@gmail.com", "google123");
         appService.addNewEmployee(313L, appService.getListOfCompanies().get(2), 3000L, "google3@gmail.com", "google123");
-        appService.addNewActivity(appService.getListOfClubs().get(0), "Fútbol5", 120L, crearHorarios(10), ActivityCategories.CATEGORY_1);
-        appService.addNewActivity(appService.getListOfClubs().get(0), "Basketball", 150L, crearHorarios(10), ActivityCategories.CATEGORY_2);
-        appService.addNewActivity(appService.getListOfClubs().get(0), "Gimnasio", 1L, crearHorarios2(), ActivityCategories.CATEGORY_3);
-        appService.addNewActivity(appService.getListOfClubs().get(1), "Handball", 100L, crearHorarios(14), ActivityCategories.CATEGORY_4);
-        appService.addNewActivity(appService.getListOfClubs().get(1), "Basketball", 140L, crearHorarios(10), ActivityCategories.CATEGORY_2);
-        appService.addNewActivity(appService.getListOfClubs().get(1), "Piscina", 1L, crearHorarios2(), ActivityCategories.CATEGORY_3);
-        appService.addNewActivity(appService.getListOfClubs().get(2), "Crossfit", 2000L, crearHorarios(15), ActivityCategories.CATEGORY_4);
-        appService.addNewActivity(appService.getListOfClubs().get(2), "Basketball", 145L, crearHorarios(10), ActivityCategories.CATEGORY_2);
-        appService.addNewActivity(appService.getListOfClubs().get(2), "Baile", 1L, crearHorarios(-1), ActivityCategories.CATEGORY_3);
-
+        //activities
+        appService.addNewActivity(appService.getListOfClubs().get(0), "Fútbol5", 120L, crearHorarios(10), ActivityCategories.Deportes_En_Equipo);
+        appService.addNewActivity(appService.getListOfClubs().get(0), "Basketball", 150L, crearHorarios(10), ActivityCategories.Deportes_En_Equipo);
+        appService.addNewActivity(appService.getListOfClubs().get(0), "Gimnasio", 80L, crearHorarios2(), ActivityCategories.Gimnasio);
+        appService.addNewActivity(appService.getListOfClubs().get(1), "Handball", 100L, crearHorarios(14), ActivityCategories.Deportes_En_Equipo);
+        appService.addNewActivity(appService.getListOfClubs().get(1), "Basketball", 140L, crearHorarios(10), ActivityCategories.Deportes_En_Equipo);
+        appService.addNewActivity(appService.getListOfClubs().get(1), "Piscina", 80L, crearHorarios2(), ActivityCategories.Piscina);
+        appService.addNewActivity(appService.getListOfClubs().get(2), "Crossfit", 2000L, crearHorarios(15), ActivityCategories.Clases);
+        appService.addNewActivity(appService.getListOfClubs().get(2), "Basketball", 145L, crearHorarios(10), ActivityCategories.Deportes_En_Equipo);
+        appService.addNewActivity(appService.getListOfClubs().get(2), "Baile", 1L, crearHorarios(-1), ActivityCategories.Clases);
+        //images
         appService.uploadActivityPicture(new File("src/main/resources/futbol5.png"), 1L);
         appService.uploadActivityPicture(new File("src/main/resources/basketball.png"), 2L);
         appService.uploadActivityPicture(new File("src/main/resources/gimnasio.png"), 3L);
