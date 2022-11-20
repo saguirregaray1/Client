@@ -338,6 +338,7 @@ public class ClubListViewController implements Initializable {
         FXMLLoader loader = new FXMLLoader(CheckInActivityController.class.getResource("CheckInClub.fxml"));
         CheckInClubController checkInClubController = new CheckInClubController();
         checkInClubController.setCurrentClub(appUser.getClub());
+        checkInClubController.setAppUser(appUser);
         loader.setController(checkInClubController);
         Parent root = null;
         try {

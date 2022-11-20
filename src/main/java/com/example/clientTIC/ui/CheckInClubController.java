@@ -1,5 +1,6 @@
 package com.example.clientTIC.ui;
 
+import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.*;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -34,6 +35,11 @@ import java.util.Scanner;
 
 public class CheckInClubController implements Initializable {
 
+    private AppUser appUser;
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     private Club currentClub;
 
@@ -55,7 +61,10 @@ public class CheckInClubController implements Initializable {
 
     @FXML
     protected void volver(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubAdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubsListView.fxml"));
+        ClubListViewController clubListViewController = new ClubListViewController();
+        clubListViewController.setAppUser(appUser);
+        loader.setController(clubListViewController);
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -93,18 +102,6 @@ public class CheckInClubController implements Initializable {
             Label fechaLabel = new Label("Fecha: " + fecha);
             Label diaLabel = new Label("Dia: " + check.get(1));
             Label horaInicio= new Label("Hora inicio:" + check.get(2));
-            Button mostrar = new Button("Ver empleados");
-            mostrar.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    employeeTable.getItems().clear();
-                    /*for(Employee empleado: empleados){
-                        Label cedula = new Label("C.I: "+empleado.getCedula());
-                        employeeTable.getChildren().add(cedula);
-                    }*/
-                    employeeTable.setItems(empleados);
-                }
-            });
             fechaLabel.setStyle("-fx-font-weight: bold");
             fechaLabel.setFont(new Font("Arial", 14));
             diaLabel.setStyle("-fx-font-weight: bold");
@@ -113,19 +110,20 @@ public class CheckInClubController implements Initializable {
             horaInicio.setFont(new Font("Arial", 14));
             HBox.setHgrow(fechaLabel, Priority.ALWAYS);
             HBox.setHgrow(diaLabel, Priority.ALWAYS);
-            checkInBox.getChildren().addAll(fechaLabel,diaLabel,horaInicio,mostrar);
+            checkInBox.getChildren().addAll(fechaLabel,diaLabel,horaInicio);
             costsBox.getChildren().add(checkInBox);
         }
     }
 
     @FXML
     protected void setEmployeeTable(){
+        employeeTable.getItems().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String now = LocalDate.now().toString();
         Scanner scanner = new Scanner(now);
         scanner.useDelimiter("-");
         String fechaMesAño = scanner.next()+"-"+ scanner.next();
-        //ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(appUser.getClub().getId(),fechaMesAño));
-        //employeeTable.setItems(empleados);
+        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMesAño));
+        employeeTable.setItems(empleados);
     }
 }
