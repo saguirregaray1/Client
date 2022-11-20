@@ -75,22 +75,22 @@ public class CheckInEmployeesController implements Initializable {
         scanner.useDelimiter("-");
         String fechaMesAño = scanner.next()+"-"+ scanner.next();
         Costs costs = appService.getTotalCompanyCostsForTheMonth(currentCompany.getId(),fechaMesAño);
-        List<CheckIn> checkIns=appService.getCompanyCheckInsForTheMonth(currentCompany.getId(), fechaMesAño);
+        List<CheckIn> checkIns= costs.getCheckIns();
         for(CheckIn check : checkIns){
             HBox checkInBox = new HBox(10);
             String fecha = check.getFecha();
             Label fechaLabel = new Label("Fecha: " + fecha);
-            //Label diaLabel = new Label("Dia: " + check.getEmployee().getCedula());
-            //Label horaInicio= new Label("Hora inicio:" + check.getQuota().getStartTime());
+            Label cedula = new Label("Dia: " + check.getEmployee().getCedula());
+            Label saldo= new Label("Hora inicio:" + check.getEmployee().getSaldo());
             fechaLabel.setStyle("-fx-font-weight: bold");
             fechaLabel.setFont(new Font("Arial", 14));
-            //diaLabel.setStyle("-fx-font-weight: bold");
-            //diaLabel.setFont(new Font("Arial", 14));
-            //horaInicio.setStyle("-fx-font-weight: bold");
-            //horaInicio.setFont(new Font("Arial", 14));
+            cedula.setStyle("-fx-font-weight: bold");
+            cedula.setFont(new Font("Arial", 14));
+            saldo.setStyle("-fx-font-weight: bold");
+            saldo.setFont(new Font("Arial", 14));
             HBox.setHgrow(fechaLabel, Priority.ALWAYS);
-            //HBox.setHgrow(diaLabel, Priority.ALWAYS);
-            checkInBox.getChildren().addAll(fechaLabel);
+            HBox.setHgrow(cedula, Priority.ALWAYS);
+            checkInBox.getChildren().addAll(fechaLabel,cedula,saldo);
             costsBox.getChildren().add(checkInBox);
         }
     }
