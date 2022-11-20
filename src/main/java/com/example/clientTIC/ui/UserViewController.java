@@ -176,13 +176,25 @@ public class UserViewController extends ListView<Activity> implements Initializa
                 }
             });
             Label labelName = new Label(activity.getNombre());
+            Label labelClubName = new Label("Club: " +nombreClub);
+            Label labelDirName = new Label("Direccion: " +dirClub);
             labelName.setMaxWidth(150);
             labelName.setMaxHeight(100);
             labelName.setWrapText(true);
             labelName.setStyle("-fx-font-weight: bold");
             labelName.setFont(new Font("Arial", 20));
+            labelClubName.setMaxWidth(150);
+            labelClubName.setMaxHeight(100);
+            labelClubName.setWrapText(true);
+            labelClubName.setStyle("-fx-font-weight: bold");
+            labelClubName.setFont(new Font("Arial", 20));
+            labelDirName.setMaxWidth(150);
+            labelDirName.setMaxHeight(100);
+            labelDirName.setWrapText(true);
+            labelDirName.setStyle("-fx-font-weight: bold");
+            labelDirName.setFont(new Font("Arial", 20));
             Label labelPrice = new Label(" Precio: " + activity.getPrecio());
-            labelPrice.setMaxWidth(250);
+            labelPrice.setMaxWidth(150);
             labelPrice.setMaxHeight(100);
             labelPrice.setWrapText(true);
             labelPrice.setFont(new Font("Arial", 20));
@@ -200,7 +212,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
                 }
             });
             hBox.setStyle("-fx-border-color: transparent transparent #263f78 transparent;");
-            hBox.getChildren().addAll(activityButton, labelName,labelPrice, favoriteButton);
+            hBox.getChildren().addAll(activityButton, labelName,labelPrice,labelClubName,labelDirName, favoriteButton);
             activityBox.getChildren().add(hBox);
         }
     }
