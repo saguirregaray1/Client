@@ -23,16 +23,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.core.Local;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -335,7 +331,7 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     protected void verCheckIns(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(CheckInActivityController.class.getResource("CheckInClub.fxml"));
+        FXMLLoader loader = new FXMLLoader(CheckInEmployeesController.class.getResource("CheckInClub.fxml"));
         CheckInClubController checkInClubController = new CheckInClubController();
         checkInClubController.setCurrentClub(appUser.getClub());
         checkInClubController.setAppUser(appUser);

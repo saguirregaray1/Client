@@ -11,8 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -36,10 +39,6 @@ public class CompanyViewController implements Initializable {
 
     @FXML
     private TextField idField;
-
-    @FXML
-    private Label costosCompania;
-
     @FXML
     private TextField emailField;
 
@@ -129,12 +128,19 @@ public class CompanyViewController implements Initializable {
 
     @FXML
     protected void verCostosCompania(ActionEvent event){
-        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        String fecha = LocalDate.now().toString();
-        Scanner scanner = new Scanner(fecha);
-        scanner.useDelimiter("-");
-        String fechaMesAño = scanner.next()+"-"+ scanner.next();
-        Long costos = appService.getTotalCompanyCostsForTheMonth(appuser.getCompany().getId(), fechaMesAño).getTotal();
-        costosCompania.setText("Costo total: " + costos);
+        FXMLLoader loader = new FXMLLoader(CheckInEmployeesController.class.getResource("CheckInEmployees.fxml"));
+        CheckInEmployeesController checkInEmployeesController = new CheckInEmployeesController();
+        checkInEmployeesController.setCurrentCompany(appuser.getCompany());
+        loader.setController(checkInEmployeesController);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

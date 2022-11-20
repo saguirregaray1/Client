@@ -118,10 +118,11 @@ public class UserViewController extends ListView<Activity> implements Initializa
 
     @FXML
     private void setActiVityByClub(ActionEvent event){
+        activityBox.getChildren().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String nombre = clubsBox.getValue();
-        //Club currentclub = appService.getClubpornombre
-        //setListOfActivities(appService.getListOfActivitiesByClub(currentclub.id));
+        Club currentclub = appService.getClubByNombre(nombre);
+        setListOfActivities(appService.getListOfActivitiesByClub(currentclub.getId()));
     }
 
     @FXML
