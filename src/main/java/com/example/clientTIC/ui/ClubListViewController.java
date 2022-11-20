@@ -254,7 +254,7 @@ public class ClubListViewController implements Initializable {
             //registrado correctamente
         }
         else{
-            notificationLabelTAB2.setText(response.getBody().toString());
+            notificationLabelTAB2.setText("No se pudo registrar al usuario");
         }
 
     }
@@ -281,18 +281,17 @@ public class ClubListViewController implements Initializable {
                 String inicio = cupo.getStartTime();
                 String fin = cupo.getFinishTime();
                 Label horario= new Label(inicio + " : "+ fin);
-                Button reserveButton = new Button("Check In");
+                Button reserveButton = new Button("Check-In");
                 reserveButton.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            //cedula
-                            HttpResponse<JsonNode> response= appService.checkInWithReservation(1234L,cupo.getStartTime(),currentActivity.getId());
+                            //fixme cedula
+                            HttpResponse<JsonNode> response= appService.checkInWithReservation(123L,cupo.getStartTime(),currentActivity.getId());
                             if (response.getStatus()==200){
-                                notificationLabelTAB1.setText("Check In realizado correctamente");
-                                //registrado correctamente
+                                notificationLabelTAB1.setText("Check-In realizado correctamente");
                             }
                             else{
-                                notificationLabelTAB1.setText(response.getBody().toString());}
+                                notificationLabelTAB1.setText("Check-In no realizado");}
                         }
                 });
 

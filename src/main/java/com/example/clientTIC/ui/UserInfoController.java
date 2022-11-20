@@ -107,7 +107,7 @@ public class UserInfoController implements Initializable {
                         reservationsBox.getChildren().remove(box);
                     }
                     else{
-                        notificationLabel.setText(apiResponse.getBody().toString());}
+                        notificationLabel.setText("No se pudo hallar la reserva");}
                 }
             });
             nombreAct.setStyle("-fx-font-weight: bold");

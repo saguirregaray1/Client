@@ -234,6 +234,19 @@ public class AppService {
         return list;
     }
 
+    public List<List> getListOfActivitiesByClub(Long clubId) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<List> list;
+        try {
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/" + clubId).asJson();
+            list = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+
     public List<List> getListOfFavs(AppUser appUser) {
         ObjectMapper mapper = new ObjectMapper();
         List<List> list;
@@ -350,7 +363,9 @@ public class AppService {
         } catch (UnirestException e) {
             throw new RuntimeException(e);
         }
-
+        if (a.getStatus()!=200){
+            return new ArrayList<>();
+        }
         List<byte[]> images;
         try {
             images = mapper.readValue(a.getBody(), new TypeReference<>() {

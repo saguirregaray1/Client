@@ -114,7 +114,7 @@ public class CompanyViewController implements Initializable {
             //registrado correctamente
         }
         else{
-            notificationLabel.setText(response.getBody().toString());
+            notificationLabel.setText("No se pudo registrar al empleado");
         }
         setListOfEmployees();
 

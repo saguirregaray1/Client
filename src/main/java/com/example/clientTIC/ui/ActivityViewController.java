@@ -90,6 +90,10 @@ public class ActivityViewController implements Initializable {
             String cupos = String.valueOf(horario.getMaxCupos());
             Label diaLabel = new Label("Hora inicio: "+ horario.getStartTime());
             Label cuposLabel = new Label("Cupos disponibles:" + cupos);
+            if (horario.getMaxCupos()==-1){
+                cuposLabel = new Label("Horario finalización:" + horario.getFinishTime());
+            }
+             // sacar boton
             HBox.setHgrow(cuposLabel, Priority.ALWAYS);
             Button registrarAHorario = new Button("Reservar");
             registrarAHorario.setOnAction(new EventHandler<ActionEvent>() {
@@ -100,7 +104,7 @@ public class ActivityViewController implements Initializable {
                         notificationLabel.setText("Reservado correctamente");
                     }
                     else{
-                        notificationLabel.setText(response.getBody().toString());
+                        notificationLabel.setText("No se pudo realizar la reserva");
                     }
                 }
             });

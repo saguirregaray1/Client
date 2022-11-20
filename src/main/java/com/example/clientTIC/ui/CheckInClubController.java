@@ -73,7 +73,7 @@ public class CheckInClubController implements Initializable {
         scanner.useDelimiter("-");
         String fechaMesAño = scanner.next()+"-"+ scanner.next();
         Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
-        gananciasLabel.setText("Ganancias de la actividad: "+String.valueOf(costs.getTotal()));
+        gananciasLabel.setText("Ganancias del club: "+String.valueOf(costs.getTotal()));
     }
 
     void setCosts(){
