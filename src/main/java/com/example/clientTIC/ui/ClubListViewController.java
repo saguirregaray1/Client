@@ -89,6 +89,10 @@ public class ClubListViewController implements Initializable {
     private ChoiceBox<String> activitiesBox;
 
     @FXML
+    private ChoiceBox<String> imagesActivityBox;
+
+
+    @FXML
     private ChoiceBox<ActivityCategories> categoriesBox;
 
 
@@ -152,6 +156,8 @@ public class ClubListViewController implements Initializable {
     }
 
     private void setListOfActivities(){
+        activitiesBox.getItems().clear();
+        imagesActivityBox.getItems().clear();
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         List<List> activityList = appService.getListOfActivitiesByClub(appUser.getClub().getId());
 
@@ -164,6 +170,7 @@ public class ClubListViewController implements Initializable {
         }
         ObservableList<String> activityCLubNames = FXCollections.observableArrayList(activitiesClub);
         activitiesBox.getItems().addAll(activityCLubNames);
+        imagesActivityBox.getItems().addAll(activityCLubNames);
     }
 
     @FXML
@@ -203,7 +210,7 @@ public class ClubListViewController implements Initializable {
             HBox box = new HBox(10);
             box.getChildren().addAll(day,inicio,finish,cupos);
             horariosCreateActivity.getChildren().add(box);
-            notificationLabel.setText(dia+ " de " + start +" a" +finale + " agregado");
+            notificationLabel.setText(dia+ " de " + start +" a " +finale + " agregado");
         }
     }
 
@@ -227,6 +234,8 @@ public class ClubListViewController implements Initializable {
         appService.addNewActivity(appUser.getClub(),nombreActividad,precio,cuposActividad,categoriesBox.getValue());
         horariosCreateActivity.getChildren().clear();
         horariosIngresados.clear();
+        notificationLabel.setText("");
+        setListOfActivities();
     }
 
     @FXML
@@ -262,7 +271,7 @@ public class ClubListViewController implements Initializable {
     @FXML
     protected void insertImages(ActionEvent event){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        Activity actividad = appService.getActivityByNombre(appUser.getClub().getId(),addImageActivity.getText());
+        Activity actividad = appService.getActivityByNombre(appUser.getClub().getId(),imagesActivityBox.getValue());
         for(File archivo : imagenes){
             appService.uploadActivityPicture(archivo,actividad.getId());
         }

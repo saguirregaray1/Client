@@ -168,7 +168,7 @@
                         </Label>
                         <ImageView fx:id="imagePrev" fitHeight="132.0" fitWidth="295.0" layoutX="36.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" />
                         <Label layoutX="36.0" layoutY="103.0" text="Previsualizacion" />
-                        <ChoiceBox layoutX="161.0" layoutY="329.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="imagesActivityBox" layoutX="161.0" layoutY="329.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
               </content>
