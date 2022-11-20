@@ -3,6 +3,8 @@ package com.example.clientTIC.ui;
 import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.Activity;
 import com.example.clientTIC.models.ActivityCategories;
+import com.example.clientTIC.models.Club;
+import com.example.clientTIC.models.Employee;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
@@ -32,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -64,6 +67,9 @@ public class UserViewController extends ListView<Activity> implements Initializa
     private Button returnButton;
 
     @FXML
+    private ChoiceBox<String> clubsBox;
+
+    @FXML
     private Label notificationLabel;
 
     @FXML
@@ -86,18 +92,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
         stage.show();
     }
 
-    @FXML
-    protected void setFilter(ActionEvent event){
-        activityBox.getChildren().clear();
-        String category = filter.getValue();
-        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        if (filter.getValue().equals("Sin filtro")){
-            setListOfActivities(appService.getListOfActivities());
-        }else{
-            setListOfActivities(appService.getListOfActivitiesByCategory(category));
-        }
 
-    }
 
     @FXML
     protected void mostrarFavoritos(ActionEvent event){
@@ -121,15 +116,46 @@ public class UserViewController extends ListView<Activity> implements Initializa
         returnButton.setGraphic(img);
     }
 
+    @FXML
+    private void setActiVityByClub(ActionEvent event){
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        String nombre = clubsBox.getValue();
+        //Club currentclub = appService.getClubpornombre
+        //setListOfActivities(appService.getListOfActivitiesByClub(currentclub.id));
+    }
 
+    @FXML
+    protected void setFilter(ActionEvent event){
+        activityBox.getChildren().clear();
+        String category = filter.getValue();
+        AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        if (filter.getValue().equals("Sin filtro")){
+            setListOfActivities(appService.getListOfActivities());
+        }else{
+            setListOfActivities(appService.getListOfActivitiesByCategory(category));
+        }
 
+    }
+
+    private void setClubsBox(){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        ObservableList<Club> clubs =appService.getListOfClubs();
+        ArrayList<String> nameList= new ArrayList<>();
+        for(Club currentclub: clubs){
+            String nombre = currentclub.getNombre();
+            nameList.add(nombre);
+        }
+        ObservableList<String> nameClubs = FXCollections.observableArrayList(nameList);
+        clubsBox.getItems().addAll(nameClubs);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         filter.getItems().addAll(categorias);
-
+        setClubsBox();
         filter.setOnAction(this::setFilter);
+        clubsBox.setOnAction(this::setActiVityByClub);
         setListOfActivities(appService.getListOfActivities());
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
