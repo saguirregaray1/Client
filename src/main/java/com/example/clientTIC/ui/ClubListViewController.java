@@ -170,7 +170,7 @@ public class ClubListViewController implements Initializable {
         List<String> activitiesClub = new ArrayList<>() {
         };
         for (List value: activityList){
-            activitiesClub.add(value.get(3).toString());
+            activitiesClub.add(value.get(0).toString());
         }
         ObservableList<String> activityCLubNames = FXCollections.observableArrayList(activitiesClub);
         activitiesBox.getItems().addAll(activityCLubNames);
@@ -305,7 +305,7 @@ public class ClubListViewController implements Initializable {
     @FXML
     protected void verHorarios() throws Exception {
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        String nombreActividad = activityNameCheck.getText();
+        String nombreActividad = activitiesBox.getValue();
         Activity currentActivity = appService.getActivityByNombre(appUser.getClub().getId(),nombreActividad);
         List<Quota> cupos= currentActivity.getCupos();
         if (cupos != null) {
