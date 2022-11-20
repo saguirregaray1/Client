@@ -1,5 +1,6 @@
 package com.example.clientTIC.ui;
 
+import com.example.clientTIC.AppUser;
 import com.example.clientTIC.models.*;
 import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
@@ -34,6 +35,11 @@ import java.util.Scanner;
 
 public class CheckInClubController implements Initializable {
 
+    private AppUser appUser;
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     private Club currentClub;
 
@@ -72,8 +78,8 @@ public class CheckInClubController implements Initializable {
         String fecha = LocalDate.now().toString();
         Scanner scanner = new Scanner(fecha);
         scanner.useDelimiter("-");
-        String fechaMonthYear = scanner.next()+"-"+ scanner.next();
-        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMonthYear);
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
         gananciasLabel.setText("Ganancias del club: "+String.valueOf(costs.getTotal()));
     }
 
@@ -82,10 +88,10 @@ public class CheckInClubController implements Initializable {
         String now = LocalDate.now().toString();
         Scanner scanner = new Scanner(now);
         scanner.useDelimiter("-");
-        String fechaMonthYear = scanner.next()+"-"+ scanner.next();
-        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMonthYear);
-        List<List> checks = appService.getClubCheckInsForTheMonth(currentClub.getId(),fechaMonthYear);
-        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMonthYear));
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
+        List<List> checks = appService.getClubCheckInsForTheMonth(currentClub.getId(),fechaMesAño);
+        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMesAño));
         gananciasLabel.setText("Ganancias totales: " +costs.getTotal());
         for(List check : checks){
             HBox checkInBox = new HBox(10);
@@ -120,12 +126,13 @@ public class CheckInClubController implements Initializable {
 
     @FXML
     protected void setEmployeeTable(){
+        employeeTable.getItems().clear();
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String now = LocalDate.now().toString();
         Scanner scanner = new Scanner(now);
         scanner.useDelimiter("-");
-        String fechaMonthYear = scanner.next()+"-"+ scanner.next();
-        //ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(appUser.getClub().getId(),fechaMesAño));
-        //employeeTable.setItems(empleados);
+        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMesAño));
+        employeeTable.setItems(empleados);
     }
 }
