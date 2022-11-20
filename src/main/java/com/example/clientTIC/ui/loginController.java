@@ -52,7 +52,7 @@ public class loginController {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = emailTextField.getText();
         String password = passwordTextField.getText();
-        insertCosas();
+      ///  insertCosas();
 
         HttpResponse<JsonNode> apiResponse = appService.login(email, password);
 
@@ -63,7 +63,6 @@ public class loginController {
             AppUser appUser = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
             });
             if (appUser.getAppUserRole().equals(AppUserRole.ADMIN)) {
-                //appUser.setAdmin(appService.appUserGetAdmin(appUser.getId()));
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                 Parent root = loader.load();
                 AdminController adminController = loader.getController();

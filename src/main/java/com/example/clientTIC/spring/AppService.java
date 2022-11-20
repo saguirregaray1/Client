@@ -458,6 +458,8 @@ public class AppService {
         return club;
     }
 
+
+
     public Activity getActivityByNombre(Long clubId, String nombre) {
         ObjectMapper mapper = new ObjectMapper();
         String json;
@@ -475,6 +477,24 @@ public class AppService {
             throw new RuntimeException(ex);
         }
         return activity;
+    }
+
+    public Club getClubByNombre(String nombreClub) {
+        ObjectMapper mapper = new ObjectMapper();
+        String json;
+        Club club;
+        try {
+            List<String> list = new ArrayList<>();
+            list.add(nombreClub);
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+
+            HttpResponse<JsonNode> apiResponse = Unirest.get("http://localhost:8080/club/byName/" + nombreClub).asJson();
+            club = mapper.readValue(apiResponse.getBody().toString(), new TypeReference<>() {
+            });
+        } catch (UnirestException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return club;
     }
 
     public Costs getCompanyCostsForTheMonth(Long companyId, String fechaMonthYear) {
