@@ -154,7 +154,7 @@ public class ClubListViewController implements Initializable {
         returnButton.setGraphic(img);
         habilitarCupos.setSelected(true);
         categoriesBox.getItems().addAll(categorias);
-        //setListOfActivities();
+        setListOfActivities();
         dias.getItems().addAll("MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY");
         horarioInicio.getItems().addAll("00:00:00", "01:00:00", "02:00:00","03:00:00","04:00:00","05:00:00","06:00:00",
                 "07:00:00","08:00:00","09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00",
@@ -167,10 +167,13 @@ public class ClubListViewController implements Initializable {
     private void setListOfActivities(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         List<List> activityList = appService.getListOfActivitiesByClub(appUser.getClub().getId());
+
+        // select a.club,a.nombre,a.cupos,a.precio,a.activityCategories,c.nombre,c.dir
         List<String> activitiesClub = new ArrayList<>() {
         };
+
         for (List value: activityList){
-            activitiesClub.add(value.get(3).toString());
+            activitiesClub.add(value.get(0).toString());
         }
         ObservableList<String> activityCLubNames = FXCollections.observableArrayList(activitiesClub);
         activitiesBox.getItems().addAll(activityCLubNames);
