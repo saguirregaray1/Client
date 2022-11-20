@@ -37,8 +37,8 @@
       <TextField fx:id="deleteUserName" layoutX="408.0" layoutY="298.0" promptText="Ingrese cedula" />
       <Button layoutX="410.0" layoutY="237.0" mnemonicParsing="false" onAction="#crearUser" text="Crear usuario" />
       <Button layoutX="408.0" layoutY="345.0" mnemonicParsing="false" onAction="#borrarUser" text="Borrar usuario" />
-      <TextField fx:id="createUserEmail" layoutX="408.0" layoutY="158.0" promptText="Ingrese nombre compania" />
-      <TextField fx:id="createUserPassword" layoutX="408.0" layoutY="196.0" promptText="Ingrese nombre compania" />
+      <TextField fx:id="createUserEmail" layoutX="408.0" layoutY="158.0" promptText="Ingrese email" />
+      <TextField fx:id="createUserPassword" layoutX="408.0" layoutY="196.0" promptText="Ingrese contraseña" />
       <Label fx:id="notificationLabel" layoutX="165.0" layoutY="375.0" prefHeight="18.0" prefWidth="171.0">
          <font>
             <Font name="System Bold" size="12.0" />

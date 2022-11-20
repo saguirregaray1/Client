@@ -135,6 +135,9 @@ public class ClubListViewController implements Initializable {
     @FXML
     private ChoiceBox<String> dias;
 
+    @FXML
+    private Label notificationLabelImages;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -275,6 +278,7 @@ public class ClubListViewController implements Initializable {
         for(File archivo : imagenes){
             appService.uploadActivityPicture(archivo,actividad.getId());
         }
+        notificationLabelImages.setText("Imagenes cargadas correctamente");
         imagenes.clear();
     }
     @FXML

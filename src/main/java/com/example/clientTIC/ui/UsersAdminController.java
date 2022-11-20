@@ -106,29 +106,9 @@ public class UsersAdminController implements Initializable {
         ObservableList<Employee> users =appService.getListOfEmployees();
         for(Employee employee : users){
             HBox hBox = new HBox(10);
-            Button verCheckIn = new Button("Ver CheckIn");
             Label nombreLabel = new Label("C.I: " +employee.getId());
             Label dirLabel= new Label("Saldo: "+ employee.getSaldo());
-            verCheckIn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    FXMLLoader loader = new FXMLLoader(CheckInEmployeesController.class.getResource("UserInfo.fxml"));
-                    UserInfoController userInfoController = new UserInfoController();
-                    userInfoController.setAppUser(employee.getAppUser());
-                    loader.setController(userInfoController);
-                    Parent root = null;
-                    try {
-                        root = loader.load();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                }
-            });
-            hBox.getChildren().addAll(nombreLabel,dirLabel,verCheckIn);
+            hBox.getChildren().addAll(nombreLabel,dirLabel);
             UserList.getChildren().add(hBox);
         }
     }
