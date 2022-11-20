@@ -173,7 +173,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
             String dirClub=value.get(4).toString();
             List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(5).toString()));
             if (pictures.isEmpty()){
-                File file = new File("src/main/resources/fitnessapp.png");
+                File file = new File("src/main/resources/logo.png");
                 pictures.add(new Image(file.toURI().toString()));
             }
             ImageView imageView = new ImageView(pictures.get(0));
