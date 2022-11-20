@@ -129,8 +129,11 @@ public class loginController {
         quotas.add(new Quota(DayOfWeek.SATURDAY.toString() +
                 "", "00:01:00", "23:59:00", 100));
         quotas.add(new Quota(DayOfWeek.SUNDAY.toString(), "00:01:00", "23:59:00", 100));
+        List<Quota> horarios = new ArrayList<>();
+        horarios.add(new Quota(DayOfWeek.SUNDAY.toString(), "00:01:00", "23:59:00", 0));
         appService.addNewActivity(appService.getListOfClubs().get(0), "futbol", 120L, quotas, ActivityCategories.CATEGORY_1);
         appService.addNewActivity(appService.getListOfClubs().get(0), "basketball", 1L, quotas, ActivityCategories.CATEGORY_2);
+        appService.addNewActivity(appService.getListOfClubs().get(0), "voleyball", 1L, horarios, ActivityCategories.CATEGORY_3);
         appService.addFavourite(appService.getListOfEmployees().get(0).getAppUser(), 1L);
         AppUser temp = new AppUser();
         temp.setId(5L);
