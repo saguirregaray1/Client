@@ -6,6 +6,7 @@ import com.example.clientTIC.spring.AppService;
 import com.example.clientTIC.spring.ApplicationContextProvider;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -87,6 +88,18 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     private TextField createActivityNameCupos;
+
+    @FXML
+    private ChoiceBox<String> activitiesBox;
+
+    @FXML
+    private ChoiceBox<ActivityCategories> categoriesBox;
+
+
+    ObservableList<ActivityCategories> categorias = FXCollections.observableArrayList(ActivityCategories.CATEGORY_1,
+            ActivityCategories.CATEGORY_2,
+            ActivityCategories.CATEGORY_3,
+            ActivityCategories.CATEGORY_4);
     @FXML
     private  TextField registerUserEmail;
 
@@ -122,15 +135,26 @@ public class ClubListViewController implements Initializable {
     @FXML
     private ChoiceBox<String> dias;
 
+    @FXML
+    private Label clubNameLabel;
+
+    @FXML
+    private Label clubDirLabel;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        clubNameLabel.setText("Club: " + appUser.getClub().getNombre());
+        clubDirLabel.setText("Direccion: " + appUser.getClub().getDir());
         Image image = new Image("volver.png");
         ImageView img = new ImageView(image);
         img.setFitHeight(100);
         img.setFitWidth(200);
         returnButton.setGraphic(img);
         habilitarCupos.setSelected(true);
+        categoriesBox.getItems().addAll(categorias);
+        //setListOfActivities();
         dias.getItems().addAll("MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY");
         horarioInicio.getItems().addAll("00:00:00", "01:00:00", "02:00:00","03:00:00","04:00:00","05:00:00","06:00:00",
                 "07:00:00","08:00:00","09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00",
@@ -138,6 +162,18 @@ public class ClubListViewController implements Initializable {
         horarioFin.getItems().addAll("00:00:00", "01:00:00", "02:00:00","03:00:00","04:00:00","05:00:00","06:00:00",
                 "07:00:00","08:00:00","09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00",
                 "17:00:00","18:00:00","19:00:00","20:00:00","21:00:00","22:00:00","23:00:00");
+    }
+
+    private void setListOfActivities(){
+        AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
+        List<List> activityList = appService.getListOfActivitiesByClub(appUser.getClub().getId());
+        List<String> activitiesClub = new ArrayList<>() {
+        };
+        for (List value: activityList){
+            activitiesClub.add(value.get(3).toString());
+        }
+        ObservableList<String> activityCLubNames = FXCollections.observableArrayList(activitiesClub);
+        activitiesBox.getItems().addAll(activityCLubNames);
     }
 
     @FXML
@@ -191,14 +227,14 @@ public class ClubListViewController implements Initializable {
 
 
     @FXML
-    protected void createActivityButtonCupos(){
+    protected void createActivityButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String nombreActividad = createActivityNameCupos.getText();
         List<Quota> cuposActividad = horariosIngresados;
         Long precio = Long.valueOf(activityPrice.getText());
-        Activity actividad = new Activity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
+        Activity actividad = new Activity(appUser.getClub(),nombreActividad,precio,cuposActividad,categoriesBox.getValue());
         // label
-        appService.addNewActivity(appUser.getClub(),nombreActividad,precio,cuposActividad,ActivityCategories.CATEGORY_1);
+        appService.addNewActivity(appUser.getClub(),nombreActividad,precio,cuposActividad,categoriesBox.getValue());
         horariosCreateActivity.getChildren().clear();
         horariosIngresados.clear();
     }
@@ -286,7 +322,7 @@ public class ClubListViewController implements Initializable {
                         @Override
                         public void handle(ActionEvent event) {
                             //fixme cedula
-                            HttpResponse<JsonNode> response= appService.checkInWithReservation(123L,cupo.getStartTime(),currentActivity.getId());
+                            HttpResponse<JsonNode> response= appService.checkInWithReservation(Long.valueOf(userCheckIn.getText()),cupo.getStartTime(),currentActivity.getId());
                             if (response.getStatus()==200){
                                 notificationLabelTAB1.setText("Check-In realizado correctamente");
                             }
