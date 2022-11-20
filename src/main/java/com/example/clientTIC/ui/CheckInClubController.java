@@ -72,8 +72,8 @@ public class CheckInClubController implements Initializable {
         String fecha = LocalDate.now().toString();
         Scanner scanner = new Scanner(fecha);
         scanner.useDelimiter("-");
-        String fechaMesAño = scanner.next()+"-"+ scanner.next();
-        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
+        String fechaMonthYear = scanner.next()+"-"+ scanner.next();
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMonthYear);
         gananciasLabel.setText("Ganancias del club: "+String.valueOf(costs.getTotal()));
     }
 
@@ -82,10 +82,10 @@ public class CheckInClubController implements Initializable {
         String now = LocalDate.now().toString();
         Scanner scanner = new Scanner(now);
         scanner.useDelimiter("-");
-        String fechaMesAño = scanner.next()+"-"+ scanner.next();
-        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMesAño);
-        List<List> checks = appService.getClubCheckInsForTheMonth(currentClub.getId(),fechaMesAño);
-        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMesAño));
+        String fechaMonthYear = scanner.next()+"-"+ scanner.next();
+        Costs costs = appService.getClubEarningsForTheMonth(currentClub.getId(),fechaMonthYear);
+        List<List> checks = appService.getClubCheckInsForTheMonth(currentClub.getId(),fechaMonthYear);
+        ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(currentClub.getId(),fechaMonthYear));
         gananciasLabel.setText("Ganancias totales: " +costs.getTotal());
         for(List check : checks){
             HBox checkInBox = new HBox(10);
@@ -124,7 +124,7 @@ public class CheckInClubController implements Initializable {
         String now = LocalDate.now().toString();
         Scanner scanner = new Scanner(now);
         scanner.useDelimiter("-");
-        String fechaMesAño = scanner.next()+"-"+ scanner.next();
+        String fechaMonthYear = scanner.next()+"-"+ scanner.next();
         //ObservableList<Employee> empleados = FXCollections.observableArrayList(appService.getClubCheckInsForTheMonthEmployees(appUser.getClub().getId(),fechaMesAño));
         //employeeTable.setItems(empleados);
     }

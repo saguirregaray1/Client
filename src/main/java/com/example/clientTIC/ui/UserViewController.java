@@ -28,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -147,7 +148,8 @@ public class UserViewController extends ListView<Activity> implements Initializa
             String dirClub=value.get(4).toString();
             List<Image> pictures = appService.getActivityImages(Long.valueOf(value.get(5).toString()));
             if (pictures.isEmpty()){
-                pictures.add(new Image(("file:resources/fitnessapp.png")));
+                File file = new File("src/main/resources/fitnessapp.png");
+                pictures.add(new Image(file.toURI().toString()));
             }
             ImageView imageView = new ImageView(pictures.get(0));
             imageView.setFitHeight(75);

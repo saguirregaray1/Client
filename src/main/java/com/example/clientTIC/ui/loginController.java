@@ -113,9 +113,11 @@ public class loginController {
     private void insertCosas(){
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         //fixme para que funcione el checkIn se debe ajustar el id a la quota correspondiente (1 si es lunes, 2 si es martes etc)
-        appService.addNewAdmin("aa", "bb");
-        appService.addNewCompany("coca", 123L, "abcd", "222");
-        appService.addNewClub("um", "18", "abc", "111");
+        appService.addNewAdmin("admin", "admin123");
+        appService.addNewCompany("Apple", 12345678L, "apple@icloud.com", "apple123");
+        appService.addNewCompany("Microsoft", 87654321L, "microsoft@outlook.com", "microsoft123");
+        appService.addNewCompany("Google", 81726354L, "google@gmail.com", "google123");
+        appService.addNewClub("Biguá", "Vázquez Ledesma 2968", "biguauser@gmail.com", "bigua123");
         appService.addNewEmployee(123L, appService.getListOfCompanies().get(0), 1000L, "aaa", "bbb");
         appService.addNewEmployee(1234L, appService.getListOfCompanies().get(0), 1000L, "a123", "b123");
         List<Quota> quotas = new ArrayList<>();
