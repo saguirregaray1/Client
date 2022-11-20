@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -113,7 +112,7 @@ public class UsersAdminController implements Initializable {
             verCheckIn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    FXMLLoader loader = new FXMLLoader(CheckInActivityController.class.getResource("UserInfo.fxml"));
+                    FXMLLoader loader = new FXMLLoader(CheckInEmployeesController.class.getResource("UserInfo.fxml"));
                     UserInfoController userInfoController = new UserInfoController();
                     userInfoController.setAppUser(employee.getAppUser());
                     loader.setController(userInfoController);

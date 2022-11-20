@@ -63,6 +63,11 @@
                         </Label>
                         <Button layoutX="500.0" layoutY="23.0" mnemonicParsing="false" onAction="#verHorarios" text="Ver horarios" />
                         <ChoiceBox fx:id="activitiesBox" layoutX="299.0" layoutY="23.0" prefWidth="150.0" />
+                        <Label fx:id="notificationLabelTAB1" layoutX="50.0" layoutY="432.0" prefHeight="20.0" prefWidth="338.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>

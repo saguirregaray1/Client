@@ -331,7 +331,7 @@ public class ClubListViewController implements Initializable {
 
     @FXML
     protected void verCheckIns(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(CheckInActivityController.class.getResource("CheckInClub.fxml"));
+        FXMLLoader loader = new FXMLLoader(CheckInEmployeesController.class.getResource("CheckInClub.fxml"));
         CheckInClubController checkInClubController = new CheckInClubController();
         checkInClubController.setCurrentClub(appUser.getClub());
         checkInClubController.setAppUser(appUser);
