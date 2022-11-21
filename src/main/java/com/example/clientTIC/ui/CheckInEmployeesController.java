@@ -58,7 +58,7 @@ public class CheckInEmployeesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+     // idColumn.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         setCosts();
         String fecha = LocalDate.now().toString();
         Scanner scanner = new Scanner(fecha);
