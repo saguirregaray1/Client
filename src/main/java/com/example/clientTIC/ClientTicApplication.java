@@ -15,7 +15,7 @@ public class ClientTicApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ClientTicApplication.class, args);
 		AppService appService = ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
-	//	appService.insertCosas();  		//Comentar luego de correr por primera vez
+		//appService.insertCosas();  		//Comentar luego de correr por primera vez
 		InitApplication.main(args);
 	}
 

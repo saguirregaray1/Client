@@ -88,13 +88,13 @@ public class ActivityViewController implements Initializable {
         }
         List<Quota> horarios= appService.getActivityQuota(Long.parseLong(currentActivity.getId().toString()));
         for (Quota horario : horarios){
-            if (horario.getDay().equals(DayOfWeek.from(LocalDate.now()).toString())){
             HBox hBox= new HBox(20);
             String cupos = String.valueOf(horario.getMaxCupos());
             Label diaLabel = new Label("Hora inicio: "+ horario.getStartTime());
-            Label cuposLabel = new Label("Cupos disponibles:" + cupos);
+            Label cuposLabel = new Label("Cupos:" + cupos);
+            Label diaQupta = new Label("Dia: " +horario.getDay());
             if (horario.getMaxCupos()==-1 || horario.getMaxCupos()==0){
-                cuposLabel = new Label("Horario finalización: " + horario.getFinishTime());
+                cuposLabel = new Label("Hora fin: " + horario.getFinishTime());
             }
              // sacar boton
             HBox.setHgrow(cuposLabel, Priority.ALWAYS);
@@ -112,13 +112,13 @@ public class ActivityViewController implements Initializable {
                 }
             });
             if(horario.getMaxCupos()==-1 || horario.getMaxCupos()==0){
-                hBox.getChildren().addAll(diaLabel,cuposLabel);
+                hBox.getChildren().addAll(diaQupta,diaLabel,cuposLabel);
             }else{
-                hBox.getChildren().addAll(diaLabel,cuposLabel,registrarAHorario);
+                hBox.getChildren().addAll(diaQupta,diaLabel,cuposLabel,registrarAHorario);
             }
 
             horariosActivity.getChildren().add(hBox);
-        }}
+        }
     }
 
     @FXML
