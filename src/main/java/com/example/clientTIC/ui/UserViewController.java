@@ -179,7 +179,7 @@ public class UserViewController extends ListView<Activity> implements Initializa
             ImageView imageView = new ImageView(pictures.get(0));
             imageView.setFitHeight(75);
             imageView.setFitWidth(100);
-            Button activityButton= new Button();
+            Button activityButton= new Button() ;
             activityButton.setBackground(null);
             activityButton.setGraphic(imageView);
             activityButton.setOnAction(new EventHandler<ActionEvent>() {
