@@ -608,9 +608,9 @@ public class AppService {
         return employees;
     }
 
-    public void deleteClubUser(String cedula) {
+    public HttpResponse<JsonNode> deleteClubUser(String cedula) {
         try {
-            Unirest.delete("http://localhost:8080/club/user/" + cedula).asJson();
+            return Unirest.delete("http://localhost:8080/club/user/" + cedula).asJson();
         } catch (UnirestException ex) {
             throw new RuntimeException(ex);
         }
@@ -663,7 +663,7 @@ public class AppService {
         appService.addNewClub("Malvin", "Av. Legrand 5163", "malvin@gmail.com", "malvin123");
         appService.addNewClub("Trouville", "Alejandro Chucarro 1031", "trouville@gmail.com", "trouville123");
         ///employees
-        appService.addNewEmployee(111L, appService.getListOfCompanies().get(0), 1000L, "apple1@icloud.com", "user123");
+        appService.addNewEmployee(111L, appService.getListOfCompanies().get(0), 1000L, "apple1@icloud.com", "apple123");
         appService.addNewEmployee(112L, appService.getListOfCompanies().get(0), 1500L, "apple2@icloud.com", "apple123");
         appService.addNewEmployee(113L, appService.getListOfCompanies().get(0), 2000L, "apple3@icloud.com", "apple123");
         appService.addNewEmployee(211L, appService.getListOfCompanies().get(1), 1500L, "microsoft1@outlook.com", "microsoft123");

@@ -289,7 +289,7 @@ public class ClubListViewController implements Initializable {
         // label
         HttpResponse<JsonNode> response=appService.addNewClubUser(email,password,appUser.getClub().getId());
         if (response.getStatus()==200){
-            notificationLabelTAB2.setText("Registrado correctamente");
+            notificationLabelTAB2.setText(email+ " registrado correctamente");
             //registrado correctamente
         }
         else{
@@ -302,7 +302,14 @@ public class ClubListViewController implements Initializable {
     protected void deleteUserButton(){
         AppService appService= ApplicationContextProvider.getApplicationContext().getBean(AppService.class);
         String email = deleteUserID.getText();
-        appService.deleteClubUser(email);
+        HttpResponse<JsonNode> response = appService.deleteClubUser(email);
+        if (response.getStatus()==200){
+            notificationLabelTAB2.setText(email+ " borrado correctamente");
+        }
+        else{
+            notificationLabelTAB2.setText("Usuario no encontrado");
+
+        }
     }
 
     @FXML

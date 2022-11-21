@@ -23,10 +23,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -86,6 +88,7 @@ public class ActivityViewController implements Initializable {
         }
         List<Quota> horarios= appService.getActivityQuota(Long.parseLong(currentActivity.getId().toString()));
         for (Quota horario : horarios){
+            if (horario.getDay().equals(DayOfWeek.from(LocalDate.now()).toString())){
             HBox hBox= new HBox(20);
             String cupos = String.valueOf(horario.getMaxCupos());
             Label diaLabel = new Label("Hora inicio: "+ horario.getStartTime());
@@ -115,7 +118,7 @@ public class ActivityViewController implements Initializable {
             }
 
             horariosActivity.getChildren().add(hBox);
-        }
+        }}
     }
 
     @FXML
