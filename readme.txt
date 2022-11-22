@@ -2,6 +2,10 @@ Conexion a base de datos:
 spring.datasource.url=jdbc:postgresql://192.168.56.102:5432/tic
 spring.datasource.username=labuser
 spring.datasource.password=labuser
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
 
 IMPORTANTE: Luego de inicializar el cliente por primera vez, es importante comentar la linea 18
 en ClientTicApplication, o se realizarán todos los inserts nuevamente.
